@@ -14,8 +14,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.TargetDataLine;
 
 /**
- * @author roberto
- * @deprecated Use https://github.com/onebeartoe/java-libraries instead
+ * @author Roberto Marquez
  */
 public class DefaultSoundRecorder implements SoundRecorder
 {
