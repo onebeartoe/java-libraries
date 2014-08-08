@@ -5,7 +5,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Commander 
+/**
+ * 
+ * @author Roberto Marquez
+ */
+public class Commander
 {
     private String command;
 	
