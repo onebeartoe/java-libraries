@@ -1,0 +1,19 @@
+Sample Images:
+
+	http://commons.wikimedia.org/wiki/File:Seven_segment_display-animated.gif
+
+
+Event Dispatch Thread Explained:
+
+	http://java.sun.com/developer/technicalArticles/javase/swingworker/
+	
+	http://download.oracle.com/javase/tutorial/uiswing/concurrency/simple.html
+	
+	http://download.oracle.com/javase/6/docs/api/javax/swing/SwingWorker.html
+	
+	
+Code Exmples
+
+	http://www.devdaily.com/blog/post/jfc-swing/use-animated-gif-image-in-jfc-swing-application
+	
+	http://www.catalysoft.com/articles/busyCursor.html

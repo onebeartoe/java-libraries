@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta name="updated" content="8/5/2005">
+<link rel="stylesheet" type="text/css" href="edt-layout.css">
+<link rel="stylesheet" type="text/css" href="edt-style.css">
+<title>ADT - Ant Overview</title>
+</head>
+
+<body>
+<br/>
+<center>
+
+	<h2>Event Dispatching Thread - Overview</h2>
+
+
+	<div id="bookmark">
+			<a name="everything">&nbsp;</a>
+	</div>
+	<div id="cm_content">
+		<div id="cm_title">Overall Overview</div>
+			<br/>
+			
+			<ul>
+				<li>
+					The event dispatching thread (EDT) is responsible for sending messages to all GUI components for 
+					desktop applications.
+				</li>
+				<br />
+				
+				<li>
+					It comes from the Model/View/Control design pattern.
+				</li>
+				<br />
+				
+				<li>
+					The EDT is responsible for drawing, updating, and responding to user
+					interactions.  Often the response to user interactions is notifying event handlers.
+				</li>
+				<br />
+				
+				<li>
+					<a href="#edt.swing">EDT in a Java Swing Application</a>
+				</li>
+				<br />
+				
+				<li>
+					<a href="#edt.javafx">EDT in a JavaFX Script Application</a>
+				</li>
+				<br />
+			</ul>
+		<div id="back">
+			<a href="javascript:history.back(1)">back</a>
+		</div>
+	</div>
+
+
+
+
+	<div id="bookmark">
+			<a name="edt.javafx">&nbsp;</a>
+	</div>
+	<div id="cm_content">
+		<div id="cm_title">EDT in a JavaFX Script Application</div>
+			<br/>
+			<p>
+			The event dispatch thread is pretty much the same as in a Swing application, but it is implemented in 
+			JavaFX Script instead of AWT.
+			</p>
+			<br/>
+			<a href="#edt.javafx.resources">Resources</a>
+			<br/>
+			<br/>
+		<div id="back">
+			<a href="javascript:history.back(1)">back</a>
+		</div>
+	</div>
+	<br/>
+
+
+
+
+	<div id="bookmark">
+			<a name="edt.swing">&nbsp;</a>
+	</div>
+	<div id="cm_content">
+		<div id="cm_title">EDT in a Java Swing Application</div>
+			<br/>
+			(from <a href="#edt.swing.resources">Swing resource #4</a>)
+			<p>
+There are three threads involved in the life cycle of a SwingWorker :
+<br/><br/>
+    *
+
+      <b>Current thread</b>: The execute() method is called on this thread. It schedules SwingWorker for the execution on a worker thread and returns immediately. One can wait for the SwingWorker to complete using the get methods.
+<br/><br/>      
+    *
+
+      <b>Worker thread</b>: The doInBackground() method is called on this thread. This is where all background activities should happen. To notify PropertyChangeListeners about bound properties changes use the firePropertyChange and getPropertyChangeSupport() methods. By default there are two bound properties available: state and progress.
+<br/><br/>
+    *
+
+      <b>Event Dispatch Thread</b>: All Swing related activities occur on this thread. SwingWorker invokes the process and done() methods and notifies any PropertyChangeListeners on this thread. 			
+			</p>
+			<br/>
+			
+		<div id="back">
+			<a href="javascript:history.back(1)">back</a>
+		</div>
+	</div>
+
+
+
+	<div id="bookmark">
+			<a name="edt.swing.resources">&nbsp;</a>
+	</div>
+	<div id="cm_content">
+		<div id="cm_title">EDT Swing Resources</div>
+			<br/>
+<pre>
+Sample Images:
+
+	1) http://commons.wikimedia.org/wiki/File:Seven_segment_display-animated.gif
+
+
+Event Dispatch Thread Explained:
+
+	2) http://java.sun.com/developer/technicalArticles/javase/swingworker/
+	
+	3) http://download.oracle.com/javase/tutorial/uiswing/concurrency/simple.html
+	
+	4) http://download.oracle.com/javase/6/docs/api/javax/swing/SwingWorker.html
+	
+	
+Code Exmples
+
+	5) http://www.devdaily.com/blog/post/jfc-swing/use-animated-gif-image-in-jfc-swing-application
+	
+	6) http://www.catalysoft.com/articles/busyCursor.html
+</pre>
+			<br/>
+		<div id="back">
+			<a href="javascript:history.back(1)">back</a>
+		</div>
+	</div>
+
+
+
+
+	<div id="bookmark">
+			<a name="edt.javafx.resources">&nbsp;</a>
+	</div>
+	<div id="cm_content">
+		<div id="cm_title">EDT JavaFX Script Resources</div>
+		
+		<br/>
+		<pre>
+Sample Images/Applications
+
+	http://www.rw-designer.com/icon-set/dylzal
+	
+	http://javafx.com/samples/PhotoFlip/index.html			
+		
+Event Dispatch Thread Explained:
+		
+	http://blogs.sun.com/baechul/entry/javafx_1_2_async
+			
+Code Exmples
+		
+	http://blogs.sun.com/clarkeman/entry/javafx_async_task		
+		</pre>
+		<br/>
+		<div id="back">
+			<a href="javascript:history.back(1)">back</a>
+		</div>
+	</div>
+
+	<br/>
+	<br/>
+	<br/>
+	<div id="bookmark">
+			<a name="meat_puppets">&nbsp;</a>
+	</div>
+	<div id="cm_content">
+		<div id="cm_title">Spurs Rule</div>
+			<br/>
+			<p>Have a great day!</p>
+			<br/>
+		<div id="back">
+			<a href="javascript:history.back(1)">back</a>
+		</div>
+	</div>
+
+	<br/>
+	<br/>
+	<br/>
+
+</center>
+</body>
+
+</html>
