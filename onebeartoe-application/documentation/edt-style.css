@@ -1,0 +1,23 @@
+body {
+	font-family: Arial; 	
+	font-size: 14pt;
+
+}
+
+#cm_content {	
+
+	border: 1px solid #d4dfef;
+	background-color: #FFFFFF;
+	font-size: 18px;
+	font-family: Arial, Helvetica;
+}
+
+#back {	
+	border: 1px solid #d4dfef;
+#	background-color: #cccccc;
+}
+
+
+#cm_title {	
+	background-color: #d4dfef;
+}
