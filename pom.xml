@@ -4,9 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.onebeartoe</groupId>
-
     <artifactId>java-libraries</artifactId>
-
     <version>0.0.1-SNAPSHOT</version>
 
     <packaging>pom</packaging>
@@ -16,8 +14,8 @@
     <modules>
         <module>onebeartoe-system</module>
         <module>onebeartoe-application</module>
-    <module>multimedia</module>
-  </modules>
+        <module>onebeartoe-multimedia</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
