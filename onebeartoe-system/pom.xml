@@ -5,9 +5,7 @@
   
     <parent>
         <groupId>org.onebeartoe</groupId>
-
         <artifactId>java-libraries</artifactId>
-
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

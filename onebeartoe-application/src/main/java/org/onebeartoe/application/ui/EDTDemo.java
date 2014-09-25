@@ -1,4 +1,4 @@
-package org.onebeartoe.ui;
+package org.onebeartoe.application.ui;
 
 import java.awt.BorderLayout;
 
