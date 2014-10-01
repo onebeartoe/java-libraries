@@ -12,12 +12,21 @@
     <groupId>org.onebeartoe.network</groupId>
     <artifactId>network</artifactId>
     <version>1.0-SNAPSHOT</version>
-    
+
+    <name>onebeartoe-network</name>
+        
     <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-    </properties>
-    <name>onebeartoe-network</name>
+    </properties>    
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.onebeartoe</groupId>  
+            <artifactId>onebeartoe-system</artifactId>  
+            <version>1.0-SNAPSHOT</version>            
+        </dependency>
+    </dependencies>
 </project>
