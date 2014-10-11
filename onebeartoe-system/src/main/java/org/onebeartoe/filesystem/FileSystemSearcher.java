@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import onebeartoe.FileHelper;
-
 /**
- * @deprecated use the version at https://github.com/onebeartoe/java-libraries
  * @author Roberto Marquez
  */
 public class FileSystemSearcher
@@ -107,7 +104,8 @@ public class FileSystemSearcher
                     if (file.isDirectory() && recursive)
                     {
                         directories.add(file);
-                    } else
+                    } 
+                    else
                     {
                         FileType type = determinFileType(file);
                         if (targets.contains(type))
@@ -117,7 +115,6 @@ public class FileSystemSearcher
                     }
                 }
             }
-
         }
 
         return targetFiles;
@@ -152,7 +149,12 @@ public class FileSystemSearcher
         {
             type = FileType.TEXT;
         }
-
+        
+        if( file.isDirectory() )
+        {
+            type = FileType.DIRECTORY;
+        }
+        
         return type;
     }
 

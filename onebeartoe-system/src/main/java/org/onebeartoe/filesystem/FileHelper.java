@@ -1,5 +1,5 @@
 
-package onebeartoe;
+package org.onebeartoe.filesystem;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * @deprecated use the version at https://github.com/onebeartoe/java-libraries
  * File name: FileHelper.java Written by: Roberto H. Marquez Last Modified:
  * 4/17/2004 Added split() method to break up a single file into smaller ones.
  * Made FILES_ONLY and DIRECTORIES_ONLY public. Modified: April 29th, 2003;

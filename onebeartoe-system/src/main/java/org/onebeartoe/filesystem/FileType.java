@@ -2,35 +2,30 @@
 package org.onebeartoe.filesystem;
 
 /**
- * @deprecated use the version at https://github.com/onebeartoe/java-libraries
  * Created on May 2, 2007
  * @author roberto.marquez
  */
 public enum FileType 
 {
-
-   MULTIMEDIA("great"),
-   AUDIO("good"),
-   IMAGE("ok"),
-   DIRECTORY("eh"),
-   TEXT("loser"),
+   MULTIMEDIA("multimedia"),
+   AUDIO("audio"),
+   IMAGE("images"),
+   DIRECTORY("directories"),
+   TEXT("text"),
    REGULAR("Regular"),
    UNKNOWN("Unkown"),
    ZIP("Zip Formatted Files"),
-   ALL_FILES("ANY TYPE");
+   ALL_FILES("Any type");
    
-
    private String message;
 
    FileType(String message) 
    {
-	  this.message = message;
+    this.message = message;
    }
 
-   String getMessage() 
+   public String getMessage() 
    {
-	  return message;
+       return message;
    }
-
 }
-
