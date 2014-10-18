@@ -16,6 +16,7 @@
         <module>onebeartoe-application</module>
         <module>onebeartoe-multimedia</module>
         <module>network</module>
+        <module>web</module>
     </modules>
 
     <properties>
