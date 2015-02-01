@@ -1,3 +1,4 @@
+
 package org.onebeartoe.network;
 
 import java.io.BufferedReader;
@@ -43,10 +44,22 @@ public abstract class ServerConnection implements Runnable, Cloneable
 
     protected PixelClient app;
 
-    private void changeSoundMeterMode(String mode)
+    private String changeSoundMeterMode(String mode)
     {
-        SoundMeterModes meterMode = SoundMeterModes.meterFor(mode);
-        app.setSoundMeter(meterMode);
+        String modeChangeResult = "Mode request change for " + mode + " received.  ";
+        SoundMeterModes meterMode = null;
+        try
+        {
+            meterMode = SoundMeterModes.meterFor(mode);
+            app.setSoundMeter(meterMode);
+            modeChangeResult += "Mode changed to " + meterMode;
+        }
+        catch(Exception e)
+        {
+            modeChangeResult += "Mode NOT chagned to " + meterMode + " (" + mode + ")";
+        }
+        
+        return modeChangeResult;
     }
     
 // TODO: test to see if the method can be removed    
@@ -80,13 +93,24 @@ public abstract class ServerConnection implements Runnable, Cloneable
         out.flush();
         out.close();
     }
-    
-    protected void sendNonHtmlResponse(String filename) throws IOException
+
+    /**
+     * Sends the static contents of a file on the classpath
+     * @param resourcePath - the path to the resource, on the classpath
+     * @throws IOException 
+     */
+    protected void sendClasspathResource(String resourcePath) throws IOException
     {
-        InputStream instream = getClass().getResourceAsStream(path + filename);
+        InputStream instream = getClass().getResourceAsStream(path + resourcePath);
         String html = TextFileReader.readText(instream);
         boolean includeHeader = false;
-        sendHttpResponse(html, includeHeader);        
+        sendHttpResponse(html, includeHeader);
+    }
+    
+    protected void sendPlainTextResponse(String text) throws IOException
+    {
+        boolean includeHeader = false;
+        sendHttpResponse(text, includeHeader);
     }
     
     public void setApp(PixelClient app)
@@ -110,6 +134,9 @@ public abstract class ServerConnection implements Runnable, Cloneable
     
     public abstract void nextAction(String currentSongTitle, String clientAddress);
     
+    /**
+     * This crazy method delegates each HTTP request.
+     */
     @Override
     public void run()
     {
@@ -124,6 +151,8 @@ public abstract class ServerConnection implements Runnable, Cloneable
             String request = in.readLine();
 
             System.out.println("Request: " + request);
+            
+            boolean quitRequested = false;
 
             Pattern pattern = Pattern.compile("(GET|POST) /?(\\S*).*");
 
@@ -140,23 +169,31 @@ public abstract class ServerConnection implements Runnable, Cloneable
 
                 if (request.equals("style.css"))
                 {
-                    sendNonHtmlResponse(request);
+                    sendClasspathResource(request);
                 } 
                 else if (request.equals("layout.css"))
                 {
-// CHANGE THIS TO THE SAME AS style.css
-
-                    InputStream instream = getClass().getResourceAsStream(path + "layout.css");
-                    String html = TextFileReader.readText(instream);
-                    boolean includeHeader = false;
-                    sendHttpResponse(html, includeHeader);
+                    sendClasspathResource(request);
                 }
                 else if( request.equals("sound-visualizer.js") )
                 {
-                    sendNonHtmlResponse(request);
+                    sendClasspathResource(request);
+                }
+                else if( request.equals("quit") )
+                {
+                    quitRequested = true;
+                    String text = "Quit request received";
+                    sendPlainTextResponse(text);
+
+                    System.exit(1);
                 }
                 else
                 {
+                    boolean sendPlainText = false;
+                    String plainText = "--plain text not set---";
+                    
+                    
+                    
                     String[] parameters = request.split("&");
                     for (String param : parameters)
                     {
@@ -208,32 +245,40 @@ public abstract class ServerConnection implements Runnable, Cloneable
                             }
                             else if( nameValues[0].equals("sound-meter-mode") )
                             {
-                                changeSoundMeterMode(nameValues[1]);
+                                sendPlainText = true;
+                                plainText = changeSoundMeterMode(nameValues[1]);
                             }
                         }
                     }
+                    
+                    // send a response
+                    if(sendPlainText)
+                    {
+                        // a response to a JavaScript request
+                        sendPlainTextResponse(plainText);
+                    }
+                    else
+                    {
+                        boolean includeHeader = true;
+
+                        String uiHtmlath = path + getControlsResourcePath();
+                        InputStream instream = getClass().getResourceAsStream(uiHtmlath);
+                        String html = TextFileReader.readText(instream);
+
+                        if(PixelClient.currentSongTitle != null)
+                        {
+                            String currentSong = URLDecoder.decode(PixelClient.currentSongTitle);
+                            html = html.replace("CURRENT_SONG", currentSong);
+                        }
+
+                        int volume = systemMediaControler.currentVolume();
+                        html = html.replace(SERVER_VOLUME, "" + volume);
+
+                        sendHttpResponse(html, includeHeader);
+                    }
                 }
-
-                // send a response
-                boolean includeHeader = true;
-                
-                String uiHtmlath = path + getControlsResourcePath();
-                InputStream instream = getClass().getResourceAsStream(uiHtmlath);
-                String html = TextFileReader.readText(instream);
-
-                if(PixelClient.currentSongTitle != null)
-                {
-                    String currentSong = URLDecoder.decode(PixelClient.currentSongTitle);
-                    html = html.replace("CURRENT_SONG", currentSong);
-                }
-
-                int volume = systemMediaControler.currentVolume();
-                html = html.replace(SERVER_VOLUME, "" + volume);
-
-                sendHttpResponse(html, includeHeader);
             }
 
-//            client.close();
             System.out.println("message sent for request: " + request);
         } 
         catch (IOException e)
