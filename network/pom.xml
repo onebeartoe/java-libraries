@@ -13,7 +13,7 @@
     <artifactId>network</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>onebeartoe-network</name>
+    <name>onebeartoe-java-libraries-network</name>
         
     <packaging>jar</packaging>
 

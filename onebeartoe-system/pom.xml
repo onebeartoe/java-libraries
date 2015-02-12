@@ -15,7 +15,7 @@
   
     <packaging>jar</packaging>
 
-    <name>onebeartoe-system</name>
+    <name>onebeartoe-java-libraries-system</name>
   
     <url>http://maven.apache.org</url>
    
