@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class TextFileReader
 {
+// TODO: should this really be static?    
     public static String readText(InputStream instream)
     {
         try
@@ -52,6 +53,7 @@ public class TextFileReader
         }
     }
 
+// TODO: should this really be static?    
     /**
      * @param filename path to file
      * @return text contained in the specified file or null if the file does not
@@ -70,6 +72,7 @@ public class TextFileReader
         }
     }
 
+// TODO: should this really be static?    
     /**
      *
      * @param f
