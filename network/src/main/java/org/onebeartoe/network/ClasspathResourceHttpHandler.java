@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.onebeartoe.io.TextFileReader;
@@ -50,7 +51,9 @@ public class ClasspathResourceHttpHandler implements HttpHandler
         String text = defaultMessage;
         try
         {
-            text = textFileReader.readTextFromClasspath(path);
+            List<String> lines = textFileReader.readTextLinesFromClasspath(path);
+            
+            text = String.join("\n", lines);
         }
         catch (IOException ex)
         {            
