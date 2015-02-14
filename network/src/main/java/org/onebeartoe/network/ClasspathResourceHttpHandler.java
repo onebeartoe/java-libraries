@@ -53,7 +53,14 @@ public class ClasspathResourceHttpHandler implements HttpHandler
         {
             List<String> lines = textFileReader.readTextLinesFromClasspath(path);
             
-            text = String.join("\n", lines);
+            StringBuilder sb = new StringBuilder();
+            for(String l : lines)
+            {
+                sb.append(l + "\n");
+            }
+            text = sb.toString();
+//TODO: ADD THIS BACK WITH A JAVA 8 JVM            
+//            text = String.join("\n", lines);
         }
         catch (IOException ex)
         {            
