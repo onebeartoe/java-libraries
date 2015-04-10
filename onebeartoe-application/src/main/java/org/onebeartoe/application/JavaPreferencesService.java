@@ -11,8 +11,7 @@ import org.onebeartoe.pixel.preferences.PixelPreferencesKeys;
  * @author rmarquez
  */
 public class JavaPreferencesService implements PreferencesService
-{
-    
+{   
     private Preferences preferences;
     
     private DesktopApplication application;
@@ -31,7 +30,13 @@ public class JavaPreferencesService implements PreferencesService
 	
 	return value;
     }        
-	
+
+    @Override
+    public String restoreProperty(String key)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     public Dimension restoreWindowDimension() 
     {	
 	String key = PixelPreferencesKeys.windowWidth;
@@ -66,6 +71,12 @@ public class JavaPreferencesService implements PreferencesService
 	
 	return point;
     }    
+
+    @Override
+    public void saveProperty(String key, String value)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }    
     
     @Override
     public void saveWindowPreferences(JFrame window)
@@ -86,7 +97,4 @@ public class JavaPreferencesService implements PreferencesService
 	key = PixelPreferencesKeys.windowHeight;
 	preferences.putInt(key, height);
     }
-
-
-    
 }
