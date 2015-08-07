@@ -9,7 +9,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
- * @deprecated 
  * @author Roberto Marquez
  */
 public class SwingServices implements GraphicalUserInterfaceServices

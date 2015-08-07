@@ -17,7 +17,6 @@ import org.onebeartoe.multimedia.juke.SongList;
 import org.onebeartoe.multimedia.juke.links.LinkManager;
 
 /**
- * @deprecated use the version at https://github.com/onebeartoe/java-libraries
  * @author Roberto Marquez
  */
 public class FileSystemSearchingSongManager implements SongListManager//extends JuniorSongListManager 
@@ -36,7 +35,7 @@ public class FileSystemSearchingSongManager implements SongListManager//extends 
 		songLists.clear();
 	}
 	
-protected HashMap<String, File> songLists;
+        protected HashMap<String, File> songLists;
 	
 	@Override
 	public SongList getSongListFor(String listName)

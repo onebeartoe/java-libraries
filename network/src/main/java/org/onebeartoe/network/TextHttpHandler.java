@@ -10,7 +10,7 @@ import java.io.OutputStream;
  * @author Roberto Marquez
  */
 public abstract class TextHttpHandler implements HttpHandler
-{    
+{   
     protected abstract String getHttpText(HttpExchange exchange);
 
     @Override

@@ -1,9 +1,12 @@
 
 package org.onebeartoe.multimedia.juke.songs;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.onebeartoe.multimedia.juke.SongList;
 import org.onebeartoe.multimedia.juke.links.LinkManager;
@@ -20,7 +23,10 @@ public class NetworkAndFilesystemSearchingSongManager implements SongListManager
 
     public NetworkAndFilesystemSearchingSongManager()
     {
-        filesystemSongManager = new FileSystemSearchingSongManager();
+        
+        filesystemSongManager = new FileSystemSearchingSongManager();        
+        
+//TODO: why are we not using this?        
 //		networkSearchingSongManager = new NetworkSearchingSongManager();
     }
 

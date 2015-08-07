@@ -16,7 +16,7 @@ public class BasicMultimediaController implements MultimediaController
 	public BasicMultimediaController()
 	{
 		final Port lineOut;
-		float volume = -1;
+//		float volume = -1;
 		try
 		{
 			System.out.println();
@@ -47,7 +47,7 @@ public class BasicMultimediaController implements MultimediaController
 				controlIn = (FloatControl) lineOut.getControl(FloatControl.Type.VOLUME);							
 			}
 			
-			System.out.println("LINE_OUT : volume = " + volume);
+//			System.out.println("LINE_OUT : volume = " + volume);
 			
 		}
 		catch(final Exception e)

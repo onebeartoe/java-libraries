@@ -7,7 +7,6 @@ import org.onebeartoe.multimedia.juke.links.LinkParser;
 import org.onebeartoe.multimedia.juke.links.SwingLinkParser;
 
 /**
- * @deprecated use the version at https://github.com/onebeartoe/java-libraries
  * @author Roberto Marquez
  */
 public class JavaxNetworkSearchingSongManager extends NetworkSearchingSongManager
