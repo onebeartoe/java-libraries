@@ -1,10 +1,9 @@
 
-package org.onebeartoe.network;
+package org.onebeartoe.network.http.file.transfer;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
@@ -12,21 +11,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This is an HttpHandler to serve static content (files) from the local filesystem.
- * 
  * @author Roberto Marquez
  */
-public abstract class StaticFileHttpHandler implements HttpHandler
+public abstract class LocalFileHttpHandler implements HttpHandler
 {
     protected Logger logger;
     
-    public StaticFileHttpHandler()
+    protected abstract String getRootPath();
+    
+    protected abstract void writeText(OutputStream os, File localFile) throws IOException;
+        
+    public LocalFileHttpHandler()
     {
         String name = getClass().getName();
         logger = Logger.getLogger(name);
     }
-    
-    protected abstract String getRootPath();
     
     @Override    
     public void handle(HttpExchange t) throws IOException
@@ -77,15 +76,8 @@ public abstract class StaticFileHttpHandler implements HttpHandler
             // Object exists and is a file: accept with response code 200.
             t.sendResponseHeaders(200, 0);
             OutputStream os = t.getResponseBody();
-            FileInputStream fs = new FileInputStream(file);
-            final byte[] buffer = new byte[0x10000];
-            int count = 0;
-            while ((count = fs.read(buffer)) >= 0)
-            {
-                os.write(buffer, 0, count);
-            }
-            fs.close();
-            os.close();
+            
+            writeText(os, file);
         }
-    }
+    }    
 }
