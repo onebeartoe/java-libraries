@@ -44,4 +44,40 @@ public class Colors
         
         return colors;
     }
+    
+    public static Color valueOf(String targetColorName)
+    {
+        Color color = null;
+        
+//TODO: lambda and stream this!        
+        final Field[] fields = Color.class.getFields(); // only want public
+        
+        for (final Field field : fields)
+        {
+            if (field.getType() == Color.class)
+            {
+                try
+                {
+                    final Color currentColor = (Color) field.get(null);
+                    final String colorName = field.getName();
+                    
+                    if( colorName.equals(targetColorName) )
+                    {
+                        color = currentColor;
+                        
+                        break;  // stop iterating once the target color is found
+                    }
+                }
+                catch (IllegalAccessException illegalAccessEx)
+                {
+                    String message = "Securty Manager does not allow access of field '"
+                            + field.getName() + "' - " + illegalAccessEx.getMessage();
+                    
+                    err.println(message);
+                }
+            }
+        }
+        
+        return color;
+    }    
 }
