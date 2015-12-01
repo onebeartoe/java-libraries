@@ -8,9 +8,11 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -18,6 +20,24 @@ import java.util.stream.Collectors;
  */
 public abstract class DynamicFileHttpHandler extends LocalFileHttpHandler
 {
+    protected Map<String, TextReplacement> textReplacements;
+    
+//TODO: Move this to the bottom
+    public interface TextReplacement
+    {
+        String operation(String key, String original);
+    }
+    
+    public DynamicFileHttpHandler()
+    {
+        textReplacements = new HashMap();
+    }
+
+    protected void addTextReplacer(String key, TextReplacement textReplacer)
+    {
+        textReplacements.put(key, textReplacer);
+    }
+    
     @Override
     protected void writeText(OutputStream os, File localFile) throws IOException
     {
@@ -26,7 +46,12 @@ public abstract class DynamicFileHttpHandler extends LocalFileHttpHandler
         {
             List<String> lines = reader.lines()
                                     .map( s -> {
-                                                    s = s.replace("REPLACE_ME_TEXT", "--This is replaced text---");
+                                                    Set<String> keySet = textReplacements.keySet();
+                                                    for(String key : keySet)
+                                                    {
+                                                        TextReplacement replacer = textReplacements.get(key);
+                                                        s = replacer.operation(key, s); //s.replace("REPLACE_ME_TEXT", "--This is replaced text---");
+                                                    }
                                                     
                                                     return s;
                                                 } )
