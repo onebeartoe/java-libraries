@@ -25,7 +25,11 @@ public abstract class DynamicFileHttpHandler extends LocalFileHttpHandler
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8))
         {
             List<String> lines = reader.lines()
-                                    .map( s -> s.replace("a", "A") )
+                                    .map( s -> {
+                                                    s = s.replace("REPLACE_ME_TEXT", "--This is replaced text---");
+                                                    
+                                                    return s;
+                                                } )
                                     .collect( Collectors.toList() );
             
             lines.stream()
@@ -37,7 +41,7 @@ public abstract class DynamicFileHttpHandler extends LocalFileHttpHandler
                                     }
                                     catch (IOException ex)
                                     {
-                                        Logger.getLogger(DynamicFileHttpHandler.class.getName()).log(Level.SEVERE, null, ex);
+                                        logger.log(Level.SEVERE, null, ex);
                                     }
                                   }
                             );

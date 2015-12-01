@@ -33,6 +33,7 @@ public abstract class LocalFileHttpHandler implements HttpHandler
         logger.log(Level.INFO, "static file handler request: " + t.getRequestURI());
         
         String root = getRootPath();
+        root = root.replace("\\","/");
         
         URI uri = t.getRequestURI();
         String request = uri.getPath();
@@ -40,15 +41,22 @@ public abstract class LocalFileHttpHandler implements HttpHandler
         request = request.replaceFirst(urlPrefix, "");
         
         String path = root + request;
+        path = path.replace("\\", "/");
+        
         File f = new File(path);
         File file = f.getCanonicalFile();
-        if (!file.getPath().startsWith(root))
+        
+        String requestedPath = file.getPath().replace("\\","/");
+        
+        if (!requestedPath.startsWith(root))
         {
-            logger.log(Level.INFO, "forbidden request: " + t.getRequestURI());
-            logger.log(Level.INFO, "forbidden    file: " + file.getAbsolutePath() );
+            String forbiddenMessage = "forbidden request: " + t.getRequestURI() + "\n"
+                                        + "forbidden    file: " + file.getAbsolutePath();
+            logger.log(Level.INFO, forbiddenMessage);
             
-            logger.log(Level.INFO, "compared paths - root: " + root);
-            logger.log(Level.INFO, "compared paths - file: " + file.getPath() );
+            String compareMessage = "compared paths - root: " + root + "\n"
+                                    + "compared paths - file: " + file.getPath();
+            logger.log(Level.INFO, compareMessage);
                     
             // Suspected path traversal attack: reject with 403 error.
             String response = "403 (Forbidden)\n";
