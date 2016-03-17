@@ -13,8 +13,6 @@
 
     <modules>
         <module>onebeartoe-system</module>
-        <module>onebeartoe-application</module>
-        <module>onebeartoe-multimedia</module>
         <module>network</module>
         <module>web</module>
     </modules>
@@ -32,7 +30,6 @@
                     <artifactId>findbugs-maven-plugin</artifactId>
                     <version>3.0.3</version>
                 </plugin>
-        
             </plugins>
         </pluginManagement>
     
