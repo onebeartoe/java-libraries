@@ -42,12 +42,16 @@ public class SerialPorts
     /**
      * Don't for get to call addEventListener() on the returned SerialPort object.
      * 
+     * @param portName - The path or name of the serial port.  Paths are used on 
+     * Linux type operating systems and names are used on MS Windows type operating 
+     * systems.
+     *
      * @return A serial port object found at the first path in PORT_NAMES list.
      * 
      * @throws Exception
      * @throws NoClassDefFoundError 
      */
-    public static SerialPort get() throws Exception, NoClassDefFoundError
+    public static SerialPort get(String portName) throws Exception, NoClassDefFoundError
     {
         
 //TODO: check if the JRE is running on the Raspberry Pi and execute the next commented
@@ -65,15 +69,15 @@ public class SerialPorts
         {
             CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
             System.out.println("port ID: " + currPortId);
-            for (String portName : PORT_NAMES) 
-            {
+//            for (String portName : PORT_NAMES) 
+//            {
                 System.out.println("trying: " + portName);
                 if (currPortId.getName().equals(portName)) 
                 {
                     portId = currPortId;
                     break;
                 }
-            }
+//            }
         }            
 
         SerialPort serialPort = null;
