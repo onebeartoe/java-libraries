@@ -60,9 +60,14 @@ public class RegularCurrentSongService implements CurrentSongService
 		cleanup();
 		
 		nexts.put(songTitle, clientAddress);
+
+// I forgot what the heck is goin on here.  This is set to true so that the app 'works'.                
+		boolean next = true;
+//		boolean next = false;
 		
-		boolean next = false;
-		
+
+                System.out.println("playig next song");
+
 		if(songTitle == null || songTitle.equals(currentSong) )
 		{
 			float percentage = (float) nexts.size() / clients.size();
