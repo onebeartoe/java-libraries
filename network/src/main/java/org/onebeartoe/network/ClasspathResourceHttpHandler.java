@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.onebeartoe.io.TextFileReader;
+import org.onebeartoe.io.buffered.BufferedTextFileReader;
 
 /**
  * This class is used to send the contents of text files located on the 
@@ -28,7 +29,7 @@ public class ClasspathResourceHttpHandler implements HttpHandler
         String name = getClass().getName();
         logger = Logger.getLogger(name);
         
-        textFileReader = new TextFileReader();
+        textFileReader = new BufferedTextFileReader();
     }
     
     @Override    

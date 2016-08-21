@@ -66,7 +66,7 @@ public class RegularCurrentSongService implements CurrentSongService
 //		boolean next = false;
 		
 
-                System.out.println("playig next song");
+                System.out.println("The regular current song service is playing the next song.");
 
 		if(songTitle == null || songTitle.equals(currentSong) )
 		{

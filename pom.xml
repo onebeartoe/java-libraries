@@ -12,8 +12,10 @@
     <name>onebeartoe-java-libraries</name>
 
     <modules>
-        <module>onebeartoe-system</module>
         <module>network</module>
+        <module>onebeartoe-application</module>
+        <module>onebeartoe-multimedia</module>
+        <module>onebeartoe-system</module>
         <module>web</module>
     </modules>
 
