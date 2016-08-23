@@ -7,6 +7,8 @@ import java.io.File;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,22 +24,17 @@ public class TaskPanel extends javax.swing.JPanel implements ActionListener
 	private File infile;
 	private boolean on_task;
 	private JButton invokeBtn;
-	private TimerTask task;
+	private Class<TimerTask> task;
 	
-	public TaskPanel(TimerTask task, String instructions) {
-//		super();
+	public TaskPanel(Class<TimerTask> task, String instructions) 
+        {
 		this.task = task;
 		on_task = false;
-		invokeBtn = new JButton("Yeah, Baby!");
-		invokeBtn.addActionListener(this);
-		
-		File infile = new File("archive.html");
-//		String archive_description = TextFileReader.readText(infile);
-//		if( archive_description == null )
-//			archive_description = infile.getPath() + " not found";
+
 		JLabel archiveLabel = new JLabel(instructions);
-		invokeBtn = new JButton("archive this");
+		invokeBtn = new JButton("Generage HTML File");
 		invokeBtn.addActionListener(this);
+                
 		setLayout( new BorderLayout() );
 		add(archiveLabel, BorderLayout.CENTER );
 		add(invokeBtn, BorderLayout.SOUTH );	
@@ -53,7 +50,19 @@ public class TaskPanel extends javax.swing.JPanel implements ActionListener
 //			task.
 				Date date = new Date();
 				Timer timer = new Timer();
-				timer.schedule(task,date);      
+                                
+                    try 
+                    {
+                                    TimerTask newInstance = task.newInstance();
+                                    timer.schedule(newInstance, date);      
+                    } 
+                    catch (InstantiationException ex) {
+                        Logger.getLogger(TaskPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(TaskPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                                
+				
 		}
 		else {
 			GUITools.infoMessage("can not perform task yet");
