@@ -24,9 +24,9 @@ public class TaskPanel extends javax.swing.JPanel implements ActionListener
 	private File infile;
 	private boolean on_task;
 	private JButton invokeBtn;
-	private Class<TimerTask> task;
+	private TimerTask task;
 	
-	public TaskPanel(Class<TimerTask> task, String instructions) 
+	public TaskPanel(TimerTask task, String instructions) 
         {
 		this.task = task;
 		on_task = false;
@@ -47,20 +47,14 @@ public class TaskPanel extends javax.swing.JPanel implements ActionListener
 	public void actionPerformed(ActionEvent ae) {
 		if(on_task) 
 		{
-//			task.
-				Date date = new Date();
-				Timer timer = new Timer();
+                    Date date = new Date();
+                    Timer timer = new Timer();
                                 
-                    try 
-                    {
-                                    TimerTask newInstance = task.newInstance();
-                                    timer.schedule(newInstance, date);      
-                    } 
-                    catch (InstantiationException ex) {
-                        Logger.getLogger(TaskPanel.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IllegalAccessException ex) {
-                        Logger.getLogger(TaskPanel.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    
+                    
+                    timer.schedule(task, date);      
+                     
+                    
                                 
 				
 		}

@@ -153,12 +153,12 @@ public class FileSelectionPanel extends JPanel implements ActionListener
     	}
 	}
 
-	/**
-	 * this method is called only when the currentDirectory has a value
-	 *
-	 */
-	private void updateOutputPanel() 
-	{
+    /**
+     * this method is called only when the currentDirectory has a value
+     *
+     */
+    private void updateOutputPanel() 
+    {
 	    File [] files = getTargetedFiles();
 	    
 	    StringBuffer buf = new StringBuffer("\n");
@@ -167,40 +167,45 @@ public class FileSelectionPanel extends JPanel implements ActionListener
 	    	buf.append("\n" + file.getName() + "\n");
 	    }
 	    outputPanel.setText( buf.toString() );
-	}
+    }
 	
-	public File [] getTargetedFiles() 
-	{
-		File [] files;
-		
-		if(fileSelectionMode == FileSelectionMethods.SINGLE_DIRECTORY)
-		{
-			boolean recursive = recursiveCheckbox.isSelected();
-			List<FileType> targets = new ArrayList<FileType>();
-			targets.add(targetType);
-			FileSystemSearcher searcher = new FileSystemSearcher(currentDirectory, targets, recursive);
-			List<File> filesList = searcher.findTargetFiles();
-    		files = filesList.toArray( new File[0] );
-	    	
-	    	if(files == null)
-	    	{
-	    		files = new File[0];
-	    	}
-		}
-		else
-		{
-			if(currentFile == null)
-			{
-				files = new File[0];
-			}
-			else
-			{
-				files = new File[1];
-				files[0] = currentFile;				
-			}			
-		}	    		    
+    public File getCurrentDirectoty()
+    {
+        return currentDirectory;
+    }
+
+    public File [] getTargetedFiles() 
+    {
+            File [] files;
+
+            if(fileSelectionMode == FileSelectionMethods.SINGLE_DIRECTORY)
+            {
+                boolean recursive = recursiveCheckbox.isSelected();
+                List<FileType> targets = new ArrayList<FileType>();
+                targets.add(targetType);
+                FileSystemSearcher searcher = new FileSystemSearcher(currentDirectory, targets, recursive);
+                List<File> filesList = searcher.findTargetFiles();
+                files = filesList.toArray( new File[0] );
+
+                if(files == null)
+                {
+                        files = new File[0];
+                }
+            }
+            else
+            {
+                if(currentFile == null)
+                {
+                    files = new File[0];
+                }
+                else
+                {
+                    files = new File[1];
+                    files[0] = currentFile;				
+                }			
+            }
 	    
-    	return files;
+            return files;
 	}
 
 }
