@@ -17,8 +17,19 @@ public class Commander
 
     private List<String> stderr;
 
-    static final String defaultFile = "errors.txt";             
+    static final String defaultFile = "errors.txt";
+    
+    public Commander()
+    {
+        this("no-opp");
+    }
 
+    /**
+     * @deprecated This constructor is deprecated so as to not use one command per Commander object for one command.  
+     * The Commande.java class should handle multiple different commands.
+     * 
+     * @param command 
+     */
     public Commander(String command)
     {
             this.command = command;
@@ -26,156 +37,60 @@ public class Commander
             stderr = new ArrayList();
     }
 	
-	public int execute() throws IOException, InterruptedException 
-	{
-		String os = System.getProperty("os.name");
-		if( os.contains("Windows") && ! command.toLowerCase().startsWith("cmd /c") )
-		{
-			command = "cmd /C " + command;				
-		}
-	   
-		Process jobProcess = null;
-		Runtime runtime = Runtime.getRuntime();		
-		jobProcess = runtime.exec(command);
-		jobProcess.waitFor();				
-		
-		// read the output from the command
-		InputStream instream = jobProcess.getInputStream();
-		InputStreamReader insteamReader = new InputStreamReader(instream);
-		BufferedReader stdInput = new BufferedReader(insteamReader);		
-		String s = null;
-//		System.out.println("Here is the standard output of the command:\n");
-		while ((s = stdInput.readLine()) != null) 
-		{
-			stdout.add(s);
-//                        stdout.append( System.lineSeparator() );
-//			System.out.println(s);				
-		}
+    public int execute() throws IOException, InterruptedException 
+    {
+        boolean useWindowsCmd = false;
+        
+        String os = System.getProperty("os.name");
+        if( os.contains("Windows") && ! command.toLowerCase().startsWith("cmd /c") && useWindowsCmd)
+        {
+                command = "cmd /C " + command;				
+        }
 
-		// read any errors from the attempted command
-		InputStream is = jobProcess.getErrorStream();
-		InputStreamReader isr = new InputStreamReader(is);
-		BufferedReader stdError = new BufferedReader(isr);
-//		System.out.println("Here is the standard error of the command (if any):\n");
-		while ((s = stdError.readLine()) != null) 
-		{
-			stderr.add(s);
-                        stdout.add( System.lineSeparator() );
-//			System.out.println(s);
-		}
-			
-		int exitCode = jobProcess.exitValue();
-		
-		return exitCode;
+        System.out.println("executing: " + command);
+
+        ProcessBuilder builder = new ProcessBuilder(command, "push", "terue", "sss");
+        Process jobProcess = builder.start();
+//        Runtime runtime = Runtime.getRuntime();	
+//        Process jobProcess = runtime.exec(command);
+                
+        int waitValue = jobProcess.waitFor();
+
+
+        // read the output from the command
+        InputStream instream = jobProcess.getInputStream();
+        InputStreamReader insteamReader = new InputStreamReader(instream);
+        BufferedReader stdInput = new BufferedReader(insteamReader);		
+        String s = null;
+
+        while ((s = stdInput.readLine()) != null) 
+        {
+            stdout.add(s);
+        }
+                
+        // read any errors from the attempted command
+        InputStream is = jobProcess.getErrorStream();
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader stdError = new BufferedReader(isr);
+        while ((s = stdError.readLine()) != null) 
+        {
+            stderr.add(s);
+        }
+
+//int waitValue = jobProcess.waitFor();        
+        
+        int exitCode = jobProcess.exitValue();
+
+        return exitCode;
    }
-   
-   public static void executeCommand(String args) 
+ 
+   public int executeCommand(String command) throws IOException, InterruptedException 
    {
-
-
-      String errorFile = defaultFile;  // The name of the file to which error 
-                                       //              messages will be written.
-
-      String command = args;  
-      
-      Process compiler;  // A process object that will run the javac compiler.
-      
-      InputStream errorInput;   // A stream for reading error output from 
-                                //    the compiler process.
-      
-      PrintStream errorOutput = null;  // A stream for writing error messages to the
-                                       //    file.  Lines from the errorInput stream
-                                       //    are copied to this stream.
-                                       
-      boolean foundErrors = false;   // This will be set to true if any error messages
-                                     //    are produced by the compiler.
-      
-      String errorline = null;  // One line of error output from the compiler process.
-                                // (The last line of output is written to the screen
-                                // as well as to the file.  It should contain a message
-                                // such as "17 errors, 1 warning".)
-      
-      Runtime runtime = Runtime.getRuntime();  // The Runtime object, which is needed to
-                                               //    create a process.
-
-/*      int paramStart = 0;  // Position of (first) file name in the command-line parameter
-                           //   array.  This is set to 2 if the parameters begin with
-                           //   a "-f" option. */  
-   
-      
-      try {
-            // Create a stream for writing the error messages to a file.
-            // If an error occurs, errorOutput is null.
-         errorOutput = new PrintStream(new FileOutputStream(errorFile));
-      }
-      catch (IOException e) {
-         errorOutput = null;
-      }
-
-      try {
-            // Create the compiler process to run the compiler, and get a stream for
-            // reading the error messages from the compiler process.
-         compiler = runtime.exec(command);
-         errorInput = compiler.getErrorStream();
-      }
-      catch (Exception e) {
-         System.out.println("*** Error while trying to start the compiler:");
-         System.out.println(e.toString());
-         if (errorOutput != null)
-            errorOutput.println("*** Error while trying to start the compiler.");
-         return;
-      }
-
-      try {         
-             // Read error messages, if any, from the compiler process, and
-             // write them to the file.
-         checkLF = false;
-         while (true) {
-            String line = readLine(errorInput);
-            if (line == null)  // Signal that all data has been read from the stream.
-               break;
-            foundErrors = true;
-            errorline = line;  // For saving the LAST line of the error messages.
-            if (errorOutput == null) {
-                   // errorOutput is null only if the output stream to the file
-                   // couldn't be created, AND this is the first error message.
-                   // In this case, write the errors to standard output.
-               errorOutput = System.out;
-               System.out.println("*** Can't open file \"" 
-                                + errorFile + "\" -- sending errors to standard out.\n");
-               errorFile = "Standard Output";
-            }
-            errorOutput.println(line.trim());
-         } 
-      }
-      catch (Exception e) {
-         System.out.println("*** Error while trying to get error messages from call to notpad:");
-         System.out.println(e.toString());
-         if (foundErrors && errorOutput != null)
-            errorOutput.println("*** Error while trying to get error messages from call to notpad.");
-         return;
-      }
-      
-      try {
-            // Wait for the compiler process to finish.  (Actually, it should
-            // already be done when the program gets here...)
-         compiler.waitFor();
-      }
-      catch (Exception e) {
-         System.out.println("*** Error while waiting for notpad to finish.");
-         System.out.println("*** Output might be incorrect or incomplete.");
-         return;
-      }
-      
-      if (foundErrors == false) {
-         System.out.println("call to notpad finished with no errors.");
-         errorOutput.println("No errors");
-      }
-      else {
-         System.out.println("call to notpad finished with errors.  Error messages sent to " + errorFile + ".");
-         System.out.println(errorline);
-      }
-      
+       this.command = command;
+               
+       int exitValue = execute();
+       
+       return exitValue;        
    }
    
    public List<String> getStderr() 
@@ -196,27 +111,33 @@ public class Commander
                             // a line feed that follows a carriage return, rather than
                             // treat it as an empty line.
    
-   static String readLine(InputStream in) {
-         // This subroutine reads one line from the input stream, in.
-         // If the end-of-stream has been reached, null is returned.
-         // (Null is also returned if an input error occurs.)
-      try {
+   /**
+    * This subroutine reads one line from the input stream, in.
+    * If the end-of-stream has been reached, null is returned.
+    * (Null is also returned if an input error occurs.)
+    * @param in
+    * @return 
+    */
+   static String readLine(InputStream in) 
+   {
+      try 
+      {
          int ch = in.read();
          if (checkLF && ch == '\n')
             ch = in.read();
          if (ch == -1)
             return null;
          StringBuffer b = new StringBuffer();
-         while (ch != -1 && ch != '\r' && ch != '\n') {
+         while (ch != -1 && ch != '\r' && ch != '\n') 
+         {
             b.append( (char)ch );
             ch = in.read();
          }
          return b.toString();
       }
-      catch (IOException e) {
+      catch (IOException e) 
+      {
          return null;
       }
    }
-      
-
-}  // end class cef
+}
