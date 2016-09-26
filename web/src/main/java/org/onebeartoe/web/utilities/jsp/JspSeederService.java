@@ -1,6 +1,9 @@
 
 package org.onebeartoe.web.utilities.jsp;
 
+import java.io.File;
+import java.io.IOException;
+
 /**
  *
  * Given the filesystem location of a JEE Web directory and an accessible (target) 
@@ -11,5 +14,11 @@ package org.onebeartoe.web.utilities.jsp;
  */
 public interface JspSeederService 
 {
-    public boolean indexSeed();
+    /**
+     * 
+     * @param webRoot the directory of the wep application that is the root context
+     * @param childDirectory the path of the directory to index
+     * @return 
+     */
+    public boolean seedIndex(File webRoot, String childDirectory) throws IOException;
 }
