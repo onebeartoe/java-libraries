@@ -11,8 +11,6 @@ import java.io.IOException;
  */
 public class StreamedJspSeederService implements JspSeederService
 {
-
-    
     @Override
     public boolean seedIndex(File webRoot, String childDirectoryPath) throws IOException
     {

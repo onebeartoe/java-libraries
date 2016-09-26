@@ -25,49 +25,49 @@ import org.onebeartoe.filesystem.FileType;
 
 public class FileSelectionPanel extends JPanel implements ActionListener 
 {
-	private static final long serialVersionUID = -7589899404797359860L;
+    private static final long serialVersionUID = -7589899404797359860L;
 
-	private FileType targetType;
+    private FileType targetType;
 
-	private String selectDirectoryTitle = "What Dir?";    
+    private String selectDirectoryTitle = "What Dir?";    
 
-	private JButton selectButton;
+    private JButton selectButton;
 
-	private File currentDirectory;
+    private File currentDirectory;
+
+    private File currentFile;
+
+    public static String title = "Resize Image Helper";
+
+    private JTextField source;
+
+    JList selectFiles;
+
+    ScrollableTextArea outputPanel;
+
+    FileSelectionMethods fileSelectionMode;
+
+    JCheckBox recursiveCheckbox;
+
+    public FileSelectionPanel(FileType type)
+    {
+            this(type, FileSelectionMethods.SINGLE_DIRECTORY, false);
+    }
 	
-	private File currentFile;
-
-	public static String title = "Resize Image Helper";
-
-	private JTextField source;		
-
-	JList selectFiles;
-			
-	ScrollableTextArea outputPanel;
-
-	FileSelectionMethods fileSelectionMode;
-	
-	JCheckBox recursiveCheckbox;
-
-	public FileSelectionPanel(FileType type)
-	{
-		this(type, FileSelectionMethods.SINGLE_DIRECTORY, false);
-	}
-	
-	/**
-	 * This GUI component shows the files that fit the targeted type. 
-	 * @param type specifies what type of files to target.  Use values from onebeartoe.FileHelper, but if
-	 * an invalid file type is pased in then the target type will be all files.
-	 * @see onebeartoe.FileHelper 
-	 */
-	public FileSelectionPanel(FileType type, FileSelectionMethods mode, boolean showRecursive) 
-	{
+    /**
+     * This GUI component shows the files that fit the targeted type. 
+     * @param type specifies what type of files to target.  Use values from onebeartoe.FileHelper, but if
+     * an invalid file type is pased in then the target type will be all files.
+     * @see onebeartoe.FileHelper 
+     */
+    public FileSelectionPanel(FileType type, FileSelectionMethods mode, boolean showRecursive) 
+    {
     	targetType = validateType(type);
     	
     	fileSelectionMode = mode;
 	    	
-		// set up GUI display componets
-		JLabel sourceLabel = new JLabel("Enter the source directory here:");
+        // set up GUI display componets
+        JLabel sourceLabel = new JLabel("Enter the source directory here:");
         JPanel labelPanel = new JPanel();
         labelPanel.setLayout(new FlowLayout(FlowLayout.LEFT) );
         labelPanel.add(sourceLabel);
@@ -98,18 +98,18 @@ public class FileSelectionPanel extends JPanel implements ActionListener
         }
         
                                 			
-		outputPanel = new ScrollableTextArea("\n \n \n");
-		
-		setLayout( new BorderLayout() );		
-		add(dirPanel, BorderLayout.NORTH);
-		add(outputPanel, BorderLayout.CENTER);
-		
-		// cause the GUI to update itself to reflect the inital state of the selection panel
-		File initalDir = new File( System.getProperty("user.home") + File.separator +  "Desktop" );		
-		source.setText( initalDir.getPath() );
-		currentDirectory = initalDir;
-		updateOutputPanel();
-	}
+        outputPanel = new ScrollableTextArea("\n \n \n");
+
+        setLayout( new BorderLayout() );		
+        add(dirPanel, BorderLayout.NORTH);
+        add(outputPanel, BorderLayout.CENTER);
+
+        // cause the GUI to update itself to reflect the inital state of the selection panel
+        File initalDir = new File( System.getProperty("user.home") + File.separator +  "Desktop" );		
+        source.setText( initalDir.getPath() );
+        currentDirectory = initalDir;
+        updateOutputPanel();
+    }
 	
 	private FileType validateType(FileType type)
 	{
