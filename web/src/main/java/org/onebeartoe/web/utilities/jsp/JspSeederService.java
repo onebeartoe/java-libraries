@@ -20,5 +20,5 @@ public interface JspSeederService
      * @param childDirectory the path of the directory to index
      * @return 
      */
-    public boolean seedIndex(File webRoot, String childDirectory) throws IOException;
+    public JspSeedReport seedIndex(File webRoot, String childDirectory) throws IOException;
 }
