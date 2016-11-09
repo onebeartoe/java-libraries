@@ -4,6 +4,7 @@ package org.onebeartoe.web.utilities.jsp;
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
+import org.onebeartoe.io.TextFileWriter;
 
 /**
  *
@@ -12,28 +13,29 @@ import java.util.Optional;
  */
 public class StreamedJspSeederService implements JspSeederService
 {
-    private SeedResult seed(File index)
+    private SeedResult seed(File seefFile, String content)
     {
         SeedResult result = new SeedResult();
         
-        if(index.exists())
+        if(seefFile.exists())
         {
             result.type = SeedResults.NOT_CREATED_EXISTED;
-            result.details = index.getAbsolutePath();
+            result.details = seefFile.getAbsolutePath();
         }
         else
         {
             try 
-            {        
-                index.createNewFile();
+            {
+                TextFileWriter tfw = new TextFileWriter();
+                tfw.writeText(seefFile, content);
                 
                 result.type = SeedResults.CREATED;
-                result.details = index.getAbsolutePath();
+                result.details = seefFile.getAbsolutePath();
             } 
             catch (Exception ex) 
             {
                 result.type = SeedResults.NOT_CREATED_ERRORED;
-                result.details = "Error with " + index.getAbsolutePath();
+                result.details = "Error with " + seefFile.getAbsolutePath();
                 result.error = Optional.of(ex);
             }
         }
@@ -44,13 +46,15 @@ public class StreamedJspSeederService implements JspSeederService
     @Override
     public JspSeedReport seedIndex(File webRoot, String childDirectoryPath) throws IOException
     {
+        JspTemplates templates = new JspTemplates();
         JspSeedReport report = new JspSeedReport();
                 
         File indexDirectoy = new File(webRoot, childDirectoryPath);
         indexDirectoy.mkdirs();
         
         File index = new File(indexDirectoy, "index.jsp");
-        report.index = seed(index);
+        String content = templates.loadIndex();
+        report.index = seed(index, content);
         
         File webinfJspDir = new File(webRoot, "WEB-INF/jsp/");
         webinfJspDir.mkdirs();
@@ -59,13 +63,16 @@ public class StreamedJspSeederService implements JspSeederService
         webinfChildDir.mkdirs();
         
         File webinfIndex = new File(webinfChildDir, "index.jsp");
-        report.webinfIndex = seed(webinfIndex);
+        content = templates.loadWebinfIndex();
+        report.webinfIndex = seed(webinfIndex, content);
         
         File webinfProperties = new File(webinfChildDir, "properties.jsp");
-        report.webinfProperties = seed(webinfProperties);
+        content = templates.loadProperites();
+        report.webinfProperties = seed(webinfProperties, content);
         
         File webinfBottom = new File(webinfChildDir, "bottom.jsp");
-        report.webinfBottom = seed(webinfBottom);
+        content = templates.loadBottom();
+        report.webinfBottom = seed(webinfBottom, content);
                 
         return report;
     }
