@@ -41,6 +41,7 @@ public class BufferedTextFileReader implements TextFileReader
         for(String line : lines)
         {
             sb.append(line);
+            sb.append("\n");
         }
         
         return sb.toString();
