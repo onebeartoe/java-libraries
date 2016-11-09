@@ -56,12 +56,13 @@ public interface TextFileReader
     }
 
 // TODO: should this really be static?    
+//    Nope, we can use default implementation as of Java 8 interfaces
     /**
      * @param filename path to file
      * @return text contained in the specified file or null if the file does not
      * exist
      */
-    public static String readText(String filename)
+    default String readText(String filename)
     {
         File file = new File(filename);
 
@@ -87,7 +88,8 @@ public interface TextFileReader
         {
             FileInputStream instream = new FileInputStream(f);
             return readText(instream);
-        } catch (FileNotFoundException fnfe)
+        } 
+        catch (FileNotFoundException fnfe)
         {
             return null;
         }
