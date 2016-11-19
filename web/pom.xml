@@ -35,10 +35,12 @@
         <dependency>
             <groupId>org.onebeartoe</groupId>
             <artifactId>onebeartoe-system</artifactId>
-            <version>0.0.1-SNAPSHOT</version>            
+            <version>1.0-SNAPSHOT</version>            
         </dependency>
     </dependencies>
   
+  <!--
+  set this in the parent project
     <build>
         <defaultGoal>package</defaultGoal>
         <plugins>
@@ -46,11 +48,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
-                <configuration><!-- Java Compilation Version. -->
+                <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+    -->
 </project>
