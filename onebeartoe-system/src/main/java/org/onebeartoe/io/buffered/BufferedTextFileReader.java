@@ -41,7 +41,8 @@ public class BufferedTextFileReader implements TextFileReader
         for(String line : lines)
         {
             sb.append(line);
-            sb.append("\n");
+            String s = System.lineSeparator();
+            sb.append(s);
         }
         
         return sb.toString();
@@ -50,9 +51,8 @@ public class BufferedTextFileReader implements TextFileReader
     @Override
     public List<String> readTextLinesFromClasspath(String infileClaspath) throws IOException
     {
-        
 	InputStream instream = getClass().getResourceAsStream(infileClaspath);
-	
+
         List<String> lines = readLines(instream);
         
         return lines;

@@ -6,12 +6,10 @@
     <parent>
         <groupId>org.onebeartoe</groupId>
         <artifactId>java-libraries</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     
-    <groupId>org.onebeartoe</groupId>
     <artifactId>multimedia</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     
     <name>onebeartoe-java-libraries-multimedia</name>
     
