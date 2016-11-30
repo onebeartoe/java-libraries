@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import org.onebeartoe.io.TextFileReader;
@@ -40,6 +41,7 @@ public class BufferedTextFileReader implements TextFileReader
         StringBuilder sb = new StringBuilder();
         for(String line : lines)
         {
+//TODO: Remove the new line hack below and replace with a call to java.nio.file.Files.readAllBytes(path);
             sb.append(line);
             String s = System.lineSeparator();
             sb.append(s);

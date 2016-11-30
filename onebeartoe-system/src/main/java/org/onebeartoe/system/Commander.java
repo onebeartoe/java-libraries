@@ -103,7 +103,7 @@ public class Commander
             return stdout;
     }
    
-   static boolean checkLF;  // A kludge to take care of the fact that text files
+//   static boolean checkLF;  // A kludge to take care of the fact that text files
                             // on different files can have different formats.  Lines can end
                             // with either a carriage return, or a line feed, or a carriage
                             // return followed by a line feed.  This variable is used by the
@@ -118,26 +118,26 @@ public class Commander
     * @param in
     * @return 
     */
-   static String readLine(InputStream in) 
-   {
-      try 
-      {
-         int ch = in.read();
-         if (checkLF && ch == '\n')
-            ch = in.read();
-         if (ch == -1)
-            return null;
-         StringBuffer b = new StringBuffer();
-         while (ch != -1 && ch != '\r' && ch != '\n') 
-         {
-            b.append( (char)ch );
-            ch = in.read();
-         }
-         return b.toString();
-      }
-      catch (IOException e) 
-      {
-         return null;
-      }
-   }
+//   static String readLine(InputStream in) 
+//   {
+//      try 
+//      {
+//         int ch = in.read();
+//         if (checkLF && ch == '\n')
+//            ch = in.read();
+//         if (ch == -1)
+//            return null;
+//         StringBuffer b = new StringBuffer();
+//         while (ch != -1 && ch != '\r' && ch != '\n') 
+//         {
+//            b.append( (char)ch );
+//            ch = in.read();
+//         }
+//         return b.toString();
+//      }
+//      catch (IOException e) 
+//      {
+//         return null;
+//      }
+//   }
 }

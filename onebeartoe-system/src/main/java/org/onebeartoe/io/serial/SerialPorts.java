@@ -68,17 +68,16 @@ public class SerialPorts
         while (portEnum.hasMoreElements()) 
         {
             CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
+            
             System.out.println("port ID: " + currPortId);
-//            for (String portName : PORT_NAMES) 
-//            {
-                System.out.println("trying: " + portName);
-                if (currPortId.getName().equals(portName)) 
-                {
-                    portId = currPortId;
-                    break;
-                }
-//            }
-        }            
+            System.out.println("trying: " + portName);
+            
+            if (currPortId.getName().equals(portName)) 
+            {
+                portId = currPortId;
+                break;
+            }
+        }
 
         SerialPort serialPort = null;
         
