@@ -38,7 +38,7 @@ public class StreamedJspSeederServiceTest
         System.out.println("expecting: " + index.getAbsolutePath() );
         assert( index.exists() );
         
-        File webinfDir = new File(outputDir, "WEB-INF");
+        File webinfDir = new File(outputDir, "WEB-INF/jsp/");
         
         String bottomPath = urlPath + "/bottom.jsp";
         File bottom = new File(webinfDir, bottomPath);
