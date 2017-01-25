@@ -27,10 +27,17 @@ public class StreamedJspSeederService implements JspSeederService
             try 
             {
                 TextFileWriter tfw = new TextFileWriter();
-                tfw.writeText(seefFile, content);
+                boolean saved = tfw.writeText(seefFile, content);
                 
-                result.type = SeedResults.CREATED;
-                result.details = seefFile.getAbsolutePath();
+                if(saved)
+                {
+                    result.type = SeedResults.CREATED;
+                    result.details = seefFile.getAbsolutePath();
+                }
+                else
+                {
+                    throw new Exception("The file could not be saved");
+                }
             } 
             catch (Exception ex) 
             {

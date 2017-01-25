@@ -28,7 +28,7 @@ public class JspTemplates
         return text;
     }
     
-    public String loadText(String filename) throws IOException
+    private String loadText(String filename) throws IOException
     {
         TextFileReader tfr = new BufferedTextFileReader();
         String text = tfr.readTextFromClasspath("/" + filename);

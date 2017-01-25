@@ -1,8 +1,13 @@
 
 package org.onebeartoe.pixel.preferences;
 
+// TODO: Refactor this to not have any PIXEL specific properties, and move them to a 
+//         class in the PIXEL project.
+
+// TODO: Refactor this to not have 'Pixel' in the name.        
+
 /**
- * @author rmarquez
+ * @author Roberto Marquez
  */
 public class PixelPreferencesKeys
 {

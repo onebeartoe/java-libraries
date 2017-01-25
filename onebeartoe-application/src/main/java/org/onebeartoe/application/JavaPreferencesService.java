@@ -3,6 +3,7 @@ package org.onebeartoe.application;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 import javax.swing.JFrame;
 import org.onebeartoe.pixel.preferences.PixelPreferencesKeys;
@@ -24,6 +25,16 @@ public class JavaPreferencesService implements PreferencesService
 	preferences = Preferences.userNodeForPackage(c);
     }
 
+    @Override
+    public String get(Enum type, String defaultValue) 
+    {
+        String name = type.name();
+        
+        String value = get(name, defaultValue);
+        
+        return value;
+    }    
+    
     public String get(String key, String defaultValue) 
     {	
 	String value = preferences.get(key, defaultValue);
@@ -73,9 +84,10 @@ public class JavaPreferencesService implements PreferencesService
     }    
 
     @Override
-    public void saveProperty(String key, String value)
+    public void saveProperty(String key, String value) throws BackingStoreException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        preferences.put(key, value);
+        preferences.flush();
     }    
     
     @Override

@@ -2,7 +2,9 @@
 package org.onebeartoe.io;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
@@ -26,20 +28,25 @@ public class TextFileWriter implements TextWriter
      */
     public boolean writeText(File f, String text, boolean append)
     {
+        boolean saved = true;
         try
         {
             FileWriter file = new FileWriter(f, append);
             PrintWriter pic_index = new PrintWriter(file);
             pic_index.println(text);
             pic_index.close();
-
-            return true;
         } 
-        catch (java.io.IOException ioe)
+        catch(FileNotFoundException fnfe)
+        {
+            saved = false;
+        }
+        catch (IOException ioe)
         {
             ioe.printStackTrace();
-            return false;
+            
+            saved = false;
         }
+        
+        return saved;
     }
-
 }
