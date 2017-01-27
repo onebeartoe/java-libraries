@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.onebeartoe.system.OperatingSystem;
 
 /**
  * @author Roberto Marquez
@@ -60,6 +61,14 @@ public class SerialPorts
         // and gets us into the while loop,
         // and was suggested here: http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
 //        System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
+        
+        OperatingSystem os = new OperatingSystem();
+        if( !os.seemsLikeMsWindows() )
+        {
+            // assume we are on Linux
+            System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
+            System.out.println("The serial port system property is set.");
+        }
 
         CommPortIdentifier portId = null;
                         
