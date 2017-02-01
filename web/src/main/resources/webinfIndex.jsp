@@ -1,16 +1,16 @@
 
     <div class="copyspace">
-        <h3>Major</h3>
+        <h3>Major Project</h3>
         
         <div class="featuredProject">
-            <h3>Minor</h3>
+            <h3>Overview</h3>
             <p>		
                 <helper:RandomGreeting /> &nbsp;
             </p>
         </div>
             
         <div class="featuredProject">
-            <h3>Minor 2</h3>
+            <h3>Resources</h3>
             <p>		
                  &nbsp;
             </p>
