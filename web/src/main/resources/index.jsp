@@ -1,8 +1,8 @@
 
-<%@ include file="../../WEB-INF/jsp//properties.jsp" %>
+<%@ include file="--dot-dot-slash--WEB-INF/jsp/--subpath--/properties.jsp" %>
 
-<%@ include file="../../WEB-INF/jsp/top.jsp" %>
+<%@ include file="--dot-dot-slash--WEB-INF/jsp/top.jsp" %>
 
-<%@ include file="../../WEB-INF/jsp//index.jsp" %>
+<%@ include file="--dot-dot-slash--WEB-INF/jsp/--subpath--/index.jsp" %>
 
-<%@ include file="../../WEB-INF/jsp//bottom.jsp" %>
+<%@ include file="--dot-dot-slash--WEB-INF/jsp/--subpath--/bottom.jsp" %>

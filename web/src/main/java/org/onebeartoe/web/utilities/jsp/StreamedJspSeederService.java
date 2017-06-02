@@ -4,6 +4,7 @@ package org.onebeartoe.web.utilities.jsp;
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.stream.Stream;
 import org.onebeartoe.io.TextFileWriter;
 
 /**
@@ -13,6 +14,17 @@ import org.onebeartoe.io.TextFileWriter;
  */
 public class StreamedJspSeederService implements JspSeederService
 {
+    private String dotDotSlashes(String childDirectoryPath)
+    {
+        String [] strs = childDirectoryPath.split("/");
+        
+        StringBuilder dotSlashes = new StringBuilder();
+        
+        Stream.of(strs).forEach(s -> {dotSlashes.append("../"); });
+        
+        return dotSlashes.toString();
+    }
+    
     private SeedResult seed(File seefFile, String content)
     {
         SeedResult result = new SeedResult();
@@ -61,6 +73,9 @@ public class StreamedJspSeederService implements JspSeederService
         
         File index = new File(indexDirectoy, "index.jsp");
         String content = templates.loadIndex();
+        content = content.replaceAll("--subpath--", childDirectoryPath);
+        String dotDotSlashes = dotDotSlashes(childDirectoryPath);
+        content = content.replaceAll("--dot-dot-slash--", dotDotSlashes);
         report.index = seed(index, content);
         
         File webinfJspDir = new File(webRoot, "WEB-INF/jsp/");

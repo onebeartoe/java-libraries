@@ -31,9 +31,9 @@ public class TextFileWriter implements TextWriter
         try
         {
             FileWriter file = new FileWriter(outfile, append);
-            PrintWriter pic_index = new PrintWriter(file);
-            pic_index.println(text);
-            pic_index.close();
+            PrintWriter index = new PrintWriter(file);
+            index.print(text);
+            index.close();
         } 
         catch(FileNotFoundException fnfe)
         {
