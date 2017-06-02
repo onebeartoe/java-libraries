@@ -54,18 +54,14 @@ public class SerialPorts
      */
     public static SerialPort get(String portName) throws Exception, NoClassDefFoundError
     {
-        
-//TODO: check if the JRE is running on the Raspberry Pi and execute the next commented
-//      line of code if so        
-        // the next line is for Raspberry Pi,
-        // and gets us into the while loop,
-        // and was suggested here: http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
-//        System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
-        
+        // the next line checks if the
+        // JRE is on the is on Linux (including Raspberry Pi Debian        
         OperatingSystem os = new OperatingSystem();
         if( !os.seemsLikeMsWindows() )
         {
             // assume we are on Linux
+            // and as suggested here: http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
+            // TODO: Should the second parameter be the portName?
             System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
             System.out.println("The serial port system property is set.");
         }
