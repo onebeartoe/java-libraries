@@ -25,7 +25,8 @@ public class ImageTag
 		this.alt = alt;
 	}
 	
-	public String toString()
+        @Deprecated
+	public String toHtml()
 	{
 		StringBuffer buf = new StringBuffer("<img src=\"");
 		buf.append(src);
@@ -38,6 +39,5 @@ public class ImageTag
 		buf.append("\" />");
 		
 		return buf.toString(); 
-	}
-	
+	}	
 }

@@ -26,8 +26,8 @@ public abstract class LinkTag implements HtmlTag
 //		this.breakTag = breakTag;
 	}
 	
-
-	public String toString()
+        @Override
+	public String toHtml()
 	{
 		StringBuffer tag = new StringBuffer();
 

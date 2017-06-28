@@ -12,16 +12,19 @@
     <name>onebeartoe-java-libraries-parent</name>
 
     <modules>
+        <module>math</module>
         <module>network</module>
         <module>onebeartoe-application</module>
         <module>onebeartoe-multimedia</module>
         <module>onebeartoe-system</module>
+        <module>science</module>
         <module>web</module>
     </modules>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>        
+		
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -73,5 +76,4 @@
             </plugin>
         </plugins>
     </reporting>
-
 </project>

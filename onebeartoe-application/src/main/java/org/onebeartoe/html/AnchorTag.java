@@ -1,10 +1,10 @@
 
 package org.onebeartoe.html;
 
-public class AnchorTag implements HtmlTag {
-	
-	private String href;
-	private String text;
+public class AnchorTag implements HtmlTag 
+{
+    private String href;
+    private String text;
 	
 	public AnchorTag(String href, String text)
 	{
@@ -12,7 +12,8 @@ public class AnchorTag implements HtmlTag {
 		this.text= text;
 	}
 	
-	public String toString()
+        @Override
+	public String toHtml()
 	{
 		StringBuffer buf = new StringBuffer("<a href=\"");
 		buf.append(href);
@@ -36,8 +37,5 @@ public class AnchorTag implements HtmlTag {
 
 	public void setText(String text) {
 		this.text = text;
-	}
-	
+	}	
 }
-
-
