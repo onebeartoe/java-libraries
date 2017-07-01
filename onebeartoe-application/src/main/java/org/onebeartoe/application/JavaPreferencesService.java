@@ -50,6 +50,7 @@ public class JavaPreferencesService implements PreferencesService
     
     public Dimension restoreWindowDimension() 
     {	
+//todo: remove the hard coding.   wait, is this needed here?
 	String key = PixelPreferencesKeys.windowWidth;
 	int width = preferences.getInt(key, application.DEFAULT_WIDTH);
 	
@@ -64,6 +65,7 @@ public class JavaPreferencesService implements PreferencesService
     @Override
     public Point restoreWindowLocation() throws Exception
     {
+//todo: remove the hard coding.   wait, is this needed here?        
 	int errorValue = -1;
 	String key = PixelPreferencesKeys.windowX;
 	int x = preferences.getInt(key, errorValue);
