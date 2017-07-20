@@ -1,47 +1,42 @@
 
 package org.onebeartoe.application.ui;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import javafx.stage.Stage;
 import org.onebeartoe.application.DesktopApplication;
 
 /**
  * @author Roberto Marquez <https://www.youtube.com/user/onebeartoe>
  */
-public interface JavafxApplication extends DesktopApplication
+public class JavafxApplication extends DesktopApplication
 {
-    @Override
-    default WindowProperties restoreWindowProperties(String applicationId) throws FileNotFoundException, IOException, ClassNotFoundException
+    public WindowProperties currentConfiguration(Stage stage)
     {
+        WindowProperties wp = new WindowProperties();
         
+        wp.locationX = (int) stage.getX();
+        wp.locationY = (int) stage.getY();
+
+        wp.width = (int) stage.getWidth();
+        wp.height = (int) stage.getHeight();
         
-        WindowProperties wp = null;
-        
-        try 
-        {
-            wp = restoreWindowProperties(applicationId);
-        } 
-        catch (IOException | ClassNotFoundException ex) 
-        {
-            ex.printStackTrace();
-        }
-        
-        if(wp == null)
-        {
-            wp = new WindowProperties();
-            
-            wp.id = getClass().getName();
-            wp.applicationName = getClass().getSimpleName();
-            
-            // use the default values
-            wp.width = 573;
-            wp.height = 114;
-            
-            wp.locationX = 50;
-            wp.locationY = 100;
-        }                
-                
-                
         return wp;
+    }    
+    
+    
+//    @Override
+    public void restoreWindowProperties(final WindowProperties wp, final Stage stage)// throws FileNotFoundException, IOException, ClassNotFoundException
+    {        
+//        WindowProperties wp = null;     
+//        String applicationId = wp.applicationName;
+        
+//        wp = loadWindowProperties(applicationId);
+  
+        // update the gui
+        
+        stage.setWidth(wp.width);
+        stage.setHeight(wp.height);
+                
+        stage.setX(wp.locationX);
+        stage.setY(wp.locationY);
     }        
 }

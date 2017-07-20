@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class WindowProperties implements Serializable
 {
     /**
-     * For consistency, use getClass().getSimpleName(); for the applcationName 
+     * For consistency, use getClass().getSimpleName() for the applcationName 
      * value.
      */
     public String applicationName;
