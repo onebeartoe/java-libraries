@@ -10,10 +10,9 @@ import org.onebeartoe.application.ui.WindowProperties;
 import org.onebeartoe.io.SerializedObjects;
 
 /**
- * Remove this class.
  * @author rmarquez
  */
-public interface DesktopApplication 
+public interface DesktopApplication
 {
     public int x = 0;
     public int y = 0;
@@ -69,6 +68,10 @@ public interface DesktopApplication
         InputStream input = new FileInputStream(infile);
                 
         WindowProperties wp = (WindowProperties) SerializedObjects.retrieve(input);
+        if(wp.applicationName == null)
+        {
+            wp.applicationName = filename;
+        }
         
         return wp;
     }
