@@ -1,7 +1,6 @@
 
 package org.onebeartoe.application;
 
-import java.awt.Dimension;
 import java.awt.Point;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
@@ -9,19 +8,14 @@ import javax.swing.JFrame;
 import org.onebeartoe.pixel.preferences.PixelPreferencesKeys;
 
 /**
- * @author rmarquez
+ * @author Roberto Marquez
  */
 public class JavaPreferencesService implements PreferencesService
 {   
     private Preferences preferences;
     
-    private DesktopApplication application;
-    
-    public JavaPreferencesService(DesktopApplication application)
+    public JavaPreferencesService(Class c)//DesktopApplication application)
     {
-        this.application = application;
-        Class c = this.application.getClass();        
-        
 	preferences = Preferences.userNodeForPackage(c);
     }
 
@@ -48,19 +42,19 @@ public class JavaPreferencesService implements PreferencesService
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public Dimension restoreWindowDimension() 
-    {	
-//todo: remove the hard coding.   wait, is this needed here?
-	String key = PixelPreferencesKeys.windowWidth;
-	int width = preferences.getInt(key, application.DEFAULT_WIDTH);
-	
-	key = PixelPreferencesKeys.windowHeight;
-	int height = preferences.getInt(key, application.DEFAULT_HEIGHT);
-	
-	Dimension demension = new Dimension(width, height);
-	
-	return demension;
-    }
+//    public Dimension restoreWindowDimension() 
+//    {	
+////todo: remove the hard coding.   wait, is this needed here?
+//	String key = PixelPreferencesKeys.windowWidth;
+//	int width = preferences.getInt(key, application.DEFAULT_WIDTH);
+//	
+//	key = PixelPreferencesKeys.windowHeight;
+//	int height = preferences.getInt(key, application.DEFAULT_HEIGHT);
+//	
+//	Dimension demension = new Dimension(width, height);
+//	
+//	return demension;
+//    }
     
     @Override
     public Point restoreWindowLocation() throws Exception

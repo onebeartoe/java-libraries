@@ -8,16 +8,13 @@ import java.io.Serializable;
  */
 public class WindowProperties implements Serializable
 {
-    /**
-     * For consistency, use getClass().getSimpleName() for the applcationName 
-     * value.
-     */
-    public String applicationName;
-    
-    /**
-     * For consistency, use getClass().getName() for the id value.
-     */
-    public String id;
+//    /**
+//     * For consistency, use getClass().getSimpleName() for the applcationName 
+//     * value.
+//     */
+//    public String applicationName;
+//    
+//    public String id;
     
     public int locationX;
     

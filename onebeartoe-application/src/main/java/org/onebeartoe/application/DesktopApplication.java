@@ -14,17 +14,23 @@ import org.onebeartoe.io.SerializedObjects;
  */
 public abstract class DesktopApplication
 {
-    public int x = 0;
-    public int y = 0;
+    /**
+     * For consistency, use getClass().getName() for the id value.
+     */    
+    protected String id;
     
-    public final int DEFAULT_WIDTH = 300;
-    public final int DEFAULT_HEIGHT = 400;
+    protected WindowProperties wp;
     
-    public
-//            static 
-        String buildPropertiesPath(WindowProperties wp)
+    public DesktopApplication(String id)
+    {
+        this.id = id;
+        
+        wp = new WindowProperties();
+    }
+    
+    public String buildPropertiesPath(WindowProperties wp)
     {        
-        if(wp.id == null)
+        if(id == null)
         {
             throw new IllegalArgumentException("be sure to set the ID on the WindowProperties object");
         }        
@@ -36,49 +42,37 @@ public abstract class DesktopApplication
         File parentDir = new File(parentPath);
         parentDir.mkdirs();
         
-        String path = parentPath + wp.id;
+        String path = parentPath + id;
         
         return path;
     }
 
-    public WindowProperties loadWindowProperties(WindowProperties wp) throws FileNotFoundException, IOException, ClassNotFoundException
+    public WindowProperties loadWindowProperties()//WindowProperties wp)
+            throws FileNotFoundException, IOException, ClassNotFoundException
     {
         String inpath = buildPropertiesPath(wp);
         File infile = new File(inpath);
-        
-//        File dir = new File(inpath);        
-//        int start = wp.id.lastIndexOf(".") + 1;
-//        String filename = wp.id.substring(start);
-//        File infile = new File(dir, filename);
         
         InputStream input = new FileInputStream(infile);
                 
         wp = (WindowProperties) SerializedObjects.retrieve(input);
         
-//        if(wp.applicationName == null)
-//        {
-//            wp.applicationName = filename;
-//        }
-        
         return wp;
     }
 
-    public void persistWindowProperties(WindowProperties wp) throws IOException
+    public void persistWindowProperties() throws IOException
     {        
         String path = buildPropertiesPath(wp);
         File outfile = new File(path);
         
-//        File outDir = new File(path);
-//        
-//        outDir.mkdirs();
-//        
-//        if(wp.applicationName == null)
-//        {
-//            throw new IllegalArgumentException("set the application name on the WindowProperits object");
-//        }
-//        
-//        File outfile = new File(outDir, wp.applicationName);
-        
         SerializedObjects.saveObject(outfile, wp);
-    }    
+    }
+    
+    public abstract int defaultX();
+    
+    public abstract int defaultY();
+    
+    public abstract int defaultWidth();
+    
+    public abstract int defaultHeight();    
 }

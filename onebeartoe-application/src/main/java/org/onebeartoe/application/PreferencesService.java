@@ -17,7 +17,7 @@ public interface PreferencesService
     
     String restoreProperty(String key);
     
-    Dimension restoreWindowDimension() throws Exception;
+//    Dimension restoreWindowDimension() throws Exception;
     
     Point restoreWindowLocation() throws Exception;
     
