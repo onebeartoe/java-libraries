@@ -44,10 +44,16 @@ public abstract class DesktopApplication
         return path;
     }
 
-    @Deprecated("use GragicsEvnironment.centerPoint()")
+    @Deprecated
+        /**
+         * ("use GragicsEvnironment.centerPoint()")
+         */
     public abstract int defaultX();
     
-    @Deprecated("use GragicsEvnironment.centerPoint()")
+    @Deprecated
+        /**
+         * ("use GragicsEvnironment.centerPoint()")
+         */
     public abstract int defaultY();
     
     public abstract int defaultWidth();
