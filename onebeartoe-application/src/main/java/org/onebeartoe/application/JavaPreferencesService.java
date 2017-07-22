@@ -39,7 +39,9 @@ public class JavaPreferencesService implements PreferencesService
     @Override
     public String restoreProperty(String key)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String prop = get(key, null);
+        
+        return prop;
     }
     
 //    public Dimension restoreWindowDimension() 
@@ -56,28 +58,28 @@ public class JavaPreferencesService implements PreferencesService
 //	return demension;
 //    }
     
-    @Override
-    public Point restoreWindowLocation() throws Exception
-    {
-//todo: remove the hard coding.   wait, is this needed here?        
-	int errorValue = -1;
-	String key = PixelPreferencesKeys.windowX;
-	int x = preferences.getInt(key, errorValue);
-
-	key = PixelPreferencesKeys.windowY;
-	int y = preferences.getInt(key, errorValue);
-	
-	if(x == errorValue || y == errorValue)
-	{
-	    // The window location hasn't been saved, yet.
-	    
-	    throw new Exception();
-	}
-	
-	Point point = new Point(x,y);
-	
-	return point;
-    }    
+//    @Override
+//    public Point restoreWindowLocation() throws Exception
+//    {
+////todo: remove the hard coding.   wait, is this needed here?        
+//	int errorValue = -1;
+//	String key = PixelPreferencesKeys.windowX;
+//	int x = preferences.getInt(key, errorValue);
+//
+//	key = PixelPreferencesKeys.windowY;
+//	int y = preferences.getInt(key, errorValue);
+//	
+//	if(x == errorValue || y == errorValue)
+//	{
+//	    // The window location hasn't been saved, yet.
+//	    
+//	    throw new Exception();
+//	}
+//	
+//	Point point = new Point(x,y);
+//	
+//	return point;
+//    }    
 
     @Override
     public void saveProperty(String key, String value) throws BackingStoreException

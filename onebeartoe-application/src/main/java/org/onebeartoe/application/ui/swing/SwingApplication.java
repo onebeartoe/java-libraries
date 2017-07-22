@@ -38,7 +38,9 @@ public abstract class SwingApplication extends DesktopApplication
     }
     
     /**
-     * careful, here
+     * This method provides default values if something goes wrong with restoring the 
+     * persisted values.
+     * 
      * @param stage 
      */
     public void restoreWindowProperties(JFrame stage)
@@ -56,15 +58,15 @@ public abstract class SwingApplication extends DesktopApplication
 
         if(loadError)
         {
-            // Prvoide default values if someting goes wrong with retoring the 
-            // persisted values.
-            
             // use the default values
             wp.width = defaultWidth();
             wp.height = defaultHeight();
             
-            wp.locationX = defaultX();
-            wp.locationY = defaultY();
+	    // center it
+	    stage.setLocationRelativeTo(null); 		            
+            
+            wp.locationX = (int) stage.getLocation().getX();
+            wp.locationY = (int) stage.getLocation().getY();
         }
         
         restoreWindowProperties(wp, stage);

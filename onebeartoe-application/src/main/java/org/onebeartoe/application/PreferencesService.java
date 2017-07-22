@@ -19,7 +19,7 @@ public interface PreferencesService
     
 //    Dimension restoreWindowDimension() throws Exception;
     
-    Point restoreWindowLocation() throws Exception;
+//    Point restoreWindowLocation() throws Exception;
     
     void saveProperty(String key, String value) throws BackingStoreException;
     
