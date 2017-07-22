@@ -24,7 +24,7 @@ public abstract class JavafxApplication extends DesktopApplication
 //        this.id = id;
     }
     
-    public WindowProperties currentConfiguration(Stage stage)
+    public WindowProperties setCurrentConfiguration(Stage stage)
     {
         wp.locationX = (int) stage.getX();
         wp.locationY = (int) stage.getY();
@@ -38,7 +38,7 @@ public abstract class JavafxApplication extends DesktopApplication
     /**
      * This method updates the JavaFx GUI with the properties in the wp object
      */
-    public void restoreWindowProperties(final WindowProperties wp, final Stage stage)// throws FileNotFoundException, IOException, ClassNotFoundException
+    private void restoreWindowProperties(final WindowProperties wp, final Stage stage)// throws FileNotFoundException, IOException, ClassNotFoundException
     {        
         stage.setWidth(wp.width);
         stage.setHeight(wp.height);
@@ -53,26 +53,21 @@ public abstract class JavafxApplication extends DesktopApplication
      */
     public void restoreWindowProperties(Stage stage)
     {
+        boolean loadError = false;
         try
         {
             wp = loadWindowProperties();
-// careful, here            
-//            wp.id = applicationId;
-            restoreWindowProperties(wp, stage);
         } 
         catch (IOException | ClassNotFoundException ex) 
         {
+            loadError = true;
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
         }
         
-        if(wp == null)
+        if(loadError)
         {
             // Prvoide default values if someting goes wrong with retoring the 
             // persisted values.
-            wp = new WindowProperties();
-
-//            wp.id = id;
-//            wp.applicationName = getClass().getSimpleName();
             
             // use the default values
             wp.width = defaultWidth();
@@ -80,13 +75,8 @@ public abstract class JavafxApplication extends DesktopApplication
             
             wp.locationX = defaultX();
             wp.locationY = defaultY();
-            
-            restoreWindowProperties(wp, stage);
         }
-    }
-
-    public void setApplicationId(String id)
-    {
-        this.id = id;
+        
+        restoreWindowProperties(wp, stage);
     }
 }

@@ -14,9 +14,6 @@ import org.onebeartoe.io.SerializedObjects;
  */
 public abstract class DesktopApplication
 {
-    /**
-     * For consistency, use getClass().getName() for the id value.
-     */    
     protected String id;
     
     protected WindowProperties wp;
@@ -47,6 +44,14 @@ public abstract class DesktopApplication
         return path;
     }
 
+    public abstract int defaultX();
+    
+    public abstract int defaultY();
+    
+    public abstract int defaultWidth();
+    
+    public abstract int defaultHeight();    
+    
     public WindowProperties loadWindowProperties()//WindowProperties wp)
             throws FileNotFoundException, IOException, ClassNotFoundException
     {
@@ -67,12 +72,12 @@ public abstract class DesktopApplication
         
         SerializedObjects.saveObject(outfile, wp);
     }
-    
-    public abstract int defaultX();
-    
-    public abstract int defaultY();
-    
-    public abstract int defaultWidth();
-    
-    public abstract int defaultHeight();    
+
+    /**
+     * For consistency, use getClass().getName() for the id value.
+     */    
+    public void setApplicationId(String id)
+    {
+        this.id = id;
+    }    
 }
