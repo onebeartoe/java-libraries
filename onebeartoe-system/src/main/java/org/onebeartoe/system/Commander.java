@@ -5,8 +5,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 /**
- * 
+ * @deprecated where is this even used?
  * @author Roberto Marquez
  */
 public class Commander
@@ -25,8 +26,10 @@ public class Commander
     }
 
     /**
-     * @deprecated This constructor is deprecated so as to not use one command per Commander object for one command.  
-     * The Commande.java class should handle multiple different commands.
+     * @deprecated This constructor is deprecated so as to not use one command 
+     * per Commander object for one command.  
+     * 
+     * The Commander.java class should handle multiple different commands.
      * 
      * @param command 
      */

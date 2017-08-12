@@ -1,33 +1,36 @@
 
 package org.onebeartoe.system;
 
+import java.io.InputStream;
 import java.util.List;
 
 /**
- *
  * @author Roberto Marquez
- * @deprecated Use https://github.com/onebeartoe/java-libraries instead
  */
 public class CommandResults 
 {
-    public List<String> stderr;
+    public int exitCode;
+        
+    public String processedStdOut;
     
-    public List<String> stdout;
+    public String processedStdErr;
+    
+    public InputStream stdOut;
+    
+    public InputStream stdErr;    
     
     @Override
+    @Deprecated
+    /**
+     * @Deprecated where is this used.
+     */
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        
-        for(String s : stdout)
-        {
-            sb.append(s + System.lineSeparator());
-        }
-        
-        for(String s : stderr)
-        {
-            sb.append(s + System.lineSeparator());
-        }
+
+        sb.append(processedStdOut + System.lineSeparator());
+
+        sb.append(processedStdErr + System.lineSeparator());
         
         return sb.toString();
     }
