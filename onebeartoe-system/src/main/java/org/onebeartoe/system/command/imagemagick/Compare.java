@@ -39,7 +39,7 @@ public class Compare extends SystemCommand
         
         System.err.println("Examining stderr reveals: " + stderr);
         
-        int begin = stderr.lastIndexOf("(");
+        int begin = stderr.lastIndexOf("(") + 1;
         int end  =  stderr.lastIndexOf(")");
         
         String s = stderr.substring(begin, end);
