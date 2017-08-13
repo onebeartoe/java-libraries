@@ -4,6 +4,7 @@ package org.onebeartoe.system.command.imagemagick;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
+import org.onebeartoe.system.CommandResults;
 import org.onebeartoe.system.command.SystemCommand;
 import org.onebeartoe.system.command.SystemCommandProfile;
 
@@ -36,7 +37,31 @@ public class Compare extends SystemCommand
     {
         String stderr = super.processStdErr(is);
         
-        System.out.println("Examining stderr reveals: " + stderr);
+        System.err.println("Examining stderr reveals: " + stderr);
+        
+        int begin = stderr.lastIndexOf("(");
+        int end  =  stderr.lastIndexOf(")");
+        
+        String s = stderr.substring(begin, end);
+        
+        System.err.println("string value is: " + s);
+        
+        float f = Float.valueOf(s);
+        
+        int i = (int) f;
+        
+        results.exitCode = i;
+        
+        if(results.exitCode != 0)
+        {
+            // the diff is not good
+
+            System.err.println("The comparison is not identical for:");
+            profile.commandAndArgs.forEach( c ->
+            {
+                System.err.print(c + " ");   
+            });
+        }
         
         return stderr;
     }

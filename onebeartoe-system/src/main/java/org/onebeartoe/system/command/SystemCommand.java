@@ -18,6 +18,8 @@ public abstract class SystemCommand
 {
     protected SystemCommandProfile profile;
     
+    protected CommandResults results;
+    
     public CommandResults execute() throws Exception
     {
         ProcessBuilder builder = new ProcessBuilder(profile.commandAndArgs);
@@ -25,7 +27,7 @@ public abstract class SystemCommand
         Process jobProcess = builder.start();                
         int exitCode = jobProcess.waitFor();
         
-        CommandResults results = new CommandResults();
+        results = new CommandResults();
         
         results.exitCode = exitCode;
 
