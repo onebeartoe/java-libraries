@@ -1,0 +1,53 @@
+
+package org.onebeartoe.system.command.imagemagick;
+
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
+import org.onebeartoe.system.command.SystemCommand;
+import org.onebeartoe.system.command.SystemCommandProfile;
+
+/**
+ * This system command represents the ImageMagick compare command.  It calls it in this 
+ * format: 
+ * 
+ *        compare -metric RMSE pyramid-baseline.png pyramid-proposed-baseline.png NULL:
+ * 
+ * @author Roberto Marquez <https://www.youtube.com/user/onebeartoe>
+ */
+public class Compare extends SystemCommand
+{
+    public Compare(String path1, String path2)
+    {
+        profile = new SystemCommandProfile();
+        
+        String systemCommand = "compare -metric RMSE " + path1 + " " + path2 + " NULL:";
+        
+        String [] strs = systemCommand.split("\\s+");
+        List <String> commandAndArgs = Arrays.asList(strs);        
+        profile.commandAndArgs = commandAndArgs;
+        
+        profile.processStdErr = true;
+        profile.processStdOut = true;        
+    }
+    
+    @Override
+    protected String processStdErr(InputStream is)
+    {
+        String stderr = super.processStdErr(is);
+        
+        System.out.println("Examining stderr reveals: " + stderr);
+        
+        return stderr;
+    }
+    
+    @Override
+    protected String processStdOut(InputStream is)
+    {
+        String stdout = super.processStdOut(is);
+        
+        System.out.println("examining the stdout reveals: " + stdout);
+        
+        return stdout;
+    }
+}

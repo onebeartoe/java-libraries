@@ -32,11 +32,7 @@ public abstract class SystemCommand
         InputStream es = jobProcess.getErrorStream();
         if(profile.processStdErr)
         {
-            String stderr = new BufferedReader( new InputStreamReader(es))
-                                  .lines()
-                                  .collect(Collectors.joining("\n"));
-
-            results.processedStdErr = stderr;
+            results.processedStdErr = processStdErr(es);
         }
         else
         {
@@ -46,11 +42,7 @@ public abstract class SystemCommand
         InputStream is = jobProcess.getInputStream();
         if(profile.processStdOut)
         {
-            String stdout = new BufferedReader( new InputStreamReader(is))
-                                  .lines()
-                                  .collect(Collectors.joining("\n"));
-
-            results.processedStdOut = stdout;
+            results.processedStdOut = processStdOut(is);
         }
         else
         {
@@ -58,5 +50,23 @@ public abstract class SystemCommand
         }
 
         return results;
+    }
+    
+    protected String processStdErr(InputStream errStream)
+    {
+        String stderr = new BufferedReader( new InputStreamReader(errStream))
+                                  .lines()
+                                  .collect(Collectors.joining("\n"));
+        
+        return stderr;
+    }
+    
+    protected String processStdOut(InputStream is)
+    {
+        String stdout = new BufferedReader( new InputStreamReader(is))
+                      .lines()
+                      .collect(Collectors.joining("\n"));
+                    
+        return stdout;
     }
 }

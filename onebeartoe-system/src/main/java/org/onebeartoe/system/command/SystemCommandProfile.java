@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Roberto Marquez <https://www.youtube.com/user/onebeartoe>
  */
-class SystemCommandProfile 
+public class SystemCommandProfile 
 {
     public List<String> commandAndArgs;
     
