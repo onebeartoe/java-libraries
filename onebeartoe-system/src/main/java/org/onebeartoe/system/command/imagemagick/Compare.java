@@ -58,7 +58,7 @@ public class Compare extends SystemCommand
         if(results.exitCode != 0)
         {
             // the diff is not good
-
+            System.err.println();
             System.err.println("The comparison is not identical for:");
             profile.commandAndArgs.forEach( c ->
             {
