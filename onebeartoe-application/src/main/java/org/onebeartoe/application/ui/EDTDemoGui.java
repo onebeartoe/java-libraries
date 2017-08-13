@@ -47,5 +47,4 @@ public class EDTDemoGui extends JPanel
 		add(progressPanel);
 		add(intermediateProgressPanel);
 	}	
-	
 }

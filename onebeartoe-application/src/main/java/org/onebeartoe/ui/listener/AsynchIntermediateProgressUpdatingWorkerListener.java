@@ -46,5 +46,4 @@ public class AsynchIntermediateProgressUpdatingWorkerListener extends GuiWorkerL
 
 		worker.execute();
 	}
-
 }
