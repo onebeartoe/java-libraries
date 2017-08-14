@@ -44,8 +44,6 @@ public class Compare extends SystemCommand
         
         String s = stderr.substring(begin, end);
         
-        System.err.println("string value is: " + s);
-        
         float f = Float.valueOf(s);
         
         // move it to an integer percetage
@@ -67,15 +65,5 @@ public class Compare extends SystemCommand
         }
         
         return stderr;
-    }
-    
-    @Override
-    protected String processStdOut(InputStream is)
-    {
-        String stdout = super.processStdOut(is);
-        
-        System.out.println("examining the stdout reveals: " + stdout);
-        
-        return stdout;
     }
 }
