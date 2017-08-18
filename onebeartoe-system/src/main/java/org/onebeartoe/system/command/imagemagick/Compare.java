@@ -46,7 +46,7 @@ public class Compare extends SystemCommand
         
         float f = Float.valueOf(s);
         
-        // move it to an integer percetage
+        // move it to an integer representation of a percetage
         f = f * 100.0f;
         
         int i = (int) f;
