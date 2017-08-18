@@ -37,7 +37,7 @@ public class Compare extends SystemCommand
     {
         String stderr = super.processStdErr(is);
         
-        System.err.println("Examining stderr reveals: " + stderr);
+//        System.err.println("Examining stderr reveals: " + stderr);
         
         int begin = stderr.lastIndexOf("(") + 1;
         int end  =  stderr.lastIndexOf(")");
@@ -57,11 +57,13 @@ public class Compare extends SystemCommand
         {
             // the diff is not good
             System.err.println();
+            System.err.println();
             System.err.println("The comparison is not identical for:");
             profile.commandAndArgs.forEach( c ->
             {
                 System.err.print(c + " ");   
             });
+            System.err.println();
         }
         
         return stderr;
