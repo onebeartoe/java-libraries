@@ -51,10 +51,17 @@ public class Compare extends SystemCommand
         
         int i = (int) f;
         
-        results.exitCode = i;
         
-        if(results.exitCode != 0)
+        
+        if(i <= 1)
         {
+            // have a 1% differance allownace, and set the exit code to success
+            results.exitCode = 0;
+        }
+        else
+        {
+            results.exitCode = i;
+            
             // the diff is not good
             System.err.println();
             System.err.println();
