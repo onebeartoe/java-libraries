@@ -18,8 +18,13 @@ import org.onebeartoe.system.command.SystemCommandProfile;
  */
 public class Compare extends SystemCommand
 {
-    public Compare(String path1, String path2)
+    private final static double DEFAULT_ERROR_THRESHOLD = 2.5;
+    
+    private double errorThreshold;
+
+    public Compare(String path1, String path2, double errorThreshold)
     {
+        this.errorThreshold = errorThreshold;
         profile = new SystemCommandProfile();
         
         String systemCommand = "compare -metric RMSE " + path1 + " " + path2 + " NULL:";
@@ -32,12 +37,21 @@ public class Compare extends SystemCommand
         profile.processStdOut = true;        
     }
     
-    @Override
+    public Compare(String path1, String path2)
+    {
+        this(path1, path2, DEFAULT_ERROR_THRESHOLD);
+    }    
+    
+/**
+     * This is the error allowance for the image comparison.
+     *
+     * Any comparison difference (the value given between the parenthesis by the
+     * compare command) greater than this value is treated as an error.
+     */
+        @Override
     protected String processStdErr(InputStream is)
     {
         String stderr = super.processStdErr(is);
-        
-//        System.err.println("Examining stderr reveals: " + stderr);
         
         int begin = stderr.lastIndexOf("(") + 1;
         int end  =  stderr.lastIndexOf(")");
@@ -49,18 +63,15 @@ public class Compare extends SystemCommand
         // move it to an integer representation of a percetage
         f = f * 100.0f;
         
-        int i = (int) f;
-        
-        
-        
-        if(i <= 1)
+        // check if the error percentage is below the threshold
+        if(f <= errorThreshold)
         {
-            // have a 1% differance allownace, and set the exit code to success
+            // set the exit code to success
             results.exitCode = 0;
         }
         else
         {
-            results.exitCode = i;
+            results.exitCode = (int) f;
             
             // the diff is not good
             System.err.println();
