@@ -1,7 +1,8 @@
 
 package org.onebeartoe.multimedia;
 
-public interface AudioPlayer 
+public interface AudioPlayer
 {
     void play();	
 }
+

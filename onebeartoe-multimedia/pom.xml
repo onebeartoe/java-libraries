@@ -10,7 +10,7 @@
     </parent>
     
     <artifactId>multimedia</artifactId>
-    
+
     <name>onebeartoe-java-libraries-multimedia</name>
     
     <url>http://maven.apache.org</url>
