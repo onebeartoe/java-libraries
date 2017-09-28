@@ -20,10 +20,14 @@ public class OneWebPage
      */
     public List<Menu> menus;
     
+    public List<String> videos;
+    
     public OneWebPage()
     {
         content = new ArrayList();
         
         menus = new ArrayList();
+        
+        videos = new ArrayList();
     }
 }
