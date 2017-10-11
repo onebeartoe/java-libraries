@@ -36,7 +36,7 @@ public class Compare extends SystemCommand
         String systemCommand = "compare -metric RMSE " + path1 + " " + path2 + " NULL:";
         
         String [] strs = systemCommand.split("\\s+");
-        List <String> commandAndArgs = Arrays.asList(strs);        
+        List <String> commandAndArgs = Arrays.asList(strs);
         profile.commandAndArgs = commandAndArgs;
         
         profile.processStdErr = true;

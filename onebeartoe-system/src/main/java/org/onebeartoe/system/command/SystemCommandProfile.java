@@ -1,7 +1,6 @@
 
 package org.onebeartoe.system.command;
 
-import java.io.InputStream;
 import java.util.List;
 
 /**

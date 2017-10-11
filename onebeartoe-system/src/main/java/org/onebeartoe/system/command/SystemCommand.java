@@ -1,6 +1,4 @@
-/*
 
- */
 package org.onebeartoe.system.command;
 
 import java.io.BufferedReader;
@@ -14,10 +12,12 @@ import org.onebeartoe.system.CommandResults;
  * 
  * @author Roberto Marquez <https://www.youtube.com/user/onebeartoe>
  */
-public abstract class SystemCommand 
+public class SystemCommand 
+//public abstract class SystemCommand 
 {
     protected SystemCommandProfile profile;
-    
+
+//TODO: IT DOES NOT LOOK LIKE THIS SHOULD BE A CLASS MEMBER!    
     protected CommandResults results;
     
     public CommandResults execute() throws Exception
@@ -70,5 +70,10 @@ public abstract class SystemCommand
                       .collect(Collectors.joining("\n"));
                     
         return stdout;
+    }
+    
+    public void setCommandProfile(SystemCommandProfile profile)
+    {
+        this.profile = profile;
     }
 }
