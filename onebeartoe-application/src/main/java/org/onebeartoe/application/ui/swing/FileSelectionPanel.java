@@ -51,16 +51,21 @@ public class FileSelectionPanel extends JPanel implements ActionListener
 
     public FileSelectionPanel(FileType type)
     {
-            this(type, FileSelectionMethods.SINGLE_DIRECTORY, false);
+        this(type, FileSelectionMethods.SINGLE_DIRECTORY, false);
     }
-	
+
+    public FileSelectionPanel(FileType type, FileSelectionMethods mode, boolean showRecursive) 
+    {
+        this(type, mode, showRecursive, null);
+    }
+    
     /**
      * This GUI component shows the files that fit the targeted type. 
      * @param type specifies what type of files to target.  Use values from onebeartoe.FileHelper, but if
      * an invalid file type is pased in then the target type will be all files.
      * @see onebeartoe.FileHelper 
      */
-    public FileSelectionPanel(FileType type, FileSelectionMethods mode, boolean showRecursive) 
+    public FileSelectionPanel(FileType type, FileSelectionMethods mode, boolean showRecursive, ActionListener listener) 
     {
     	targetType = validateType(type);
     	
@@ -76,7 +81,11 @@ public class FileSelectionPanel extends JPanel implements ActionListener
         source = new JTextField( "");
         source.setEnabled(false);
         selectButton = new JButton("Select Directory");
-        selectButton.addActionListener(this);
+        selectButton.addActionListener(this);        
+        if(listener != null)
+        {
+            selectButton.addActionListener(listener);
+        }
         
         recursiveCheckbox = new JCheckBox("Include Sub-folders");
         recursiveCheckbox.addChangeListener( new ChangeListener() 
@@ -127,31 +136,32 @@ public class FileSelectionPanel extends JPanel implements ActionListener
     	return validType;
 	}
 	
-	public void actionPerformed(ActionEvent ae) 
-	{		
-		Object eventSource = ae.getSource();	
-    	if(eventSource == selectButton) 
-    	{
-    		if(fileSelectionMode == FileSelectionMethods.SINGLE_DIRECTORY)
-    		{
-    			currentDirectory = GUITools.selectDirectory(selectDirectoryTitle);
-        		if(currentDirectory != null) 
-        		{
-        			source.setText( currentDirectory.getPath() );	    	
-        		}
-    		}
-    		else 
-    		{
-    			// single file selection
-    			String title = "Select a file";
-    			currentFile = GUITools.selectFile(FileSelectionMethods.SINGLE_FILE, title);
-    			String path = currentFile.getParent();
-    			source.setText(path);    			
-    		}
-    		
-    		updateOutputPanel();
-    	}
-	}
+    public void actionPerformed(ActionEvent ae) 
+    {		
+        Object eventSource = ae.getSource();	
+        
+        if(eventSource == selectButton) 
+        {
+            if(fileSelectionMode == FileSelectionMethods.SINGLE_DIRECTORY)
+            {
+                currentDirectory = GUITools.selectDirectory(selectDirectoryTitle);
+                if(currentDirectory != null) 
+                {
+                        source.setText( currentDirectory.getPath() );	    	
+                }
+            }
+            else 
+            {
+                // single file selection
+                String title = "Select a file";
+                currentFile = GUITools.selectFile(FileSelectionMethods.SINGLE_FILE, title);
+                String path = currentFile.getParent();
+                source.setText(path);    			
+            }
+
+            updateOutputPanel();
+        }
+    }
 
     /**
      * this method is called only when the currentDirectory has a value
@@ -169,43 +179,50 @@ public class FileSelectionPanel extends JPanel implements ActionListener
 	    outputPanel.setText( buf.toString() );
     }
 	
-    public File getCurrentDirectoty()
+    public File getCurrentDirectory()
     {
         return currentDirectory;
     }
 
     public File [] getTargetedFiles() 
     {
-            File [] files;
+        File [] files;
 
-            if(fileSelectionMode == FileSelectionMethods.SINGLE_DIRECTORY)
+        if(fileSelectionMode == FileSelectionMethods.SINGLE_DIRECTORY)
+        {
+            boolean recursive = recursiveCheckbox.isSelected();
+            List<FileType> targets = new ArrayList<FileType>();
+            targets.add(targetType);
+            FileSystemSearcher searcher = new FileSystemSearcher(currentDirectory, targets, recursive);
+            List<File> filesList = searcher.findTargetFiles();
+            files = filesList.toArray( new File[0] );
+
+            if(files == null)
             {
-                boolean recursive = recursiveCheckbox.isSelected();
-                List<FileType> targets = new ArrayList<FileType>();
-                targets.add(targetType);
-                FileSystemSearcher searcher = new FileSystemSearcher(currentDirectory, targets, recursive);
-                List<File> filesList = searcher.findTargetFiles();
-                files = filesList.toArray( new File[0] );
-
-                if(files == null)
-                {
-                        files = new File[0];
-                }
+                    files = new File[0];
+            }
+        }
+        else
+        {
+            if(currentFile == null)
+            {
+                files = new File[0];
             }
             else
             {
-                if(currentFile == null)
-                {
-                    files = new File[0];
-                }
-                else
-                {
-                    files = new File[1];
-                    files[0] = currentFile;				
-                }			
-            }
-	    
-            return files;
-	}
+                files = new File[1];
+                files[0] = currentFile;				
+            }			
+        }
 
+        return files;
+    }
+
+    public void setCurrentDirectory(File directory)
+    {
+        currentDirectory = directory;
+        
+        String path = directory.getAbsolutePath();
+        source.setText(path);
+    }
 }
