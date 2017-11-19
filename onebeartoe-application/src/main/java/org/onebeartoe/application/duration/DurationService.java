@@ -5,7 +5,6 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
 /**
- *
  * @author Roberto Marquez
  */
 public class DurationService
