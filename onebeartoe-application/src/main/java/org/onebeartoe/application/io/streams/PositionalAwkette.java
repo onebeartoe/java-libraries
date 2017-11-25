@@ -1,9 +1,7 @@
 
 package org.onebeartoe.application.io.streams;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,28 +30,12 @@ public class PositionalAwkette
 
     private Options buildOptions()
     {
-//        Option inputDirectory = Option.builder()
-//                                      .required()
-//                                      .hasArg()
-//                                      .longOpt(INPUT_DIRECTORY)
-//                                      .build();
-//                
         Option notMode = Option.builder()
-                                            .longOpt(NOT_MODE)
-                                            .desc("In ' not mode', all positions are printed except those listed in the command line args.")
-                                            .build();
-//        
-//        Option removeSpecialCharacterFilenames = Option.builder()
-//                                                    .required()
-//                                                    .longOpt(REMOVE_SPECIAL_CHARACTER_FILENAMES)
-//                                                    .hasArg(true)
-//                                                    .desc("Specifiying this paramter put the application in replace character mode and a" 
-//                                                            + "The argument is the String target to be replaced.")
-//                                                    .build();
+                                .longOpt(NOT_MODE)
+                                .desc("In ' not mode', all positions are printed except those listed in the command line args.")
+                                .build();
         
         Options options = new Options();
-//        options.addOption(inputDirectory);
-//        options.addOption(justPrintRenameCommands);
         options.addOption(notMode);
         
         return options;
@@ -103,16 +85,6 @@ public class PositionalAwkette
 
         runProfile.mode = RunMode.REGULAR;
 
-//        String s = cl.getOptionValue(REMOVE_SPECIAL_CHARACTER_FILENAMES);
-//        if(s.length() != 1)
-//        {
-//            String message = "The value of the " + REMOVE_SPECIAL_CHARACTER_FILENAMES + " shold be a single character.";
-//
-//            throw new ParseException(message);
-//        }
-        
-//        runProfile.specialCharTarget = s.charAt(0);
-//     
         if( cl.hasOption(NOT_MODE) )
         {
             runProfile.mode = RunMode.NOT_MODE;
