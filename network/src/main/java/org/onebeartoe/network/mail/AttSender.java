@@ -14,6 +14,9 @@ public class AttSender extends GmailSender
         super(user, password);
         
         smtphost = "outbound.att.net";
+        
+//        smtpPort = 587;
+        smtpPort = 465;
     }
     
     protected String getSender()
@@ -22,24 +25,10 @@ public class AttSender extends GmailSender
         
         return sender;
     }
-    
-    public static void main(String [] args) throws MessagingException
-    {
-
-    }
 
     @Override
     public synchronized void sendMail(String subject, String body, String recipients) throws AddressException, MessagingException
     {
-//        int port = 587;
-        int port = 465;
-
-        sendMail(subject, body, recipients, port);
-    }
-
-    @Override
-    public synchronized void sendMail(String subject, String body, String recipients, int port) throws AddressException, MessagingException
-    {
-        super.sendMail(subject, body, recipients, port);
+        super.sendMail(subject, body, recipients);
     }    
 }

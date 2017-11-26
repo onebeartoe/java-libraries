@@ -32,17 +32,21 @@ import javax.mail.internet.MimeMultipart;
 public class GmailSender implements JavaMailSender 
 {
     protected String smtphost = "smtp.gmail.com";
+    protected int smtpPort;
     protected String username;
     protected String password;
+    
 
     public GmailSender(String user, String password)
     {
             this.username = user;
             this.password = password;
+            
+            smtpPort = 465;
     }
 
     
-    private Properties buildProperties(int port)
+    private Properties buildProperties()
     {
         Properties props = new Properties();
         props.setProperty("mail.transport.protocol", "smtp");
@@ -54,8 +58,8 @@ public class GmailSender implements JavaMailSender
         
         props.put("mail.smtp.auth", "true");
         props.put("mail.debug", "true");
-        props.put("mail.smtp.port", String.valueOf(port) );
-        props.put("mail.smtp.socketFactory.port", String.valueOf(port) );
+        props.put("mail.smtp.port", String.valueOf(smtpPort) );
+        props.put("mail.smtp.socketFactory.port", String.valueOf(smtpPort) );
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
         props.setProperty("mail.smtp.quitwait", "false");
@@ -69,30 +73,21 @@ public class GmailSender implements JavaMailSender
         
         return sender;
     }
-
-    /* (non-Javadoc)
-     * @see onebeartoe.mail.google.JavaMailSender#sendMail(java.lang.String, java.lang.String, java.lang.String)
-     */
-    public synchronized void sendMail(String subject, String body, String recipients) throws AddressException, MessagingException
-    {
-        int port = 465;
-
-        sendMail(subject, body, recipients, port);
-    }
     
     @Override
-    public void sendMail(String subject, String body, String recipients, int port) throws AddressException, MessagingException 
+    public void sendMail(String subject, String body, String recipients) throws AddressException, MessagingException 
     {
         File noAttachment = null;
         
-        sendMail(subject, body, recipients, port, noAttachment);
+        sendMail(subject, body, recipients, noAttachment);
     }    
 
-    public synchronized void sendMail(String subject, String body, String recipients, int port, File attachment) throws AddressException, MessagingException
+    @Override
+    public synchronized void sendMail(String subject, String body, String recipients, File attachment) throws AddressException, MessagingException
     {
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
 
-        Properties props = buildProperties(port);
+        Properties props = buildProperties();
 
         Session session = Session.getInstance(props, new Authenticator() 
         {
