@@ -126,13 +126,12 @@ public class GmailSender implements JavaMailSender
             // Add the first part
             multipart.addBodyPart(messageBodyPart);
 
-            String filename = attachment.getName();
-
             // Part two is attachment
             messageBodyPart = new MimeBodyPart();
-            DataSource source = new FileDataSource(filename);
-            messageBodyPart.setDataHandler(
-               new DataHandler(source));
+            DataSource source = new FileDataSource(attachment);
+            messageBodyPart.setDataHandler( new DataHandler(source));
+            
+            String filename = attachment.getName();
             messageBodyPart.setFileName(filename);
 
             // Add the second part
