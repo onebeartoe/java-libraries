@@ -83,7 +83,7 @@ public class GmailSender implements JavaMailSender
     }    
 
     @Override
-    public synchronized void sendMail(String subject, String body, String recipients, File attachment) throws AddressException, MessagingException
+    public synchronized void sendMail(String subject, String messageText, String recipients, File attachment) throws AddressException, MessagingException
     {
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
 
@@ -110,7 +110,7 @@ public class GmailSender implements JavaMailSender
         if(attachment == null)
         {
             // just send a regular test-only email
-            message.setContent(body, "text/plain");
+            message.setContent(messageText, "text/plain");
         }
         else
         {
@@ -121,7 +121,7 @@ public class GmailSender implements JavaMailSender
             BodyPart messageBodyPart = new MimeBodyPart();
 
             // Fill the message
-            messageBodyPart.setText(body);
+            messageBodyPart.setText(messageText);
 
             // Add the first part
             multipart.addBodyPart(messageBodyPart);
