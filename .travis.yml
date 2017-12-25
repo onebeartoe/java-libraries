@@ -3,8 +3,8 @@ language: java
 install: true
 addons:
   sonarcloud:
-    organization: $SONAR-ORGNIZATION
-    token: $SONAR-TOKEN
+    organization: $SONAR_ORGNIZATION
+    token: $SONAR_TOKEN
 jdk:
   - oraclejdk8
 script:
