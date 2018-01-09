@@ -8,13 +8,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.event.DocumentListener;
 
+//TODO: Change the extends to a has-a relationship.
 public class ScrollableTextArea extends JScrollPane 
 {
     static final long serialVersionUID = 3L;
 
-    private Font font;
-
-    private JTextArea text;
+    private final JTextArea text;
 
     private Color textareaForeground;
     
@@ -58,11 +57,6 @@ public class ScrollableTextArea extends JScrollPane
             if(f != null) {
                     text.setFont(f);
             }
-    }
-
-    public Font getFont() 
-    {
-            return font;
     }
 
     public Color getTextareaForeground() {

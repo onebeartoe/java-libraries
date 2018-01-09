@@ -1,3 +1,4 @@
+
 package org.onebeartoe.application.ui;
 
 import java.awt.Component;
@@ -16,23 +17,28 @@ import javax.swing.UIManager;
  */
 public class LookAndFeelButton extends JButton implements ActionListener
 {
-
     static final long serialVersionUID = 3L;
 
     private int current_look = 0;
+    
     private UIManager.LookAndFeelInfo looks[];
-    private Component parent;
+    
+    private Component container;
 
     // testing objects
     int apCount;
+    
     boolean testing;
 
     // Constructor
-    public LookAndFeelButton(String text, Component parent)
+    public LookAndFeelButton(String text, Component container)
     {
         super(text);
+        
         looks = UIManager.getInstalledLookAndFeels();
-        this.parent = parent;
+        
+        this.container = container;
+        
         addActionListener(this);
 
         apCount = 0;
@@ -45,7 +51,7 @@ public class LookAndFeelButton extends JButton implements ActionListener
         {
             // get the installed look-and-feel information
             UIManager.setLookAndFeel(looks[current_look].getClassName());
-            SwingUtilities.updateComponentTreeUI(parent);
+            SwingUtilities.updateComponentTreeUI(container);
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -104,5 +110,4 @@ public class LookAndFeelButton extends JButton implements ActionListener
     {
         return apCount;
     }
-
 }
