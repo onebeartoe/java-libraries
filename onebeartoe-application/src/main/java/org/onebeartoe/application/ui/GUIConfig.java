@@ -12,8 +12,7 @@ import java.io.Serializable;
  */
 public abstract class GUIConfig implements Serializable 
 {
-
-    public static String configPath;
+    private String configPath;
 
     private Integer windowX;
     private Integer windowY;
@@ -35,7 +34,8 @@ public abstract class GUIConfig implements Serializable
         windowHeight = h;
     }
 
-    public String getConfigPath() {
+    public String getConfigPath() 
+    {
         return configPath;
     }
 

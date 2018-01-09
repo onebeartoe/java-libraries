@@ -120,22 +120,18 @@ public class FileSelectionPanel extends JPanel implements ActionListener
         updateOutputPanel();
     }
 	
-	private FileType validateType(FileType type)
-	{
-		FileType validType = FileType.ALL_FILES;
-    	
-    	if(type == FileType.MULTIMEDIA)
-    	{
-    	    validType = type;
-    	}
-    	else if(type == FileType.IMAGE)
-    	{
-    	    validType = type;
-    	}
-    	
-    	return validType;
-	}
-	
+    private FileType validateType(FileType type)
+    {
+        FileType validType = FileType.ALL_FILES;
+
+        if(type == FileType.MULTIMEDIA || type == FileType.IMAGE)
+        {
+            validType = type;
+        }
+
+        return validType;
+    }
+
     public void actionPerformed(ActionEvent ae) 
     {		
         Object eventSource = ae.getSource();	
