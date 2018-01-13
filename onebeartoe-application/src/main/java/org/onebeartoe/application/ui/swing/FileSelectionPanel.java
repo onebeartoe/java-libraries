@@ -150,7 +150,9 @@ public class FileSelectionPanel extends JPanel implements ActionListener
             {
                 // single file selection
                 String title = "Select a file";
-                currentFile = GUITools.selectFile(FileSelectionMethods.SINGLE_FILE, title);
+                currentFile = GUITools.selectFile(FileSelectionMethods.SINGLE_FILE, 
+                                                  title,
+                                                  currentDirectory);
                 String path = currentFile.getParent();
                 source.setText(path);    			
             }

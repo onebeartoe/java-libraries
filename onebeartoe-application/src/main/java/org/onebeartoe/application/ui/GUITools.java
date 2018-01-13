@@ -19,7 +19,9 @@ import org.onebeartoe.application.filesystem.FileSelectionMethods;
 
 /**
  * Copyright 2000 Roberto Marquez
+ * 
  * This file is part of onebeartoe API for Java.
+ * 
  * @author Roberto Marquez
  */
 public class GUITools
@@ -143,7 +145,13 @@ public class GUITools
 
     public static File selectFile(FileSelectionMethods mode, String title)
     {
-
+        File selection = selectFile(mode, title, currentDirectory);
+        
+        return selection;
+    }
+    
+    public static File selectFile(FileSelectionMethods mode, String title, File pwd)
+    {
         JFileChooser fileChooser = new JFileChooser();
 
         fileChooser.setCurrentDirectory(currentDirectory);
