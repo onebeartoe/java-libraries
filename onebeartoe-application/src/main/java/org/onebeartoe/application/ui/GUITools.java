@@ -122,7 +122,7 @@ public class GUITools
         return selectFile(mode, title);
     }
 
-    private static File currentDirectory = new File(System.getProperty("user.home"));
+//    private static File currentDirectory = new File(System.getProperty("user.home"));
 
     public static File selectFile(int mode, String title)
     {
@@ -145,7 +145,8 @@ public class GUITools
 
     public static File selectFile(FileSelectionMethods mode, String title)
     {
-        File selection = selectFile(mode, title, currentDirectory);
+        File pwd = new File(".");
+        File selection = selectFile(mode, title, pwd);
         
         return selection;
     }
@@ -154,7 +155,7 @@ public class GUITools
     {
         JFileChooser fileChooser = new JFileChooser();
 
-        fileChooser.setCurrentDirectory(currentDirectory);
+        fileChooser.setCurrentDirectory(pwd);
 
         fileChooser.setDialogTitle(title);
 
@@ -174,10 +175,11 @@ public class GUITools
         if (result == JFileChooser.CANCEL_OPTION)
         {
             file = null;
-        } else
+        } 
+        else
         {
             file = fileChooser.getSelectedFile();
-            currentDirectory = fileChooser.getCurrentDirectory();
+//            currentDirectory = fileChooser.getCurrentDirectory();
         }
 
         return file;
