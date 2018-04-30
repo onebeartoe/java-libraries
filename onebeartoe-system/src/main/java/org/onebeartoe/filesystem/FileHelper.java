@@ -36,41 +36,45 @@ public class FileHelper
 */
 	
 	
-	/**
-	 * Writes the data of two files to a third. The first parameter represents
-	 * the first file to write to the new file. The second parameter is the
-	 * second file that will be written to the new file. The last parameter is
-	 * the new file created or the overwritten existing file.
-	 */
-	public static boolean concat(File first, File second, File newfile) 
-	{
-		boolean result;
-		int data;
+    /**
+     * Writes the data of two files to a third. The first parameter represents
+     * the first file to write to the new file. The second parameter is the
+     * second file that will be written to the new file. The last parameter is
+     * the new file created or the overwritten existing file.
+     */
+    public static boolean concat(File first, File second, File newfile) 
+    {
+        int data;
 
-		FileInputStream input1;
-		FileInputStream input2;
+        FileInputStream input1;
+        FileInputStream input2;
 
-		try {
-			input1 = new FileInputStream(first);
-			input2 = new FileInputStream(second);
-			FileOutputStream output = new FileOutputStream(newfile);
-			while ((data = input1.read()) != -1) {
-				output.write(data);
-			}
-			input1.close();
+        try 
+        {
+            input1 = new FileInputStream(first);
+            input2 = new FileInputStream(second);
+            FileOutputStream output = new FileOutputStream(newfile);
+            while ((data = input1.read()) != -1) {
+                    output.write(data);
+            }
+            input1.close();
 
-			while ((data = input2.read()) != -1) {
-				output.write(data);
-			}
-			input2.close();
-			output.close();
-		} catch (FileNotFoundException fnfe) {
-			return false;
-		} catch (IOException ioe) {
-			return false;
-		}
-		return true;
-	}
+            while ((data = input2.read()) != -1) {
+                    output.write(data);
+            }
+            input2.close();
+            
+            output.close();
+        } 
+        catch (FileNotFoundException fnfe) {
+                return false;
+        } 
+        catch (IOException ioe) {
+                return false;
+        }
+        
+        return true;
+    }
 
 	/**
 	 * Breaks up the original file into separate files. The files will contain

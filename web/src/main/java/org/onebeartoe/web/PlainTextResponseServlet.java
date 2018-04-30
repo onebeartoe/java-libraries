@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @deprecated Just use a java.io.PrintWriter with response.getOutputStream()
- * @author Roberto Marquez
+ *
  */
-@Deprecated
 public abstract class PlainTextResponseServlet extends HttpServlet
 {
     protected abstract String buildText(HttpServletRequest request, HttpServletResponse response);

@@ -1,7 +1,7 @@
 
 package org.onebeartoe.html;
 
-public class AnchorTag implements HtmlTag 
+public class AnchorTag implements HtmlTag
 {
     private String href;
     private String text;
