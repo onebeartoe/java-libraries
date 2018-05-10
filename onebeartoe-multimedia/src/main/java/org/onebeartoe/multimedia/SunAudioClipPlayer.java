@@ -21,12 +21,9 @@ public class SunAudioClipPlayer implements AudioPlayer
 		{
 			throw new IllegalArgumentException("URL cannot be null for AudioClipPlayer's constructor.");
 		}
-		
-		InputStream in;
-		 
-		try 
+				 
+		try (InputStream in = url.openStream(); )
 		{
-			in = url.openStream();
 			as = new AudioStream(in);
 		} 
 		catch (IOException e) 
@@ -34,16 +31,9 @@ public class SunAudioClipPlayer implements AudioPlayer
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		InputStream in = new FileInputStream(Filename);
 
 		         
-
 		
-//		instanceClip = Applet.newAudioClip(url);
-//		if(instanceClip == null)
-//		{
-//			throw new IllegalArgumentException("URL provided for AudioClipPlayer object might not be an audio clip: \n\t\t" + url);
-//		}		
 	}
 	
 	public static void play(URL url) 
