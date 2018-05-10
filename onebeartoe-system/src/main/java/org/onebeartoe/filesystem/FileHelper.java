@@ -49,10 +49,10 @@ public class FileHelper
         FileInputStream input1;
         FileInputStream input2;
 
-        try 
+        try (input1 = new FileInputStream(first);
+            input2 = new FileInputStream(second);)
         {
-            input1 = new FileInputStream(first);
-            input2 = new FileInputStream(second);
+            
             FileOutputStream output = new FileOutputStream(newfile);
             while ((data = input1.read()) != -1) {
                     output.write(data);
