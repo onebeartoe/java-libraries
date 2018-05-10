@@ -127,11 +127,13 @@ public class FileHelper
 		return true;
 	}
 
-	public static boolean copyFile(File original, File parent) {
-		try {
-			FileInputStream input = new FileInputStream(original);
-			File outputFile = new File(parent, original.getName());
-			FileOutputStream output = new FileOutputStream(outputFile);
+	public static boolean copyFile(File original, File parent) 
+	{
+		File outputFile = new File(parent, original.getName());
+		try (FileInputStream input = new FileInputStream(original);			
+			FileOutputStream output = new FileOutputStream(outputFile);)
+		{
+			
 			int data;
 			while ((data = input.read()) != -1) {
 				output.write(data);
