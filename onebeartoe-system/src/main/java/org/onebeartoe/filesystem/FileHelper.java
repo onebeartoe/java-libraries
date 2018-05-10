@@ -101,8 +101,8 @@ public class FileHelper
 			file_size = FILE_SIZE_MIN;
 		}
 
-		try {
-			input = new FileInputStream(original);
+		try (input = new FileInputStream(original);)
+		{
 			filename = original.getName() + '_' + part;
 			File outfile = new File(original.getParent(), filename);
 			FileOutputStream output = new FileOutputStream(outfile);
