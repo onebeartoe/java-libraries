@@ -46,11 +46,8 @@ public class FileHelper
     {
         int data;
 
-        FileInputStream input1;
-        FileInputStream input2;
-
-        try (input1 = new FileInputStream(first);
-            input2 = new FileInputStream(second);)
+        try (FileInputStream input1 = new FileInputStream(first);
+            FileInputStream input2 = new FileInputStream(second);)
         {
             
             FileOutputStream output = new FileOutputStream(newfile);
@@ -94,14 +91,14 @@ public class FileHelper
 		int byte_count = 0;
 		char part = 'a';
 		int data;
-		FileInputStream input;
+		
 		String filename;
 
 		if (file_size < FILE_SIZE_MIN) {
 			file_size = FILE_SIZE_MIN;
 		}
 
-		try (input = new FileInputStream(original);)
+		try (FileInputStream input = new FileInputStream(original);)
 		{
 			filename = original.getName() + '_' + part;
 			File outfile = new File(original.getParent(), filename);
