@@ -16,8 +16,8 @@ public abstract class StaticFileHttpHandler extends LocalFileHttpHandler
 {    
     public void writeText(OutputStream os, File file) throws IOException
     {
-        FileInputStream fs = new FileInputStream(file);
-        
+        try (FileInputStream fs = new FileInputStream(file);)
+        {
         final byte[] buffer = new byte[0x10000];
         int count = 0;
         while ((count = fs.read(buffer)) >= 0)
@@ -28,5 +28,6 @@ public abstract class StaticFileHttpHandler extends LocalFileHttpHandler
         os.close();
 
         logger.info("static file written");
+        }
     }
 }
