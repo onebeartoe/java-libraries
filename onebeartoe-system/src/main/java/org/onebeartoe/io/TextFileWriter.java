@@ -28,10 +28,10 @@ public class TextFileWriter implements TextWriter
     public boolean writeText(File outfile, String text, boolean append)
     {
         boolean saved = true;
-        try
+        try(FileWriter file = new FileWriter(outfile, append);
+            PrintWriter index = new PrintWriter(file);)
         {
-            FileWriter file = new FileWriter(outfile, append);
-            PrintWriter index = new PrintWriter(file);
+            
             index.print(text);
             index.close();
         } 
