@@ -47,11 +47,11 @@ public class FileHelper
         int data;
 
         try (FileInputStream input1 = new FileInputStream(first);
-            FileInputStream input2 = new FileInputStream(second);)
+            FileInputStream input2 = new FileInputStream(second);
+	    FileOutputStream output = new FileOutputStream(newfile);)
         {
-            
-            FileOutputStream output = new FileOutputStream(newfile);
-            while ((data = input1.read()) != -1) {
+            while ((data = input1.read()) != -1) 
+	    {
                     output.write(data);
             }
             input1.close();
