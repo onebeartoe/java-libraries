@@ -21,7 +21,7 @@ public class LookAndFeelButton extends JButton implements ActionListener
 
     private int current_look = 0;
     
-    private UIManager.LookAndFeelInfo looks[];
+    private transient UIManager.LookAndFeelInfo looks[];
     
     private Component container;
 
