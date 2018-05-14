@@ -24,7 +24,7 @@ public class TaskPanel extends javax.swing.JPanel implements ActionListener
 	private File infile;
 	private boolean on_task;
 	private JButton invokeBtn;
-	private TimerTask task;
+	private transient TimerTask task;
 	
 	public TaskPanel(TimerTask task, String instructions) 
         {
