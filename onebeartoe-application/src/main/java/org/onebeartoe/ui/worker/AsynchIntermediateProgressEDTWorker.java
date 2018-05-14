@@ -33,6 +33,8 @@ public class AsynchIntermediateProgressEDTWorker extends AsynchEDTWorker
     		{
     			System.err.println("error in iteration " + i);
     			e1.printStackTrace();
+			
+			Thread.currentThread().interrupt();
     		}
     		publish("task " + i + " is complete.\n");
     		setProgress(100 * i / nums.length);    		    		    		    	
