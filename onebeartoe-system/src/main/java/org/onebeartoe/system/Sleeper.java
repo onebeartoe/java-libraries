@@ -15,6 +15,8 @@ public class Sleeper
         catch (InterruptedException ex) 
         {
             System.err.println("could not sleep");
+            
+            Thread.currentThread().interrupt();
         }                
     }
 }
