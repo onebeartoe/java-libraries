@@ -36,7 +36,6 @@ public class GmailSender implements JavaMailSender
     protected String username;
     protected String password;
     
-
     public GmailSender(String user, String password)
     {
             this.username = user;
@@ -141,7 +140,7 @@ public class GmailSender implements JavaMailSender
             message.setContent(multipart);
         }
 
-        if (recipients.indexOf(',') > 0)
+        if ( recipients.contains(",") )
         {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipients));
         }
