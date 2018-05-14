@@ -91,23 +91,27 @@ public class FileHelper
 		int byte_count = 0;
 		char part = 'a';
 		int data;
-		
-		String filename;
 
 		if (file_size < FILE_SIZE_MIN) {
 			file_size = FILE_SIZE_MIN;
 		}
 
-		try (FileInputStream input = new FileInputStream(original);)
+		String filename = original.getName() + '_' + part;
+		File outfile = new File(original.getParent(), filename);
+			
+		try (FileInputStream input = new FileInputStream(original);
+		     FileOutputStream output = new FileOutputStream(outfile);)
 		{
-			filename = original.getName() + '_' + part;
-			File outfile = new File(original.getParent(), filename);
-			FileOutputStream output = new FileOutputStream(outfile);
-			while ((data = input.read()) != -1) {
-				if (byte_count < file_size) {
+			
+			while ((data = input.read()) != -1) 
+			{
+				if (byte_count < file_size) 
+				{
 					output.write(data);
 					byte_count++;
-				} else {
+				} 
+				else 
+				{
 					output.close();
 					part++;
 					filename = original.getName() + '_' + part;
@@ -119,11 +123,15 @@ public class FileHelper
 			}
 			output.close();
 			input.close();
-		} catch (FileNotFoundException fnfe) {
+		} catch (FileNotFoundException fnfe) 
+		{
 			return false;
-		} catch (IOException ioe) {
+		} 
+		catch (IOException ioe) 
+		{
 			return false;
 		}
+		
 		return true;
 	}
 
