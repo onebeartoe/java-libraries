@@ -100,9 +100,9 @@ public class FileHelper
 		File outfile = new File(original.getParent(), filename);
 			
 		try (FileInputStream input = new FileInputStream(original);
-		     FileOutputStream output = new FileOutputStream(outfile);)
+		     )
 		{
-			
+			FileOutputStream output = new FileOutputStream(outfile);
 			while ((data = input.read()) != -1) 
 			{
 				if (byte_count < file_size) 
@@ -122,8 +122,8 @@ public class FileHelper
 				}
 			}
 			output.close();
-			input.close();
-		} catch (FileNotFoundException fnfe) 
+		} 
+		catch (FileNotFoundException fnfe) 
 		{
 			return false;
 		} 
