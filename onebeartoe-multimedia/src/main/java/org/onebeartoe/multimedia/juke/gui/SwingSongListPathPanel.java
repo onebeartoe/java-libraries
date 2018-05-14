@@ -26,11 +26,11 @@ public class SwingSongListPathPanel extends JPanel implements SongListPathPanel
 {
     private static final long serialVersionUID = 173856230L;
 
-    Vector<String> list;
+    private Vector<String> list;
 
-    JList songListPaths;
+    private JList songListPaths;
 
-    ListModel model;
+    private transient ListModel model;
 
     public SwingSongListPathPanel()
     {
