@@ -16,7 +16,7 @@ public class RegularCurrentSongService implements CurrentSongService
 {
     String currentSong;
 
-    long inactivityDuration = 1000 * 60 * 6;
+    long inactivityDuration = 1000L * 60 * 6;
 
     enum RequestTypes 
     {
