@@ -84,7 +84,7 @@ public class SerialPorts
             }
         }
 
-        SerialPort serialPort = null;
+        SerialPort serialPort;
         
         if (portId == null) 
         {
@@ -102,13 +102,6 @@ public class SerialPorts
                     SerialPort.STOPBITS_1,
                     SerialPort.PARITY_NONE);
                 
-                // open the streams
-//                InputStream is = serialPort.getInputStream();
-//                InputStreamReader isr = new InputStreamReader(is);
-//                input = new BufferedReader(isr);
-//
-//                output = serialPort.getOutputStream();
-//
 //                // add event listeners
 //                serialPort.addEventListener(this);
 
