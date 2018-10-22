@@ -1,11 +1,9 @@
 
 package org.onebeartoe.application;
 
-import java.awt.Point;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 import javax.swing.JFrame;
-import org.onebeartoe.pixel.preferences.PixelPreferencesKeys;
 
 /**
  * @author Roberto Marquez
@@ -92,19 +90,19 @@ public class JavaPreferencesService implements PreferencesService
     public void saveWindowPreferences(JFrame window)
     {
 	int x = window.getX();
-	String key = PixelPreferencesKeys.windowX;
+	String key = PreferencesKeys.WINDOW_X;
 	preferences.putInt(key, x);
 	
 	int y = window.getY();
-	key = PixelPreferencesKeys.windowY;
+	key = PreferencesKeys.WINDOW_Y;
 	preferences.putInt(key, y);
 	
 	int width = window.getWidth();	
-	key = PixelPreferencesKeys.windowWidth;
+	key = PreferencesKeys.WINDOW_WIDTH;
 	preferences.putInt(key, width);
 	
 	int height = window.getHeight();
-	key = PixelPreferencesKeys.windowHeight;
+	key = PreferencesKeys.WINDOW_HEIGHT;
 	preferences.putInt(key, height);
     }
 }
