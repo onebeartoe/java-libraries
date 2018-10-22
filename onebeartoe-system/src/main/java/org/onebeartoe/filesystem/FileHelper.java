@@ -14,28 +14,7 @@ import java.io.IOException;
  * added isTextFile() method Created: September 1st 2002
  */
 public class FileHelper 
-{
-
-/*
- * use FileType
- * 
- * 	
-	public static enum FILE_TYPES
-	{
-		ALL_FILES ,
-		IMAGE_FILES ,
-		AUDIO_FILES ,
-		MULTIMEIDA_FILES 
-	}
-
-	
-	public static final int ALL_FILES = 575;
-	public static final int IMAGE_FILES = 16575;
-	public static final int AUDIO_FILES = 187536575;
-	public static final int MULTIMEIDA_FILES = 655951357;
-*/
-	
-	
+{	
     /**
      * Writes the data of two files to a third. The first parameter represents
      * the first file to write to the new file. The second parameter is the
@@ -86,7 +65,8 @@ public class FileHelper
 	 * NOTE: any value for file_size less than 500,000 bytes will be adjusted to
 	 * 500,000.
 	 */
-	public static boolean split(File original, int file_size) {
+	public static boolean split(File original, int file_size) 
+        {
 		int FILE_SIZE_MIN = 500000;
 		int byte_count = 0;
 		char part = 'a';
@@ -100,36 +80,37 @@ public class FileHelper
 		File outfile = new File(original.getParent(), filename);
 			
 		try (FileInputStream input = new FileInputStream(original);
-		     )
+		     FileOutputStream output = new FileOutputStream(outfile);)
 		{
-			FileOutputStream output = new FileOutputStream(outfile);
-			while ((data = input.read()) != -1) 
-			{
-				if (byte_count < file_size) 
-				{
-					output.write(data);
-					byte_count++;
-				} 
-				else 
-				{
-					output.close();
-					part++;
-					filename = original.getName() + '_' + part;
-					outfile = new File(original.getParent(), filename);
-					output = new FileOutputStream(outfile);
-					output.write(data);
-					byte_count = 1;
-				}
-			}
-			output.close();
+                    while ((data = input.read()) != -1) 
+                    {
+                        if (byte_count < file_size) 
+                        {
+                            output.write(data);
+                            byte_count++;
+                        } 
+                        else 
+                        {
+                            output.close();
+                            part++;
+                            filename = original.getName() + '_' + part;
+                            outfile = new File(original.getParent(), filename);
+                            
+                            try( FileOutputStream outputPart = new FileOutputStream(outfile) )
+                            {
+                                outputPart.write(data);
+                            }
+                            byte_count = 1;
+                        }
+                    }
 		} 
 		catch (FileNotFoundException fnfe) 
 		{
-			return false;
+                    return false;
 		} 
 		catch (IOException ioe) 
 		{
-			return false;
+                    return false;
 		}
 		
 		return true;
