@@ -15,6 +15,11 @@ public class SeedResult
     public String details;
     
     public Optional<Exception> error;
+    
+    public SeedResult()
+    {
+        error = Optional.empty();
+    }
 
     @Override
     public String toString()
@@ -27,7 +32,7 @@ public class SeedResult
         sb.append(details);
         sb.append("\n");
         
-        if( error != null && error.isPresent() )
+        if( error.isPresent() )
         {
             String message = error.get().getMessage();
             sb.append(message);
