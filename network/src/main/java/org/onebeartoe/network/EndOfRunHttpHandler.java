@@ -37,10 +37,8 @@ public class EndOfRunHttpHandler extends TextHttpHandler
         catch (Exception e) 
         {
             e.printStackTrace();
-        } 
-        finally 
-        {
-            return "end of run approaching...";
         }
+        
+        return "end of run approaching...";
     }
 }
