@@ -242,48 +242,46 @@ public class FileHelper
 
 	public static boolean isAudioFile(String filename) 
 	{
-		if (!(filename.length() > 3)) {
-			return false;
-		}
+            if (!(filename.length() > 3)) 
+            {
+                return false;
+            }
 
-		int i = filename.length();
-		String ending = filename.substring(i - 3, i);
-		if (ending.equalsIgnoreCase(".au")) {
-			return true;
-		}
+            int i = filename.length();
+            String ending = filename.substring(i - 3, i);
+            if (ending.equalsIgnoreCase(".au")) 
+            {
+                return true;
+            }
 
-		ending = filename.substring(i - 4, i);
+            ending = filename.substring(i - 4, i);
 
-		if (ending.equalsIgnoreCase(".mp3"))
-			return true;
+            if (ending.equalsIgnoreCase(".mp3"))
+            {
+                return true;
+            }
 
-		if (ending.equalsIgnoreCase(".wav")) {
-			return true;
-		}
-		
-		if (ending.equalsIgnoreCase(".ogg")) {
-			return true;
-		}
-		
-		if (ending.equalsIgnoreCase(".3gp")) {
-			return true;
-		}
+            if (ending.equalsIgnoreCase(".wav")) 
+            {
+                return true;
+            }
 
-		if (ending.equalsIgnoreCase(".mid"))
-			return true;
+            if (ending.equalsIgnoreCase(".ogg")) 
+            {
+                return true;
+            }
 
-		int index = i-5;
-		if(index >= 0)
-		{
-			ending = filename.substring(index, i);
-			if (ending.equalsIgnoreCase(".fake"))
-			{
-				return true;
-			}	
-		}
-		
-		
-		return false;
+            if (ending.equalsIgnoreCase(".3gp")) 
+            {
+                return true;
+            }
+
+            if (ending.equalsIgnoreCase(".mid"))
+            {
+                return true;
+            }
+
+            return false;
 	}
 
 	public static boolean isMultimediaFile(String filename) 
