@@ -28,7 +28,7 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.14.3</version>
-        </dependency>        
+        </dependency>
     </dependencies>
   
     <build>
@@ -50,7 +50,7 @@
                         <suiteXmlFile>src/test/resources/unit-testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
-            </plugin>             
+            </plugin>
             
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>

@@ -1,12 +1,9 @@
-/*
- */
 
 package org.onebeartoe.filesystem;
 
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Roberto Marquez
  */
 public class FileHelperTests 

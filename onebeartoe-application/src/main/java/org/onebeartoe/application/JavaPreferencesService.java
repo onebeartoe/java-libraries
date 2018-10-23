@@ -3,7 +3,6 @@ package org.onebeartoe.application;
 
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
-import javax.swing.JFrame;
 
 /**
  * @author Roberto Marquez
@@ -12,7 +11,7 @@ public class JavaPreferencesService implements PreferencesService
 {   
     private Preferences preferences;
     
-    public JavaPreferencesService(Class c)//DesktopApplication application)
+    public JavaPreferencesService(Class c)
     {
 	preferences = Preferences.userNodeForPackage(c);
     }
@@ -86,23 +85,23 @@ public class JavaPreferencesService implements PreferencesService
         preferences.flush();
     }    
     
-    @Override
-    public void saveWindowPreferences(JFrame window)
-    {
-	int x = window.getX();
-	String key = PreferencesKeys.WINDOW_X;
-	preferences.putInt(key, x);
-	
-	int y = window.getY();
-	key = PreferencesKeys.WINDOW_Y;
-	preferences.putInt(key, y);
-	
-	int width = window.getWidth();	
-	key = PreferencesKeys.WINDOW_WIDTH;
-	preferences.putInt(key, width);
-	
-	int height = window.getHeight();
-	key = PreferencesKeys.WINDOW_HEIGHT;
-	preferences.putInt(key, height);
-    }
+//    @Override
+//    public void saveWindowPreferences(JFrame window)
+//    {
+//	int x = window.getX();
+//	String key = PreferencesKeys.WINDOW_X;
+//	preferences.putInt(key, x);
+//	
+//	int y = window.getY();
+//	key = PreferencesKeys.WINDOW_Y;
+//	preferences.putInt(key, y);
+//	
+//	int width = window.getWidth();	
+//	key = PreferencesKeys.WINDOW_WIDTH;
+//	preferences.putInt(key, width);
+//	
+//	int height = window.getHeight();
+//	key = PreferencesKeys.WINDOW_HEIGHT;
+//	preferences.putInt(key, height);
+//    }
 }

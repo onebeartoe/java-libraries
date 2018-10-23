@@ -23,5 +23,5 @@ public interface PreferencesService
     
     void saveProperty(String key, String value) throws BackingStoreException;
     
-    void saveWindowPreferences(JFrame window);
+//    void saveWindowPreferences(JFrame window);
 }
