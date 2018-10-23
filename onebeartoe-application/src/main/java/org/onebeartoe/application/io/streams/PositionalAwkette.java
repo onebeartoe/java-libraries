@@ -64,8 +64,8 @@ public class PositionalAwkette
         }
         catch(ParseException uoe)
         {
-            uoe.printStackTrace();
-            
+            uoe.printStackTrace(System.err);
+                        
             String usage = "\n" + "java -jar findette.jar " + "--" + INPUT_DIRECTORY + " <input-directory>" + 
                            " --" + REMOVE_SPECIAL_CHARACTER_FILENAMES + " <special-char>" + "\n";
             
