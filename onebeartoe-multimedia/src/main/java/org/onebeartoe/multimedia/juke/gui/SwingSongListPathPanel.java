@@ -92,7 +92,6 @@ public class SwingSongListPathPanel extends JPanel implements SongListPathPanel
 
     class AddButtonListener implements ActionListener
     {
-
         public void actionPerformed(ActionEvent e)
         {
             File songDirectory = GUITools.selectDirectory("Choose a directory containing song/audio files:");
