@@ -3,7 +3,6 @@ package org.onebeartoe.ui.listener;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class OnEDTWorkerListener extends GuiWorkerListener
 {
@@ -23,6 +22,8 @@ public class OnEDTWorkerListener extends GuiWorkerListener
 		catch (InterruptedException e1) 
 		{			
 			e1.printStackTrace();
+                        
+                        Thread.currentThread().interrupt();
 		}
 		parent.setCursor(Cursor.getDefaultCursor() );
 	}

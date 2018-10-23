@@ -17,16 +17,19 @@ public class AsynchProgressEDTWorker extends AsynchEDTWorker
     	int [] nums = {1,2,3,4,5,6,7,8,9,10};
     	for(int i : nums)
     	{
-    		try 
-    		{
-    			Thread.sleep(1000);
-    		} 
-    		catch (InterruptedException e1) 
-    		{
-    			System.err.println("error in iteration " + i);
-    			e1.printStackTrace();
-    		}
-    		setProgress(100 * i / nums.length);
+            try 
+            {
+                    Thread.sleep(1000);
+            } 
+            catch (InterruptedException e1) 
+            {
+                System.err.println("error in iteration " + i);
+                
+                e1.printStackTrace();
+                
+                Thread.currentThread().interrupt();
+            }
+            setProgress(100 * i / nums.length);
     	}
     			
         return "doing";

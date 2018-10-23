@@ -19,13 +19,15 @@ public class AsynchEDTWorker extends SwingWorker<String, Object>
     public String doInBackground() 
     {
     	try 
-		{
-			Thread.sleep(6000);
-		} 
-		catch (InterruptedException e1) 
-		{			
-			e1.printStackTrace();
-		}
+        {
+            Thread.sleep(6000);
+        } 
+        catch (InterruptedException e1) 
+        {			
+            e1.printStackTrace();
+            
+            Thread.currentThread().interrupt();
+        }
 		
         return "doing";
     }
