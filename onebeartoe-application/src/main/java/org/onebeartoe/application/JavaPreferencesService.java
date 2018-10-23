@@ -85,6 +85,7 @@ public class JavaPreferencesService implements PreferencesService
         preferences.flush();
     }    
     
+//TODO: Keep this commented code until we know for sure that no other projects use it.    
 //    @Override
 //    public void saveWindowPreferences(JFrame window)
 //    {
