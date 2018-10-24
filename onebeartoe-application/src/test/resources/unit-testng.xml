@@ -14,6 +14,7 @@
             <package name="org.onebeartoe.application"/>
             <package name="org.onebeartoe.application.io.streams"/>
             <package name="org.onebeartoe.ui.listener"/>
+            <package name="org.onebeartoe.ui.worker"/>
         </packages>
     </test>    
 </suite>
