@@ -9,7 +9,7 @@
 
     <packaging>pom</packaging>
 
-    <name>onebeartoe-java-libraries-parent</name>
+    <name>onebeartoe-java-libraries</name>
 
     <modules>
         <module>math</module>
