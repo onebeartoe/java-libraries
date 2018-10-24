@@ -1,6 +1,7 @@
 
 package org.onebeartoe.filesystem;
 
+import java.io.File;
 import org.testng.annotations.Test;
 
 /**
@@ -13,6 +14,13 @@ public class FileHelperTests
     public FileHelperTests() 
     {
         implementation = new FileHelper();
+    }
+    
+    @Test(groups = {"unit"})
+    public void hasIndex()
+    {
+        File f = new File(".");
+        implementation.hasIndexFile(f);
     }
     
     @Test(groups = {"unit"})
@@ -35,6 +43,9 @@ public class FileHelperTests
         
         String mid = "some.mid";
         assert( implementation.isAudioFile(mid) );
+        
+        String wav = "some.wav";
+        assert( implementation.isAudioFile(wav));
     }
     
     @Test(groups = {"unit"})
@@ -51,6 +62,9 @@ public class FileHelperTests
         
         String jpeg = "some.jpeg";
         assert( implementation.isImageFile(jpeg) );
+        
+        String png = "some.png";
+        assert( implementation.isImageFile(png) );
     }
     
     @Test(groups = {"unit"})
