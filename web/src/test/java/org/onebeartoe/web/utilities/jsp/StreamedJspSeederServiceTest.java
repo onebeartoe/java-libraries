@@ -24,7 +24,7 @@ public class StreamedJspSeederServiceTest
         System.out.println("pwd: " + pwd.getAbsolutePath() );
     }
     
-    @Test
+    @Test(groups = {"unit"})
     public void seedIndex() throws Exception
     {
 // TODO: Make sure the files do not already exist.

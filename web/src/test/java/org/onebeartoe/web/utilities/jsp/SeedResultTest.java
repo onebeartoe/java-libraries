@@ -20,7 +20,7 @@ public class SeedResultTest
         implementation.error = Optional.of(e);
     }
     
-    @Test
+    @Test(groups = {"unit"})
     public void toString_pass()
     {
         String expected = "CREATED: \nnull\n" +
