@@ -36,6 +36,29 @@ public class FileHelperTests
         String mid = "some.mid";
         assert( implementation.isAudioFile(mid) );
     }
+    
+    @Test(groups = {"unit"})
+    public void isImageFile()
+    {
+        String gif = "some.gif";
+        assert( implementation.isImageFile(gif));
+        
+        String bmp = "some.bmp";
+        assert( implementation.isImageFile(bmp) );
+        
+        String jpg = "some.jpg";
+        assert( implementation.isImageFile(jpg) );
+        
+        String jpeg = "some.jpeg";
+        assert( implementation.isImageFile(jpeg) );
+    }
+    
+    @Test(groups = {"unit"})
+    public void isImageFile_fail()
+    {
+        String not1 = "i.i";
+        assert( implementation.isImageFile(not1) == false );
+    }
         
     @Test(groups = {"unit"})
     public void isMultimediaFileSpecification()
