@@ -2,7 +2,7 @@
 package org.onebeartoe.web.utilities.jsp;
 
 import java.io.File;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  *
