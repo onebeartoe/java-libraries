@@ -9,10 +9,12 @@ import org.testng.annotations.Test;
 public class RegularCurrentSongServiceSpecification
 {
     @Test(groups = {"unit"})
-    public void instantiation()
+    public void instantiation() throws Exception
     {
         RegularCurrentSongService rcss = new RegularCurrentSongService();
         
+        int count = rcss.likeCount();
         
+        assert( count >= 0 );
     }
 }
