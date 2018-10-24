@@ -49,4 +49,20 @@ public class FileHelperTests
         String avi = "some.avi";
         assert( implementation.isMultimediaFile(avi) );
     }
+    
+    @Test(groups = {"unit"})
+    public void isTextFile()
+    {
+        String txt = "some.txt";
+        assert( implementation.isTextFile(txt) );
+        
+        String htm = "some.htm";
+        assert( implementation.isTextFile(htm) );
+        
+        String java = "some.java";
+        assert( implementation.isTextFile(java) );
+        
+        String html = "some.html";
+        assert( implementation.isTextFile(html) );
+    }
 }
