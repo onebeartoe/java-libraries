@@ -1,6 +1,7 @@
 
 package org.onebeartoe.web.utilities.jsp;
 
+import java.util.Optional;
 import org.testng.annotations.Test;
 
 /**
@@ -14,12 +15,16 @@ public class SeedResultTest
     {
         implementation = new SeedResult();
         implementation.type = SeedResults.CREATED;
+        
+        Exception e = new Exception("error 1");
+        implementation.error = Optional.of(e);
     }
     
     @Test
     public void toString_pass()
     {
-        String expected = "CREATED: \nnull\n";
+        String expected = "CREATED: \nnull\n" +
+                          "error 1\n";
         String actual = implementation.toString();
         
         assert( expected.equals(actual) );

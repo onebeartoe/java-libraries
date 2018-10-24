@@ -54,7 +54,10 @@ public class FileHelperTests
     public void isMultimediaFileSpecification_fail()
     {
         String not1 = "s.g";
-        assert( implementation.isMultimediaFile(not1) == false);        
+        assert( implementation.isMultimediaFile(not1) == false);
+
+        String not2 = "long.extension";
+        assert(implementation.isMultimediaFile(not2) == false);
     }
     
     @Test(groups = {"unit"})
