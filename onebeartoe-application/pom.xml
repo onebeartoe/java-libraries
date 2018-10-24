@@ -48,10 +48,6 @@
                 <configuration>
                     <skipTests>false</skipTests>
 
-                    <properties>
-
-                    </properties>
-
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/unit-testng.xml</suiteXmlFile>
                     </suiteXmlFiles>

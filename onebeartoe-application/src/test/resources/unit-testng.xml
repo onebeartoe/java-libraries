@@ -13,6 +13,7 @@
         <packages>    
             <package name="org.onebeartoe.application"/>
             <package name="org.onebeartoe.application.io.streams"/>
+            <package name="org.onebeartoe.ui.listener"/>
         </packages>
     </test>    
 </suite>
