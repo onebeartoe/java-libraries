@@ -90,8 +90,6 @@ public class PositionalAwkette
             runProfile.mode = RunMode.NOT_MODE;
         }
 
-        
-
         List<String> remainingArgs = cl.getArgList();
         if(remainingArgs.size() > 0)
         {
