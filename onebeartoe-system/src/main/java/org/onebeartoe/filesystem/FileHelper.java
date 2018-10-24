@@ -286,41 +286,34 @@ public class FileHelper
 
 	public static boolean isMultimediaFile(String filename) 
 	{
-		if (!(filename.length() > 3)) 
-		{
-			return false;
-		}
+            if (!(filename.length() > 3)) 
+            {
+                return false;
+            }
 
-		int i = filename.length();
-		String ending = filename.substring(i - 3, i);
-		if (ending.equalsIgnoreCase(".--")) 
-		{
-			return true;
-		}
+            int i = filename.length();
+            String ending = filename.substring(i - 4, i);
+            if (ending.equalsIgnoreCase(".avi"))
+            {
+                return true;
+            }
 
-		ending = filename.substring(i - 4, i);
-		if (ending.equalsIgnoreCase(".avi"))
-		{
-			return true;
-		}
+            if (ending.equalsIgnoreCase(".mpg")) 
+            {
+                return true;
+            }
 
-		if (ending.equalsIgnoreCase(".mpg")) 
-		{
-			return true;
-		}
+            int index = i-5;
+            if(index >= 0)
+            {
+                ending = filename.substring(index, i);
+                if (ending.equalsIgnoreCase(".mpeg"))
+                {
+                    return true;
+                }
+            }
 
-		int index = i-5;
-		if(index >= 0)
-		{
-			ending = filename.substring(index, i);
-			if (ending.equalsIgnoreCase(".mpeg"))
-			{
-				return true;
-			}
-		}
-		
-
-		return false;
+            return false;
 	}
 
 }

@@ -51,6 +51,13 @@ public class FileHelperTests
     }
     
     @Test(groups = {"unit"})
+    public void isMultimediaFileSpecification_fail()
+    {
+        String not1 = "s.g";
+        assert( implementation.isMultimediaFile(not1) == false);        
+    }
+    
+    @Test(groups = {"unit"})
     public void isTextFile()
     {
         String txt = "some.txt";
@@ -64,5 +71,15 @@ public class FileHelperTests
         
         String html = "some.html";
         assert( implementation.isTextFile(html) );
+    }
+    
+    @Test(groups = {"unit"})
+    public void isZipFile()
+    {
+        String zip = "some.zip";
+        assert( implementation.isZipFormatFile(zip) );
+        
+        String jar = "some.jar";
+        assert( implementation.isZipFormatFile(jar) );
     }
 }
