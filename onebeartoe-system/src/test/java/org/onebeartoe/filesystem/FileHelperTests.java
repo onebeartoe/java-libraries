@@ -16,6 +16,12 @@ public class FileHelperTests
         implementation = new FileHelper();
     }
     
+    @Test(groups = {"unit"}, expectedExceptions = NullPointerException.class)
+    public void concat_fail()
+    {
+        implementation.concat(null, null, null);
+    }
+    
     @Test(groups = {"unit"})
     public void hasIndex()
     {
@@ -121,5 +127,11 @@ public class FileHelperTests
         
         String jar = "some.jar";
         assert( implementation.isZipFormatFile(jar) );
+    }
+    
+    @Test(groups = {"unit"}, expectedExceptions = NullPointerException.class)
+    public void split()
+    {
+        implementation.split(null, 0);
     }
 }
