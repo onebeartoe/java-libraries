@@ -16,6 +16,16 @@ public class FileHelperTests
         implementation = new FileHelper();
     }
     
+    @Test(groups = {"unit"})
+    public void concat()
+    {
+        File infile1 = new File("pom.xml");
+        
+        File outfile = new File("target/pom-pom.xml");
+        
+        implementation.concat(infile1, infile1, outfile);
+    }
+    
     @Test(groups = {"unit"}, expectedExceptions = NullPointerException.class)
     public void concat_fail()
     {
