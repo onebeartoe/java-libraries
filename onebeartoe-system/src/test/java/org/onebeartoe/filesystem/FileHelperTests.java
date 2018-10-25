@@ -2,6 +2,7 @@
 package org.onebeartoe.filesystem;
 
 import java.io.File;
+import java.io.IOException;
 import org.testng.annotations.Test;
 
 /**
@@ -170,25 +171,23 @@ public class FileHelperTests
     }
     
     @Test(groups = {"unit"})
-    public void split()
+    public void split() throws IOException
     {
         File infile = new File("pom.xml");
-        implementation.split(infile, 5);
+        implementation.split(infile, 20_000);
     }
     
     @Test(groups = {"unit"})
-    public void split_largerFile()
+    public void split_largerFile() throws IOException
     {
         String largerFile = "../onebeartoe-application/src/main/resources/org/onebeartoe/ui/101px-Seven_segment_display-animated.gif";
         File infile = new File(largerFile);
         
-        boolean split = implementation.split(infile, 5);
-        
-        assert(split == true);
+        implementation.split(infile, 5);
     }
     
     @Test(groups = {"unit"}, expectedExceptions = NullPointerException.class)
-    public void split_fail()
+    public void split_fail() throws IOException
     {        
         implementation.split(null, 0);
     }

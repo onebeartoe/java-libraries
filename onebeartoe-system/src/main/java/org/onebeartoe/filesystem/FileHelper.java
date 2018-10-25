@@ -1,6 +1,7 @@
 
 package org.onebeartoe.filesystem;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -65,56 +66,31 @@ public class FileHelper
 	 * NOTE: any value for file_size less than 500,000 bytes will be adjusted to
 	 * 500,000.
 	 */
-	public static boolean split(File original, int file_size) 
+	public static void split(File f, int file_size) throws FileNotFoundException, IOException 
         {
-		int FILE_SIZE_MIN = 500000;
-		int byte_count = 0;
-		char part = 'a';
-		int data;
+            int partCounter = 1;//I like to name parts from 001, 002, 003, ...
+                                //you can change it to 0 if you want 000, 001, ...
 
-		if (file_size < FILE_SIZE_MIN) {
-			file_size = FILE_SIZE_MIN;
-		}
+            int sizeOfFiles = 1024 * 1024;// 1MB
+            byte[] buffer = new byte[sizeOfFiles];
 
-		String filename = original.getName() + '_' + part;
-		File outfile = new File(original.getParent(), filename);
-			
-		try (FileInputStream input = new FileInputStream(original);
-		     FileOutputStream output = new FileOutputStream(outfile);)
-		{
-                    while ((data = input.read()) != -1) 
-                    {
-                        if (byte_count < file_size) 
-                        {
-                            output.write(data);
-                            byte_count++;
-                        } 
-                        else 
-                        {
-                            output.close();
-                            part++;
-                            filename = original.getName() + '_' + part;
-                            outfile = new File(original.getParent(), filename);
-                            
-                            try( FileOutputStream outputPart = new FileOutputStream(outfile) )
-                            {
-                                outputPart.write(data);
-                            }
-                            byte_count = 1;
-                        }
+            String fileName = f.getName();
+
+            //try-with-resources to ensure closing stream
+            try (FileInputStream fis = new FileInputStream(f);
+                 BufferedInputStream bis = new BufferedInputStream(fis)) {
+
+                int bytesAmount = 0;
+                while ((bytesAmount = bis.read(buffer)) > 0) {
+                    //write each chunk of data into separate file with different number in name
+                    String filePartName = String.format("%s.%03d", fileName, partCounter++);
+                    File newFile = new File(f.getParent(), filePartName);
+                    try (FileOutputStream out = new FileOutputStream(newFile)) {
+                        out.write(buffer, 0, bytesAmount);
                     }
-		} 
-		catch (FileNotFoundException fnfe) 
-		{
-                    return false;
-		} 
-		catch (IOException ioe) 
-		{
-                    return false;
-		}
-		
-		return true;
-	}
+                }	
+            }
+        }
 
 	public static boolean copyFile(File original, File parent) 
 	{
