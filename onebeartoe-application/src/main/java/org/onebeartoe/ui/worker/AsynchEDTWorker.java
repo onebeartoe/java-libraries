@@ -24,7 +24,7 @@ public class AsynchEDTWorker extends SwingWorker<String, Object>
         } 
         catch (InterruptedException e1) 
         {			
-            e1.printStackTrace();
+//            e1.printStackTrace();
             
             Thread.currentThread().interrupt();
         }
