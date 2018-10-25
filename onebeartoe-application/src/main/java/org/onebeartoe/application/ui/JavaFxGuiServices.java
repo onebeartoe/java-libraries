@@ -9,10 +9,12 @@ import javafx.scene.control.Alert;
  */
 public class JavaFxGuiServices implements GraphicalUserInterfaceServices
 {
-
+    private static final String NOT_SUPPORTED = "Not supported yet.";
+    
     @Override
-    public void infoMessage(String message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void infoMessage(String message) 
+    {
+        throw new UnsupportedOperationException(NOT_SUPPORTED); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -28,22 +30,22 @@ public class JavaFxGuiServices implements GraphicalUserInterfaceServices
 
     @Override
     public void infoMessage(Object message, String title) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOT_SUPPORTED); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public File selectSaveAsFile(String title) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOT_SUPPORTED); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public File selectDirectory(String title) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOT_SUPPORTED); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void viewBrowser(String url) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOT_SUPPORTED); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
