@@ -11,6 +11,8 @@ public class FileHelperTests
 {
     FileHelper implementation;
     
+    File pom = new File("pom.xml");
+    
     public FileHelperTests() 
     {
         implementation = new FileHelper();
@@ -19,7 +21,7 @@ public class FileHelperTests
     @Test(groups = {"unit"})
     public void concat()
     {
-        File infile1 = new File("pom.xml");
+        File infile1 = pom;
         
         File outfile = new File("target/pom-pom.xml");
         
@@ -27,9 +29,20 @@ public class FileHelperTests
     }
     
     @Test(groups = {"unit"}, expectedExceptions = NullPointerException.class)
-    public void concat_fail()
+    public void concat_fail_NPE()
     {
         implementation.concat(null, null, null);
+    }
+    
+    @Test(groups = {"unit"})
+    public void concat_fail_FNF()
+    {
+        File fnf = new File("does-not.exist");
+        File outfile = new File("target/fnf.out");
+        
+        boolean success = implementation.concat(fnf, fnf, outfile);
+        
+        assert(success == false);
     }
     
     @Test(groups = {"unit"})
