@@ -11,5 +11,5 @@ import org.onebeartoe.multimedia.juke.links.LinkManager.LinkUnit;
  */
 public interface LinkParser 
 {
-	LinkUnit extractLinks(String name, URL url) throws IOException;
+    LinkUnit extractLinks(String name, URL url) throws IOException;
 }

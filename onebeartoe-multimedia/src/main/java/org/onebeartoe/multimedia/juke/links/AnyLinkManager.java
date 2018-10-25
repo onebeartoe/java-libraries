@@ -16,7 +16,7 @@ public abstract class AnyLinkManager implements LinkManager
 	
 	public AnyLinkManager() 
 	{
-		linkUnits = new ArrayList<LinkUnit>();
+            linkUnits = new ArrayList<LinkUnit>();
 	}
 	
 	@Override
@@ -105,6 +105,7 @@ public abstract class AnyLinkManager implements LinkManager
             System.out.println(" - done");            
         }
 	
+//TODO: Move this to FileHelper.java        
 	private boolean binaryFile(String href)
 	{
 		boolean binary = false;

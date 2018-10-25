@@ -128,7 +128,7 @@ public class FileHelper
                 || lowercaseName.endsWith(".htm")
                 || lowercaseName.endsWith(".java")
                 || lowercaseName.endsWith(".html")
-                || lowercaseName.endsWith("text") )
+                || lowercaseName.endsWith(".text") )
             {
                 is = true;
             } 

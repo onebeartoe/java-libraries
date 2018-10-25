@@ -12,6 +12,7 @@
 
         <packages>
             <package name="org.onebeartoe.multimedia"/>
+            <package name="org.onebeartoe.multimedia.juke.links"/>
             <package name="org.onebeartoe.multimedia.juke.services"/>
         </packages>
     </test>    
