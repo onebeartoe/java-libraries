@@ -14,9 +14,9 @@ import java.util.Set;
  */
 public class RegularCurrentSongService implements CurrentSongService 
 {
-    String currentSong;
+    private String currentSong;
 
-    long inactivityDuration = 1000L * 60 * 6;
+    private long inactivityDuration = 1000L * 60 * 6;
 
     enum RequestTypes 
     {
