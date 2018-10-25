@@ -64,7 +64,11 @@ public class FileHelper
 	 * <p>
 	 * </p>
 	 * NOTE: any value for file_size less than 500,000 bytes will be adjusted to
-	 * 500,000.
+	 * 1Mb.
+         * 
+         * The implementation is from this Stackoverflow answer
+         * 
+         *      https://stackoverflow.com/a/10864346/803890
 	 */
 	public static void split(File f, int file_size) throws FileNotFoundException, IOException 
         {

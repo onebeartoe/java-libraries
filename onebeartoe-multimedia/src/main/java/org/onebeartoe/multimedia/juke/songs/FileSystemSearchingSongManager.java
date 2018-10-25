@@ -98,7 +98,7 @@ public class FileSystemSearchingSongManager implements SongListManager//extends 
 		targets.add(FileType.MULTIMEDIA);
 		
 		FileSystemSearcher filesystemSearcher = new FileSystemSearcher(songsDir, targets, true);		
-		ArrayList<File> targetDirectories = filesystemSearcher.findTargetDirectories();
+		List<File> targetDirectories = filesystemSearcher.findTargetDirectories();
 		int discoveredCount = targetDirectories.size();
 		
 		for(File file : targetDirectories)
@@ -114,7 +114,7 @@ public class FileSystemSearchingSongManager implements SongListManager//extends 
 	 * @return an arrayList object. the list is returned alphabetized.
 	 */
 	@Override
-	public ArrayList<String> getSongListTitles()
+	public List<String> getSongListTitles()
 	{
 		ArrayList<String> songListTitles = new ArrayList<String>();
 
