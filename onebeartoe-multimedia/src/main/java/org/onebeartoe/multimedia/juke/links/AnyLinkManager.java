@@ -1,18 +1,18 @@
 
 package org.onebeartoe.multimedia.juke.links;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @deprecated use the version at https://github.com/onebeartoe/java-libraries
  * @author Roberto Marquez
  */
 public abstract class AnyLinkManager implements LinkManager 
 {
-
-	private List<LinkUnit> linkUnits;
+    private List<LinkUnit> linkUnits;
 	
 	public AnyLinkManager() 
 	{
@@ -34,70 +34,76 @@ public abstract class AnyLinkManager implements LinkManager
 	@Override
 	public void setRootUrl(String host, String path) throws Exception
 	{
-		Link rootLink = new Link();
-		rootLink.label = host + path;
-		rootLink.href = host + path;		
-		List<Link> unfollowedLinks = new ArrayList<Link>();		
-		unfollowedLinks.add(rootLink);
-		List<String> followedHrefs = new ArrayList<String>();
-		
-		while( ! unfollowedLinks.isEmpty() )
-		{	
-			Link currentLink = unfollowedLinks.remove(0);									
-			try
-			{
-				System.out.print("processing: " + currentLink);
-				URL url = new URL(currentLink.href);
-				
-				
-				int port = url.getPort();
-				LinkParser parser = getLinkParser();
-				LinkUnit linkUnit = parser.extractLinks(currentLink.href, url);
-				
-				followedHrefs.add(currentLink.href);
-				for(Link nextLink : linkUnit.links)
-				{
-					String possibleSlash = ! currentLink.href.endsWith("/") && ! nextLink.href.startsWith("/") ? "/" : "";
-					String href = currentLink.href + possibleSlash + nextLink.href;
-					if( nextLink.href.startsWith("/") )
-					{
-						href = host;
-						if(port != -1)
-						{
-							href += ":" + port;
-						}
-						href += nextLink.href;
-//						href = host + ":" + port + nextLink.href;
-					}
-					nextLink.href = href;
-					
-					if(nextLink.href.contains("?") )
-					{
-						nextLink.href = nextLink.href.substring(0, nextLink.href.indexOf('?')  );
-					}					
-					
-					boolean looper = nextLink.href.contains("/./") || nextLink.href.indexOf("http:") != nextLink.href.lastIndexOf("http:");
-					
-					// don't follow links that have already been followed
-					// stay on the original host
-					// try to avoid following binary files
-					if( !followedHrefs.contains(nextLink.href) 
-							&& nextLink.href.startsWith(host)
-							&& !binaryFile(nextLink.href) 
-							&& !looper) 
-					{
-						unfollowedLinks.add(nextLink);
-					}
-				}
-				linkUnits.add(linkUnit);
-				System.out.println(" - done");
-			}
-			catch(Exception fnfe)
-			{
-				System.out.println("\ncould not load link: " + currentLink.href);
-			}
-		}		
+            Link rootLink = new Link();
+            rootLink.label = host + path;
+            rootLink.href = host + path;		
+            
+            List<Link> unfollowedLinks = new ArrayList<Link>();
+            unfollowedLinks.add(rootLink);
+
+            while( ! unfollowedLinks.isEmpty() )
+            {	
+                Link currentLink = unfollowedLinks.remove(0);
+                try
+                {
+                    setRootUrlOneLink(currentLink, host, unfollowedLinks);
+                }
+                catch(Exception fnfe)
+                {
+                    System.out.println("\ncould not load link: " + currentLink.href);
+                }
+            }		
 	}
+        
+        private void setRootUrlOneLink(Link currentLink, String host, List<Link> unfollowedLinks) throws MalformedURLException, IOException
+        {
+            System.out.print("processing: " + currentLink);
+            URL url = new URL(currentLink.href);
+
+
+            int port = url.getPort();
+            LinkParser parser = getLinkParser();
+            LinkUnit linkUnit = parser.extractLinks(currentLink.href, url);
+
+            List<String> followedHrefs = new ArrayList<String>();            
+            
+            followedHrefs.add(currentLink.href);
+            for(Link nextLink : linkUnit.links)
+            {
+                String possibleSlash = ! currentLink.href.endsWith("/") && ! nextLink.href.startsWith("/") ? "/" : "";
+                String href = currentLink.href + possibleSlash + nextLink.href;
+                if( nextLink.href.startsWith("/") )
+                {
+                    href = host;
+                    if(port != -1)
+                    {
+                            href += ":" + port;
+                    }
+                    href += nextLink.href;
+                }
+                nextLink.href = href;
+
+                if(nextLink.href.contains("?") )
+                {
+                    nextLink.href = nextLink.href.substring(0, nextLink.href.indexOf('?')  );
+                }					
+
+                boolean looper = nextLink.href.contains("/./") || nextLink.href.indexOf("http:") != nextLink.href.lastIndexOf("http:");
+
+                // don't follow links that have already been followed
+                // stay on the original host
+                // try to avoid following binary files
+                if( !followedHrefs.contains(nextLink.href) 
+                                && nextLink.href.startsWith(host)
+                                && !binaryFile(nextLink.href) 
+                                && !looper) 
+                {
+                    unfollowedLinks.add(nextLink);
+                }
+            }
+            linkUnits.add(linkUnit);
+            System.out.println(" - done");            
+        }
 	
 	private boolean binaryFile(String href)
 	{
@@ -167,6 +173,4 @@ public abstract class AnyLinkManager implements LinkManager
 		linkUnits.remove(target);
 		System.out.println("link unit size: " + linkUnits.size());
 	}
-
 }
-
