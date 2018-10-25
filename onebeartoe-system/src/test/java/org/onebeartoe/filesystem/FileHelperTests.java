@@ -139,9 +139,16 @@ public class FileHelperTests
         assert( implementation.isZipFormatFile(jar) );
     }
     
-    @Test(groups = {"unit"}, expectedExceptions = NullPointerException.class)
+    @Test(groups = {"unit"})
     public void split()
-    {
+    {        
+        File infile = new File("pom.xml");
+        implementation.split(infile, 5);
+    }
+    
+    @Test(groups = {"unit"}, expectedExceptions = NullPointerException.class)
+    public void split_fail()
+    {        
         implementation.split(null, 0);
     }
 }
