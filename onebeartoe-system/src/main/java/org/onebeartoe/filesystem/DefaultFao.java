@@ -42,7 +42,7 @@ public class DefaultFao implements FilesystemAccessObject
         return targetFiles;
     }
     
-    public void findFilesByExtentionOneLevel(List<File> directories, boolean recursivly, String extension, List<File> targetFiles)
+    private void findFilesByExtentionOneLevel(List<File> directories, boolean recursivly, String extension, List<File> targetFiles)
     {
         File currentDirectory = directories.remove(0);
         File [] files = currentDirectory.listFiles();

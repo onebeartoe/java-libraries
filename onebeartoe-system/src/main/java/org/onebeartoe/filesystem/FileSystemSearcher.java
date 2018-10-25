@@ -43,7 +43,7 @@ public class FileSystemSearcher
         this.recursive = recursive;
     }
 
-    public ArrayList<File> findTargetDirectories()
+    public List<File> findTargetDirectories()
     {
         ArrayList<File> targetDirs = new ArrayList<File>();
         Vector<File> directories = new Vector<File>();

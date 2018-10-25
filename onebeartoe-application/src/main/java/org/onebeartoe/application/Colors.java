@@ -16,28 +16,20 @@ import javafx.scene.paint.Color;
  */
 public class Colors
 {
-    public static Map<String, Color> list() throws IllegalArgumentException, IllegalAccessException
+    public static Map<String, Color> list() throws IllegalAccessException
     {
         Map<String, Color> colors = new HashMap();
 
         final Field[] fields = Color.class.getFields(); // only want public
+        
         for (final Field field : fields)
         {
             if (field.getType() == Color.class)
             {
-//                try
-                {
-                    final Color color = (Color) field.get(null);
-                    final String colorName = field.getName();
-                    
-                    colors.put(colorName, color);                    
-                }
-  //              catch (IllegalAccessException illegalAccessEx)
-    //            {
-      //              err.println(
-        //                    "Securty Manager does not allow access of field '"
-          //                  + field.getName() + "'.");
-            //    }
+                final Color color = (Color) field.get(null);
+                final String colorName = field.getName();
+
+                colors.put(colorName, color);
             }
         }
         
@@ -48,32 +40,21 @@ public class Colors
     {
         Color color = null;
         
-//TODO: lambda and stream this!        
         final Field[] fields = Color.class.getFields(); // only want public
         
         for (final Field field : fields)
         {
             if (field.getType() == Color.class)
             {
-//                try
+                final Color currentColor = (Color) field.get(null);
+                final String colorName = field.getName();
+
+                if( colorName.equals(targetColorName) )
                 {
-                    final Color currentColor = (Color) field.get(null);
-                    final String colorName = field.getName();
-                    
-                    if( colorName.equals(targetColorName) )
-                    {
-                        color = currentColor;
-                        
-                        break;  // stop iterating once the target color is found
-                    }
+                    color = currentColor;
+
+                    break;  // stop iterating once the target color is found
                 }
-//                catch (IllegalAccessException illegalAccessEx)
-//                {
-//                    String message = "Securty Manager does not allow access of field '"
-//                            + field.getName() + "' - " + illegalAccessEx.getMessage();
-//                    
-//                    err.println(message);
-//                }
             }
         }
         
