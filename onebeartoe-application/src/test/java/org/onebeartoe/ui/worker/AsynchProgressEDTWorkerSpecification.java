@@ -21,6 +21,9 @@ public class AsynchProgressEDTWorkerSpecification
     @Test(groups = {"unit"})
     public void doInBackgroundAndDone()
     {
+        // calling interrupt() on the current Thread causes the inturreupted exception (for code coverage).
+        Thread.currentThread().interrupt();
+        
         implementation.doInBackground();
         
         implementation.done();

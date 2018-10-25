@@ -25,7 +25,7 @@ public class AsynchProgressEDTWorker extends AsynchEDTWorker
             {
                 System.err.println("error in iteration " + i);
                 
-                e1.printStackTrace();
+//                e1.printStackTrace();
                 
                 Thread.currentThread().interrupt();
             }
