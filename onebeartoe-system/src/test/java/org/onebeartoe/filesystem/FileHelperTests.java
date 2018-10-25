@@ -171,9 +171,20 @@ public class FileHelperTests
     
     @Test(groups = {"unit"})
     public void split()
-    {        
+    {
         File infile = new File("pom.xml");
         implementation.split(infile, 5);
+    }
+    
+    @Test(groups = {"unit"})
+    public void split_largerFile()
+    {
+        String largerFile = "../onebeartoe-application/src/main/resources/org/onebeartoe/ui/101px-Seven_segment_display-animated.gif";
+        File infile = new File(largerFile);
+        
+        boolean split = implementation.split(infile, 5);
+        
+        assert(split == true);
     }
     
     @Test(groups = {"unit"}, expectedExceptions = NullPointerException.class)
