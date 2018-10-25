@@ -29,7 +29,7 @@ public class EndOfRunHttpHandler extends TextHttpHandler
 
             System.out.println("http server stopped");
 
-            Thread.sleep(maxWaitTime + 1000);
+            Thread.sleep(maxWaitTime + 1000L);
 
             System.exit(0);
 
