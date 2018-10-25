@@ -11,7 +11,11 @@ public class FileHelperTests
 {
     FileHelper implementation;
     
+    File fnf = new File("does-not.exist");
+    
     File pom = new File("pom.xml");
+    
+    File targetDir = new File("target/");
     
     public FileHelperTests() 
     {
@@ -37,13 +41,26 @@ public class FileHelperTests
     @Test(groups = {"unit"})
     public void concat_fail_FNF()
     {
-        File fnf = new File("does-not.exist");
         File outfile = new File("target/fnf.out");
         
         boolean success = implementation.concat(fnf, fnf, outfile);
         
         assert(success == false);
     }
+    
+    @Test(groups = {"unit"})
+    public void copy()
+    {
+        implementation.copyFile(pom, targetDir);
+    }
+    
+    @Test(groups = {"unit"})
+    public void copy_fail_FNF()
+    {
+        boolean copied = implementation.copyFile(fnf, targetDir);
+        
+        assert(copied == false);
+    }        
     
     @Test(groups = {"unit"})
     public void hasIndex()
