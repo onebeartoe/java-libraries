@@ -119,39 +119,21 @@ public class FileHelper
 
 	/** supports .txt and .java files */
 	public static boolean isTextFile(String filename) 
-	{
-		int length = filename.length();
-		String ending;
-		boolean is = false;
+	{            
+            boolean is = false;
+            
+            String lowercaseName = filename.toLowerCase();
+            
+            if( lowercaseName.endsWith(".txt")
+                || lowercaseName.endsWith(".htm")
+                || lowercaseName.endsWith(".java")
+                || lowercaseName.endsWith(".html")
+                || lowercaseName.endsWith("text") )
+            {
+                is = true;
+            } 
 
-		if (length > 4) 
-		{
-			ending = filename.substring(length - 4, length);
-			if (ending.equalsIgnoreCase(".txt")) 
-			{
-				is = true;
-			} 
-			else if (ending.equalsIgnoreCase(".htm")) 
-			{
-				
-				is = true;
-			}
-		}
-
-		if (length > 5) 
-		{
-			ending = filename.substring(length - 5, length);
-			if (ending.equalsIgnoreCase(".java")) 
-			{
-				is = true;
-			} 
-			else if (ending.equalsIgnoreCase(".html")) 
-			{
-				is = true;
-			}
-		}
-
-		return is;
+            return is;
 	}
 
 	/**
@@ -159,141 +141,86 @@ public class FileHelper
 	 */
 	public static boolean isZipFormatFile(String filename) 
 	{
-		boolean isZip = false;
-		int length = filename.length();
+            boolean isZip = false;
+            
+            String lowercaseName = filename.toLowerCase();
 
-		if (length > 4) 
-		{
-			String ending = filename.substring(length - 4, length);
+            if ( lowercaseName.endsWith(".zip")
+                 || lowercaseName.endsWith(".jar") )
+            {
+                isZip = true;
+            }
 
-			if (ending.equalsIgnoreCase(".zip")
-					|| ending.equalsIgnoreCase(".jar")) 
-			{
-				isZip = true;
-			}
-		}
-
-		return isZip;
+            return isZip;
 	}
 
-	/**
-	 * Tests to see if the filename has a any of the standard file extensions of
-	 * common image formats
-	 * 
-	 * @param filename
-	 *            must have a length of at least 4 due to this method looking or
-	 *            a '.' before the file extentsion
-	 * @return true if the sting contains any of the standard file extensions
-	 *         for JPEG, GIF, PNG, and Bitmap image formats
-	 */
-	public static boolean isImageFile(String filename) {
-		boolean isImage = false;
-		if (!(filename.length() > 4)) {
-			return false;
-		}
+    /**
+     * Tests to see if the filename has a any of the standard file extensions of
+     * common image formats
+     * 
+     * @param filename
+     *            must have a length of at least 4 due to this method looking or
+     *            a '.' before the file extentsion
+     * @return true if the sting contains any of the standard file extensions
+     *         for JPEG, GIF, PNG, and Bitmap image formats
+     */
+    public static boolean isImageFile(String filename) 
+    {
+        boolean isImage = false;
+        
+        String lowercaseName = filename.toLowerCase();
+                
+        if( lowercaseName.endsWith(".gif")
+            || lowercaseName.endsWith(".bmp")
+            || lowercaseName.endsWith(".jpg")
+            || lowercaseName.endsWith(".png")
+            || lowercaseName.endsWith(".jpeg") )
+        {
+            isImage = true;
+        }
+                              
+        return isImage;
+    }
 
-		int i = filename.length();
-		String ending = filename.substring(i - 4, i);
+    public static boolean hasIndexFile(File dir) 
+    {
+        File f = new File(dir.getPath() + "\\index.html");
+        
+        return f.exists() ? true : false;
+    }
 
-		if (ending.equalsIgnoreCase(".gif")) {
-			isImage = true;
-		} else if (ending.equalsIgnoreCase(".bmp")) {
-			isImage = true;
-		} else if (ending.equalsIgnoreCase(".jpg")) {
-			isImage = true;
-		} else if (ending.equalsIgnoreCase(".png")) {
-			isImage = true;
-		}
+    public static boolean isAudioFile(String filename) 
+    {
+        boolean isAudio = false;
+        
+        String lowercaseName = filename.toLowerCase();
+                
+        if( lowercaseName.endsWith(".au")
+            || lowercaseName.endsWith(".mp3")
+            || lowercaseName.endsWith(".wav")
+            || lowercaseName.endsWith(".ogg")
+            || lowercaseName.endsWith(".3gp")
+            || lowercaseName.endsWith(".mid") )
+        {
+            isAudio = true;
+        }
 
-		// the ending needs a new call to substring for the files with 4 digit
-		// extensions
-		ending = filename.substring(i - 5, i);
-		if (ending.equalsIgnoreCase(".jpeg")) {
-			isImage = true;
-		}
+        return isAudio;
+    }
 
-		return isImage;
-	}
-
-	public static boolean hasIndexFile(File dir) {
-		File f = new File(dir.getPath() + "\\index.html");
-		return f.exists() ? true : false;
-	}
-
-	public static boolean isAudioFile(String filename) 
-	{
-            if (!(filename.length() > 3)) 
-            {
-                return false;
-            }
-
-            int i = filename.length();
-            String ending = filename.substring(i - 3, i);
-            if (ending.equalsIgnoreCase(".au")) 
-            {
-                return true;
-            }
-
-            ending = filename.substring(i - 4, i);
-
-            if (ending.equalsIgnoreCase(".mp3"))
-            {
-                return true;
-            }
-
-            if (ending.equalsIgnoreCase(".wav")) 
-            {
-                return true;
-            }
-
-            if (ending.equalsIgnoreCase(".ogg")) 
-            {
-                return true;
-            }
-
-            if (ending.equalsIgnoreCase(".3gp")) 
-            {
-                return true;
-            }
-
-            if (ending.equalsIgnoreCase(".mid"))
-            {
-                return true;
-            }
-
-            return false;
-	}
-
-	public static boolean isMultimediaFile(String filename) 
-	{
-            if (!(filename.length() > 3)) 
-            {
-                return false;
-            }
-
-            int i = filename.length();
-            String ending = filename.substring(i - 4, i);
-            if (ending.equalsIgnoreCase(".avi"))
-            {
-                return true;
-            }
-
-            if (ending.equalsIgnoreCase(".mpg")) 
-            {
-                return true;
-            }
-
-            int index = i-5;
-            if(index >= 0)
-            {
-                ending = filename.substring(index, i);
-                if (ending.equalsIgnoreCase(".mpeg"))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-	}
-
+    public static boolean isMultimediaFile(String filename) 
+    {
+        String lowercaseName = filename.toLowerCase();
+        
+        boolean isMedia = false;
+        
+        if( lowercaseName.endsWith(".avi") 
+            || lowercaseName.endsWith(".mpg")
+            || lowercaseName.endsWith(".mpeg") )
+        {
+            isMedia = true;
+        }
+        
+        return isMedia;        
+    }
 }
