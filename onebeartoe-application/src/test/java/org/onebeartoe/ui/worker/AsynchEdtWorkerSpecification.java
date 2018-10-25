@@ -21,7 +21,7 @@ public class AsynchEdtWorkerSpecification
     public void doInBackgroundAndDone()
     {
         // calling interrupt() on the current Thread causes the inturreupted exception (for code coverage).
-        Thread.currentThread().interrupt();
+//        Thread.currentThread().interrupt();
         
         implementation.doInBackground();
         
