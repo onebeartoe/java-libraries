@@ -101,17 +101,9 @@ public class SerialPorts
                     SerialPort.DATABITS_8,
                     SerialPort.STOPBITS_1,
                     SerialPort.PARITY_NONE);
+        }
                 
-//                // add event listeners
-//                serialPort.addEventListener(this);
-
-            serialPort.notifyOnDataAvailable(true);
-        }
-        
-        if(serialPort == null)
-        {
-            throw new Exception("could not find a serial port");
-        }
+        serialPort.notifyOnDataAvailable(true);
         
         return serialPort;
     }
