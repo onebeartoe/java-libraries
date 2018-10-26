@@ -50,35 +50,10 @@ public class FileSystemSearcher
         directories.add(dir);
         while (!directories.isEmpty())
         {
-            boolean currentContainsTargets = false;
-            boolean targetNotFoundYet = true;
             File currentDir = directories.remove(0);
-            File[] dirContents = currentDir.listFiles();
-
-            if (dirContents != null)
-            {
-                for (File file : dirContents)
-                {
-                    if (file.isDirectory() && recursive)
-                    {
-                        directories.add(file);
-                    } else
-                    {
-                        if (targetNotFoundYet)
-                        {
-                            // Only come here if a target has not been found.						
-                            FileType type = determinFileType(file);
-                            if (targets.contains(type))
-                            {
-                                currentContainsTargets = true;
-                                // If a target has been found in the current dir, we can skip the next file check
-                                targetNotFoundYet = false;
-                            }
-                        }
-                    }
-                }
-            }
-
+            
+            boolean currentContainsTargets = findTargetDirectoriesOneLevel(currentDir, directories);
+            
             if (currentContainsTargets)
             {
                 targetDirs.add(currentDir);
@@ -86,6 +61,42 @@ public class FileSystemSearcher
         }
 
         return targetDirs;
+    }
+    
+    private boolean findTargetDirectoriesOneLevel(File currentDir, Vector<File> directories)
+    {
+        boolean currentContainsTargets = false;
+        
+        boolean targetNotFoundYet = true;
+                        
+        File[] dirContents = currentDir.listFiles();
+
+        if (dirContents != null)
+        {
+            for (File file : dirContents)
+            {
+                if (file.isDirectory() && recursive)
+                {
+                    directories.add(file);
+                } 
+                else
+                {
+                    if (targetNotFoundYet)
+                    {
+                        // Only come here if a target has not been found.						
+                        FileType type = determinFileType(file);
+                        if (targets.contains(type))
+                        {
+                            currentContainsTargets = true;
+                            // If a target has been found in the current dir, we can skip the next file check
+                            targetNotFoundYet = false;
+                        }
+                    }
+                }
+            }   
+        }
+        
+        return currentContainsTargets;
     }
 
     public List<File> findTargetFiles()
