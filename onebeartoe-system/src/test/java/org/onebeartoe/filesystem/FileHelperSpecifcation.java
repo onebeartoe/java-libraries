@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 /**
  * @author Roberto Marquez
  */
-public class FileHelperTests 
+public class FileHelperSpecifcation 
 {
     FileHelper implementation;
     
@@ -18,7 +18,7 @@ public class FileHelperTests
     
     File targetDir = new File("target/");
     
-    public FileHelperTests() 
+    public FileHelperSpecifcation() 
     {
         implementation = new FileHelper();
     }
