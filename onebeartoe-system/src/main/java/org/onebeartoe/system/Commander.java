@@ -18,7 +18,7 @@ public class Commander
 
     private List<String> stderr;
 
-    static final String defaultFile = "errors.txt";
+//    static final String defaultFile = "errors.txt";
     
     public Commander()
     {
