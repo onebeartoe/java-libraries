@@ -106,29 +106,34 @@ public class FileSystemSearcher
         directories.add(dir);
         while (!directories.isEmpty())
         {
-            File currentDir = directories.remove(0);
-            File[] dirContents = currentDir.listFiles();
-            if (dirContents != null)
-            {
-                for (File file : dirContents)
-                {
-                    if (file.isDirectory() && recursive)
-                    {
-                        directories.add(file);
-                    } 
-                    else
-                    {
-                        FileType type = determinFileType(file);
-                        if (targets.contains(type))
-                        {
-                            targetFiles.add(file);
-                        }
-                    }
-                }
-            }
+            findTargetFilesOneLevel(directories, targetFiles);
         }
 
         return targetFiles;
+    }
+    
+    private void findTargetFilesOneLevel(Vector<File> directories, List<File> targetFiles)
+    {
+        File currentDir = directories.remove(0);
+        File[] dirContents = currentDir.listFiles();
+        if (dirContents != null)
+        {
+            for (File file : dirContents)
+            {
+                if (file.isDirectory() && recursive)
+                {
+                    directories.add(file);
+                } 
+                else
+                {
+                    FileType type = determinFileType(file);
+                    if (targets.contains(type))
+                    {
+                        targetFiles.add(file);
+                    }
+                }
+            }
+        }        
     }
 
     private FileType determinFileType(File file)
