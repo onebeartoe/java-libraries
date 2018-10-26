@@ -66,36 +66,45 @@ public class FileSystemSearcher
     private boolean findTargetDirectoriesOneLevel(File currentDir, Vector<File> directories)
     {
         boolean currentContainsTargets = false;
-        
-        boolean targetNotFoundYet = true;
                         
         File[] dirContents = currentDir.listFiles();
 
         if (dirContents != null)
         {
-            for (File file : dirContents)
-            {
-                if (file.isDirectory() && recursive)
-                {
-                    directories.add(file);
-                } 
-                else
-                {
-                    if (targetNotFoundYet)
-                    {
-                        // Only come here if a target has not been found.						
-                        FileType type = determinFileType(file);
-                        if (targets.contains(type))
-                        {
-                            currentContainsTargets = true;
-                            // If a target has been found in the current dir, we can skip the next file check
-                            targetNotFoundYet = false;
-                        }
-                    }
-                }
-            }   
+            currentContainsTargets = findTargetDirectoriesOneLevelExecute(dirContents, directories);
         }
         
+        return currentContainsTargets;
+    }
+    
+    private boolean findTargetDirectoriesOneLevelExecute(File[] dirContents, Vector<File> directories)
+    {
+        boolean currentContainsTargets = false;
+        
+        boolean targetNotFoundYet = true;
+            
+        for (File file : dirContents)
+        {
+            if (file.isDirectory() && recursive)
+            {
+                directories.add(file);
+            } 
+            else
+            {
+                if (targetNotFoundYet)
+                {
+                    // Only come here if a target has not been found.						
+                    FileType type = determinFileType(file);
+                    if (targets.contains(type))
+                    {
+                        currentContainsTargets = true;
+                        // If a target has been found in the current dir, we can skip the next file check
+                        targetNotFoundYet = false;
+                    }
+                }
+            }
+        }
+
         return currentContainsTargets;
     }
 
