@@ -129,49 +129,51 @@ public abstract class NetworkSearchingSongManager implements SongListManager
 		return titles;
 	}
 
-	@Override
-	public SongList getSongListFor(String listName) 
-	{
-		LinkUnit linkUnit = null;
-		for(LinkManager linkManager : linkManagers)
-		{
-			List<String> names = linkManager.getLinkUnitNames();
-			for(String name : names)
-			{
-				if(name.equals(listName))
-				{
-					linkUnit = linkManager.getLinksUnitFor(listName);
-					break;
-				}
-			}
-		}
-		
-		SongList songList = new SongList(listName); 
-		
-		if(linkUnit != null)
-		{
-			for(Link link : linkUnit.links)
-			{
-				if( acceptableMediaExtension(link.href) )
-//				if(link.href.endsWith(".mp3"))
-				{
-					URL url;
-					try 
-					{
-						url = new URL(link.href);
-						songList.addSong(link.label, url);
-					} 
-					catch (MalformedURLException e) 
-					{
-						System.err.println("could not create a URL for: " + link.href);
-						e.printStackTrace();
-					}					
-				}
-			}			
-		}
-		
-		return songList;
-	}
-	
-}
+    @Override
+    public SongList getSongListFor(String listName) 
+    {
+        LinkUnit linkUnit = null;
+        for(LinkManager linkManager : linkManagers)
+        {
+            List<String> names = linkManager.getLinkUnitNames();
+            for(String name : names)
+            {
+                if(name.equals(listName))
+                {
+                    linkUnit = linkManager.getLinksUnitFor(listName);
+                    break;
+                }
+            }
+        }
 
+        SongList songList = new SongList(listName); 
+
+        if(linkUnit != null)
+        {
+            getSongListForLinkUnit(linkUnit, songList);
+        }
+
+        return songList;
+    }
+    
+    private void getSongListForLinkUnit(LinkUnit linkUnit, SongList songList)
+    {
+        for(Link link : linkUnit.links)
+        {
+            if( acceptableMediaExtension(link.href) )
+            {
+                URL url;
+                try 
+                {
+                    url = new URL(link.href);
+                    songList.addSong(link.label, url);
+                } 
+                catch (MalformedURLException e) 
+                {
+                    System.err.println("could not create a URL for: " + link.href);
+                    e.printStackTrace();
+                }					
+            }
+        }        
+    }
+}
