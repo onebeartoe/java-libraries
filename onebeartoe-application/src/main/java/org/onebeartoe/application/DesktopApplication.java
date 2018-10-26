@@ -25,7 +25,7 @@ public abstract class DesktopApplication
         wp = new WindowProperties();
     }
     
-    public String buildPropertiesPath(WindowProperties wp)
+    public String buildPropertiesPath()
     {        
         if(id == null)
         {
@@ -46,12 +46,14 @@ public abstract class DesktopApplication
 
     @Deprecated
         /**
+         * @deprecated
          * ("use GragicsEvnironment.centerPoint()")
          */
     public abstract int defaultX();
     
     @Deprecated
         /**
+         * @deprecated
          * ("use GragicsEvnironment.centerPoint()")
          */
     public abstract int defaultY();
@@ -60,10 +62,10 @@ public abstract class DesktopApplication
     
     public abstract int defaultHeight();    
     
-    public WindowProperties loadWindowProperties()//WindowProperties wp)
+    public WindowProperties loadWindowProperties()
             throws FileNotFoundException, IOException, ClassNotFoundException
     {
-        String inpath = buildPropertiesPath(wp);
+        String inpath = buildPropertiesPath();
         File infile = new File(inpath);
         
         InputStream input = new FileInputStream(infile);
@@ -75,7 +77,7 @@ public abstract class DesktopApplication
 
     public void persistWindowProperties() throws IOException
     {        
-        String path = buildPropertiesPath(wp);
+        String path = buildPropertiesPath();
         File outfile = new File(path);
         
         SerializedObjects.saveObject(outfile, wp);

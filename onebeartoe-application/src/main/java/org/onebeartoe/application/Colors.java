@@ -16,6 +16,11 @@ import javafx.scene.paint.Color;
  */
 public class Colors
 {
+    private Colors()
+    {
+        throw new IllegalStateException("Utility class");
+    }
+    
     public static Map<String, Color> list() throws IllegalAccessException
     {
         Map<String, Color> colors = new HashMap();
