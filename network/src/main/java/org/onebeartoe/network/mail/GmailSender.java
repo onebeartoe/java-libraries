@@ -61,6 +61,10 @@ public class GmailSender implements JavaMailSender
         props.put("mail.smtp.socketFactory.port", String.valueOf(smtpPort) );
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
+        
+        // this next one was added due to a SonarQube security item
+        props.put("mail.smtp.ssl.checkserveridentity", true);
+        
         props.setProperty("mail.smtp.quitwait", "false");
         
         return props;
