@@ -1,3 +1,4 @@
+
 package org.onebeartoe.filesystem;
 
 import java.io.File;
@@ -10,7 +11,6 @@ import java.util.Vector;
  */
 public class FileSystemSearcher
 {
-
     File dir;
 
     List<FileType> targets;
@@ -173,11 +173,6 @@ public class FileSystemSearcher
         if (FileHelper.isTextFile(name))
         {
             type = FileType.TEXT;
-        }
-        
-        if( file.isDirectory() )
-        {
-            type = FileType.DIRECTORY;
         }
         
         return type;

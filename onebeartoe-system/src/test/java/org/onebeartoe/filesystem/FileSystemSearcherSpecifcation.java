@@ -29,6 +29,24 @@ public class FileSystemSearcherSpecifcation
         implementation = new FileSystemSearcher(dataDirectory, targets, recursive);        
     }
     
+    @Test(groups = {"unit"}, expectedExceptions = NullPointerException.class)
+    public void constructor_fail_nullDirectory()
+    {
+        File dir = null;
+        List<FileType> targets = new ArrayList();
+        
+        FileSystemSearcher nullDir = new FileSystemSearcher(dir, targets);
+    }
+    
+    @Test(groups = {"unit"}, expectedExceptions = NullPointerException.class)
+    public void constructor_fail_nullTargets()
+    {
+        File dir = new File(".");
+        List<FileType> targets = null;
+        
+        FileSystemSearcher nullDir = new FileSystemSearcher(dir, targets);
+    }    
+    
     @Test(groups = {"unit"})
     public void findTargetDirectories()
     {                        
