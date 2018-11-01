@@ -3,6 +3,7 @@ package org.onebeartoe.application;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.logging.Logger;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
@@ -12,7 +13,16 @@ import org.onebeartoe.application.duration.DurationService;
  * @author Roberto Marquez
  */
 public class CommandLineInterfaceApplet 
-{    
+{
+    protected Logger logger;
+    
+    public CommandLineInterfaceApplet()
+    {
+        String name = getClass().getSimpleName();
+        
+        logger = Logger.getLogger(name);
+    }
+    
     public Options buildOptions()
     {
         return new Options();
@@ -40,7 +50,8 @@ public class CommandLineInterfaceApplet
         }
         catch(ParseException uoe)
         {
-            uoe.printStackTrace();
+            String message = "An error occured: " + uoe.getMessage();
+            logger.severe(message);
             
             String usage = getUsage();
             
