@@ -1,13 +1,24 @@
 
 package org.onebeartoe.application;
 
+import java.util.logging.Logger;
+
 /**
  * @author Roberto Marquez
  */
 public class AppletService 
 {
-    public void serviceRequest(RunProfile runProfile) throws Exception
+    protected Logger logger;
+    
+    public AppletService()
     {
-        System.out.println("The default service only prints this message.");
+        String name = getClass().getSimpleName();
+        
+        logger = Logger.getLogger(name);
+    }
+    
+    public void serviceRequest(RunProfile runProfile)// throws Exception
+    {
+        logger.info("The default service only prints this message, " + runProfile.toString() );
     }
 }
