@@ -4,6 +4,7 @@ package org.onebeartoe.application.ui;
 import java.awt.Desktop;
 import java.io.File;
 import java.net.URI;
+import java.util.logging.Logger;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -13,13 +14,17 @@ import javax.swing.JOptionPane;
  */
 public class SwingServices implements GraphicalUserInterfaceServices
 {
-
+    private Logger logger;
+    
     File currentDirectory;
 
     JFileChooser fileChooser;
 
     public SwingServices()
     {
+        String name = getClass().getSimpleName();
+        logger = Logger.getLogger(name);        
+        
         currentDirectory = new File(System.getProperty("user.home"));
         fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(currentDirectory);
@@ -72,9 +77,10 @@ public class SwingServices implements GraphicalUserInterfaceServices
             {
                 uri = new URI(url);
                 desktop.browse(uri);
-            } catch (Exception e)
+            } 
+            catch (Exception e)
             {
-                e.printStackTrace();
+                logger.severe("An error occured: " + e.getMessage() );
                 String message = "Visit this URL to see the web interface: " + url;
                 String title = "The browser could not be opened.";
                 infoMessage(message, title);
