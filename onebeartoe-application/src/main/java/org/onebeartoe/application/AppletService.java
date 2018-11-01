@@ -1,6 +1,7 @@
 
 package org.onebeartoe.application;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -17,8 +18,8 @@ public class AppletService
         logger = Logger.getLogger(name);
     }
     
-    public void serviceRequest(RunProfile runProfile)// throws Exception
+    public void serviceRequest(RunProfile runProfile) throws Exception
     {
-        logger.info("The default service only prints this message, " + runProfile.toString() );
+        logger.log(Level.INFO, "The default service only prints this message, {0}", runProfile.toString());
     }
 }

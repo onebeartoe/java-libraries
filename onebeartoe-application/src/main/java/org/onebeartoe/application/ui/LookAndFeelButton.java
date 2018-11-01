@@ -28,12 +28,6 @@ public class LookAndFeelButton extends JButton implements ActionListener
     
     private Component container;
 
-    // testing objects
-    int apCount;
-    
-    boolean testing;
-
-    // Constructor
     public LookAndFeelButton(String text, Component container)
     {
         super(text);
@@ -46,9 +40,6 @@ public class LookAndFeelButton extends JButton implements ActionListener
         this.container = container;
         
         addActionListener(this);
-
-        apCount = 0;
-        testing = false;
     }
 
     private void changeTheLookAndFeel(int value)
@@ -76,12 +67,6 @@ public class LookAndFeelButton extends JButton implements ActionListener
         }
 
         changeTheLookAndFeel(current_look);
-        apCount++;
-
-        if (testing)
-        {
-            System.out.println("actionPerformed() call: " + apCount);
-        }
     }
 
     /**
@@ -95,27 +80,6 @@ public class LookAndFeelButton extends JButton implements ActionListener
         app.setLocation(50, 75);
         app.setSize(200, 200);
         app.setVisible(true);
-//      app.show();
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        /*
-         app.addWindowListener(
-         new WindowAdapter() {
-         public void windowClosing( WindowEvent e )
-         {
-         System.exit( 0 );
-         }
-         }
-         );
-         */
-    }
-
-    public void setTesting(boolean value)
-    {
-        testing = value;
-    }
-
-    public int getActionPerformedCount()
-    {
-        return apCount;
     }
 }
