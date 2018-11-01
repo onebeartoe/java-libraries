@@ -28,4 +28,12 @@ public class CommandLineInterfaceAppletSpecification
         
         implementation.execute(args);
     }
+    
+    @Test(groups = {"unit"})
+    public void getUsage()
+    {
+        String u = implementation.getUsage();
+        
+        assert(u != null);
+    }
 }

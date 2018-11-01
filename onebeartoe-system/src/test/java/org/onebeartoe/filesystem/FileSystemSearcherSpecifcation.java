@@ -21,8 +21,13 @@ public class FileSystemSearcherSpecifcation
         assert( dataDirectory.exists() );
         
         FileType ft1 = FileType.IMAGE;
+        FileType ft2 = FileType.ZIP;
+        FileType ft3 = FileType.MULTIMEDIA;
+        
         List<FileType> targets = new ArrayList();
         targets.add(ft1);
+        targets.add(ft2);
+        targets.add(ft3);
         
         boolean recursive = true;
         
@@ -44,7 +49,7 @@ public class FileSystemSearcherSpecifcation
         File dir = new File(".");
         List<FileType> targets = null;
         
-        FileSystemSearcher nullDir = new FileSystemSearcher(dir, targets);
+        FileSystemSearcher nullTargets = new FileSystemSearcher(dir, targets);
     }    
     
     @Test(groups = {"unit"})
@@ -52,7 +57,7 @@ public class FileSystemSearcherSpecifcation
     {                        
         List<File> imageDirs = implementation.findTargetDirectories();
         
-        assert(imageDirs.size() == 1);
+        assert(imageDirs.size() == 4);
     }
     
     @Test(groups = {"unit"})
@@ -60,6 +65,6 @@ public class FileSystemSearcherSpecifcation
     {
         List<File> imageFiles = implementation.findTargetFiles();
         
-        assert(imageFiles.size() == 1);
+        assert(imageFiles.size() == 4);
     }
 }
