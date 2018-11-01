@@ -41,7 +41,7 @@ public class Colors
         return colors;
     }
     
-    public static Color valueOf(String targetColorName) throws IllegalArgumentException, IllegalAccessException
+    public static Color valueOf(String targetColorName) throws IllegalAccessException
     {
         Color color = null;
         
