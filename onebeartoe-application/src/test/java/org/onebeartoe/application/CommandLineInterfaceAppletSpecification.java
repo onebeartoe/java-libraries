@@ -30,6 +30,14 @@ public class CommandLineInterfaceAppletSpecification
     }
     
     @Test(groups = {"unit"})
+    public void execute_fail_nullArgs() throws Exception
+    {
+        String [] args = null;
+        
+        implementation.execute(args);
+    }    
+    
+    @Test(groups = {"unit"})
     public void getUsage()
     {
         String u = implementation.getUsage();

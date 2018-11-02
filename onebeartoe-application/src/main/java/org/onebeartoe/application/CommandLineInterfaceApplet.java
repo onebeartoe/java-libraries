@@ -68,6 +68,11 @@ public class CommandLineInterfaceApplet
 
     protected RunProfile parseRunProfile(final String[] args, Options options) throws ParseException
     {
+        if(args == null)
+        {
+            throw new ParseException("The arguments cannot be null.");
+        }
+        
         return new RunProfile();
     }
     
