@@ -10,6 +10,8 @@ public interface CurrentSongService
 
     boolean next(String songTitle, String clientAddress) throws Exception;
 
+    String getCurrentSong();
+    
     void setCurrentSong(String song) throws Exception;
 
     int likeCount() throws Exception;
