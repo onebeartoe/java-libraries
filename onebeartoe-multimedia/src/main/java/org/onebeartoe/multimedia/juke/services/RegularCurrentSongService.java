@@ -114,6 +114,13 @@ percentage = 1;
 			clients.remove(k);
 		}
 	}
+        
+        
+    @Override
+    public String getCurrentSong()
+    {
+        return currentSong;
+    }
 
 	public void setCurrentSong(String song) throws Exception 
 	{
