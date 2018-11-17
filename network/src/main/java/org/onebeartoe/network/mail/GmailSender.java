@@ -44,7 +44,6 @@ public class GmailSender implements JavaMailSender
             smtpPort = 465;
     }
 
-    
     private Properties buildProperties()
     {
         Properties props = new Properties();
@@ -62,8 +61,14 @@ public class GmailSender implements JavaMailSender
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
         
-        // this next one was added due to a SonarQube security item
-        props.put("mail.smtp.ssl.checkserveridentity", true);
+        
+System.out.println("checkserveridentity not used");
+//      This next one was added due to a SonarQube security item, 
+//      but setting it actually cuases this error:
+//           DEBUG SMTP: exception reading response: javax.net.ssl.SSLHandshakeException: Server chose TLSv1.2, but that protocol version is not enabled or not supported by the client.
+//           Exception in thread "main" javax.mail.MessagingException
+//TODO: verify the next property, found by SonarQube, is actually recommended and if not remove this commented code.
+//        props.put("mail.smtp.ssl.checkserveridentity", true);
         
         props.setProperty("mail.smtp.quitwait", "false");
         
