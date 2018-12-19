@@ -1,36 +1,21 @@
-
-
-pipeline 
-{
-    agent
-    {
-        label 'master'
-    }
-
-    stages 
-    {
-        stage('Maven Clean')
-        {
-            steps
-            {
-                echo "Cleaning..."
-
-                sh '''
+pipeline {
+  agent any
+  stages {
+    stage('Maven Clean') {
+      steps {
+        echo 'Cleaning...'
+        sh '''
                     mvn clean
                 '''
-            }
-        }
-
-        stage('Verify onebeartoe.com')
-        {
-            steps
-            {
-                echo "Verifying..."
-
-                sh '''
+      }
+    }
+    stage('Verify onebeartoe.com') {
+      steps {
+        echo 'Verifying...'
+        sh '''
                     mvn install
                 '''
-            }
-        }
+      }
     }
+  }
 }
