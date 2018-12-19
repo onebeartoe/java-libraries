@@ -20,7 +20,7 @@ public class LookAndFeelButton extends JButton implements ActionListener
 {
     static final long serialVersionUID = 3L;
 
-    private Logger logger;
+    private final Logger logger;
     
     private int current_look = 0;
     
