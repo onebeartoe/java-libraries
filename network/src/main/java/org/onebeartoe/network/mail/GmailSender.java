@@ -4,6 +4,7 @@ package org.onebeartoe.network.mail;
 import java.io.File;
 import java.security.Security;
 import java.util.Properties;
+import java.util.logging.Logger;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -31,20 +32,25 @@ import javax.mail.internet.MimeMultipart;
  */
 public class GmailSender implements JavaMailSender 
 {
+    protected Logger logger;
+    
     protected String smtphost = "smtp.gmail.com";
+    
     protected int smtpPort;
+    
     protected String username;
+    
     protected String password;
     
     public GmailSender(String user, String password)
     {
-            this.username = user;
-            this.password = password;
-            
-            smtpPort = 465;
+        this.username = user;
+        this.password = password;
+
+        smtpPort = 465;
     }
 
-    private Properties buildProperties()
+    private Properties buildProperties(boolean checkServerIdentity)
     {
         Properties props = new Properties();
         props.setProperty("mail.transport.protocol", "smtp");
@@ -61,14 +67,19 @@ public class GmailSender implements JavaMailSender
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
         
-        
-System.out.println("checkserveridentity not used");
+        if(checkServerIdentity)
+        {
 //      This next one was added due to a SonarQube security item, 
 //      but setting it actually cuases this error:
 //           DEBUG SMTP: exception reading response: javax.net.ssl.SSLHandshakeException: Server chose TLSv1.2, but that protocol version is not enabled or not supported by the client.
 //           Exception in thread "main" javax.mail.MessagingException
 //TODO: verify the next property, found by SonarQube, is actually recommended and if not remove this commented code.
-//        props.put("mail.smtp.ssl.checkserveridentity", true);
+            props.put("mail.smtp.ssl.checkserveridentity", true);
+        }
+        else
+        {
+            logger.info("checkserveridentity not used");
+        }
         
         props.setProperty("mail.smtp.quitwait", "false");
         
@@ -91,11 +102,16 @@ System.out.println("checkserveridentity not used");
     }    
 
     @Override
-    public synchronized void sendMail(String subject, String messageText, String recipients, File attachment) throws AddressException, MessagingException
+    public synchronized void sendMail(String subject, 
+                                        String messageText, 
+                                        String recipients, 
+                                        File attachment) throws AddressException, MessagingException
     {
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
 
-        Properties props = buildProperties();
+        boolean checkServerIdentity = false;
+        
+        Properties props = buildProperties(checkServerIdentity);
 
         Session session = Session.getInstance(props, new Authenticator() 
         {
