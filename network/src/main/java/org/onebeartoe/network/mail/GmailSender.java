@@ -100,18 +100,19 @@ public class GmailSender implements JavaMailSender
     {
         File noAttachment = null;
         
-        sendMail(subject, body, recipients, noAttachment);
+        boolean checkServerIdentity = false;
+        
+        sendMail(subject, body, recipients, noAttachment, checkServerIdentity);
     }    
 
     @Override
     public synchronized void sendMail(String subject, 
                                         String messageText, 
-                                        String recipients, 
-                                        File attachment) throws AddressException, MessagingException
+                                        String recipients,
+                                        File attachment,
+                                        boolean checkServerIdentity) throws AddressException, MessagingException
     {
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-
-        boolean checkServerIdentity = false;
         
         Properties props = buildProperties(checkServerIdentity);
 
