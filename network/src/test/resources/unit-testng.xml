@@ -4,12 +4,6 @@
 
 <suite name="java-libraries-network-test-suite" parallel="none">
     <test name="network-unit-tests">
-        <groups>
-            <run>
-                <include name="unit" />
-            </run>
-        </groups>
-
         <packages>    
             <package name="org.onebeartoe.network.mail"/>
         </packages>
