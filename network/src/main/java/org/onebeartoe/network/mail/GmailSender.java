@@ -25,10 +25,10 @@ import javax.mail.internet.MimeMultipart;
 
 /**
  * A class to send email via the GMail service
- * <br/>
+ * 
  * A valid gmail account is required
- * @author rob
- *
+ * 
+ * @author Roberto Marquez
  */
 public class GmailSender implements JavaMailSender 
 {
@@ -44,6 +44,8 @@ public class GmailSender implements JavaMailSender
     
     public GmailSender(String user, String password)
     {
+        logger = Logger.getLogger( getClass().getName() );
+        
         this.username = user;
         this.password = password;
 
