@@ -1,10 +1,7 @@
 
 package org.onebeartoe.application;
 
-import java.awt.Dimension;
-import java.awt.Point;
 import java.util.prefs.BackingStoreException;
-import javax.swing.JFrame;
 
 /**
  * @author rmarquez
