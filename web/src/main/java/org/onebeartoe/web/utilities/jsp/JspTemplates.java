@@ -2,6 +2,7 @@
 package org.onebeartoe.web.utilities.jsp;
 
 import java.io.IOException;
+import java.util.Date;
 import org.onebeartoe.io.TextFileReader;
 import org.onebeartoe.io.buffered.BufferedTextFileReader;
 
@@ -39,6 +40,13 @@ public class JspTemplates
     public String loadWebinfIndex() throws IOException
     {
         String text = loadText("webinfIndex.jsp");
+        
+        final String target = "--DATE_CREATED--";
+        
+        Date d = new Date();
+        String date = d.toString();
+        
+        text  = text.replace(target, date);
         
         return text;
     }
