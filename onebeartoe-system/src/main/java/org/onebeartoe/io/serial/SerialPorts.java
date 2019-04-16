@@ -6,7 +6,9 @@ import gnu.io.SerialPort;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.onebeartoe.system.OperatingSystem;
@@ -54,17 +56,7 @@ public class SerialPorts
      */
     public static SerialPort get(String portName) throws Exception, NoClassDefFoundError
     {
-        // the next line checks if the
-        // JRE is on the is on Linux (including Raspberry Pi Debian        
-        OperatingSystem os = new OperatingSystem();
-        if( !os.seemsLikeMsWindows() )
-        {
-            // assume we are on Linux
-            // and as suggested here: http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
-            // TODO: Should the second parameter be the portName?
-            System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
-            System.out.println("The serial port system property is set.");
-        }
+        linuxSystemPoperty(portName);
 
         CommPortIdentifier portId = null;
                         
@@ -108,6 +100,42 @@ public class SerialPorts
         return serialPort;
     }
     
+    public static List<String> list()
+    {
+        List<String> serialPorts = new ArrayList();
+        
+        Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
+
+        while (portEnum.hasMoreElements()) 
+        {
+            CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
+            
+            if(currPortId.getPortType() == CommPortIdentifier.PORT_SERIAL) 
+            {
+                serialPorts.add( currPortId.getName() ) ;
+            }
+        }
+
+        return serialPorts;
+    }
+
+    private static void linuxSystemPoperty(String portName)
+    {
+        // the next line checks if the
+        // JRE is on the is on Linux (including Raspberry Pi Debian        
+        OperatingSystem os = new OperatingSystem();
+        if( !os.seemsLikeMsWindows() )
+        {
+            // assume we are on Linux
+            // and as suggested here: http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
+            // TODO: Should the second parameter be the portName?
+            System.setProperty("gnu.io.rxtx.SerialPorts", portName);
+//            System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
+            
+            System.out.println("The serial port system property is set.");
+        }        
+    }
+   
     /**
      * This method closes the input and output streams of the serial port argument.'
      * It also removes event listener and closes the serial port.
