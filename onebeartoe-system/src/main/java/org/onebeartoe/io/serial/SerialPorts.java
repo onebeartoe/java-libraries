@@ -14,23 +14,24 @@ import java.util.logging.Logger;
 import org.onebeartoe.system.OperatingSystem;
 
 /**
+ * This class provides utility methods for working with a Serial connection.
+ * 
+ * Here are some typical paths to the Serial port:
+ * 
+ *    "COM24",                       // Windows
+ *    "/dev/tty.usbserial-A9007UX1", // Mac OS X
+ *    "/dev/ttyACM0",                // Raspberry Pi
+ *    "/dev/ttyUSB0"                 // Linux
+ * 
  * @author Roberto Marquez
  */
 public class SerialPorts 
 {
-    /**
-     * The port we're normally going to use.
-     */
-    private static final String [] PORT_NAMES = 
-    {
-        "COM17"
-//        "COM24"            
-//            , // Windows
-//            "/dev/tty.usbserial-A9007UX1", // Mac OS X
-//            "/dev/ttyACM0", // Raspberry Pi
-//            "/dev/ttyUSB0" // Linux
-            
-    };
+//    private static final String [] PORT_NAMES = 
+//    {
+//        "COM17"
+//            
+//    };
     
     /**
      * Milliseconds to block while waiting for port open
