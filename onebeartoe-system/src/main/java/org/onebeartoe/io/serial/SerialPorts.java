@@ -100,8 +100,11 @@ public class SerialPorts
         return serialPort;
     }
     
-    public static List<String> list()
+    public static List<String> list()//String portName)
     {
+//TODO: is this still needed?        
+//        linuxSystemPoperty(portName);
+        
         List<String> serialPorts = new ArrayList();
         
         Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
