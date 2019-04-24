@@ -7,6 +7,8 @@ package org.onebeartoe.web.adafruit.io;
  */
 public class FeedData
 {
+    private String id;
+    
     private String topic;
     
     private String value;
@@ -39,18 +41,42 @@ public class FeedData
         
         if(split.length > 0)
         {
-            String topic = split[0].trim();
+            String id = split[0].trim();
             
-            feedData.setTopic(topic);
+            feedData.setId(id);
+        }
+        else
+        {
+            feedData.setId("id-not-set");
         }
         
         if(split.length > 1)
         {
-            String value = split[1].trim();
+            String topic = split[1].trim();
+            
+            feedData.setTopic(topic);
+        }
+        else
+        {
+            feedData.setTopic("topic-is-not-set");
+        }
+        
+        if(split.length > 2)
+        {
+            String value = split[2].trim();
             
             feedData.setValue(value);
         }
+        else
+        {
+            feedData.setValue("value-is-not-set");
+        }
         
         return feedData;
+    }
+
+    private void setId(String id)
+    {
+        this.id = id;
     }
 }

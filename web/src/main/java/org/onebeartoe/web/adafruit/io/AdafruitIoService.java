@@ -14,7 +14,7 @@ public interface AdafruitIoService
     
     boolean createFeed(String feedName) throws UnsupportedEncodingException, IOException;
     
-    boolean addFeedData(String feedName, String value) throws UnsupportedEncodingException, IOException;
+    AioResponse addFeedData(String feedName, String value) throws UnsupportedEncodingException, IOException;
     
     List<String> feedNames();
 }

@@ -51,7 +51,7 @@ public class ApacheAdafruitIoService implements AdafruitIoService
     }
 
     @Override
-    public boolean addFeedData(String feedName, String value) throws UnsupportedEncodingException, IOException
+    public AioResponse addFeedData(String feedName, String value) throws UnsupportedEncodingException, IOException
     {
         String url = baseUrl + "feeds/" + feedName + "/data";
         
@@ -59,11 +59,8 @@ public class ApacheAdafruitIoService implements AdafruitIoService
         urlParameters.add(new BasicNameValuePair("value", value));
         
         AioResponse ar = sendPostRequest(url, urlParameters);
-        
-        // we expect 201 response if the data was added to the feed
-        boolean succeeded = ar.code == 201;
-       
-        return succeeded;
+
+        return ar;
     }
     
     private AioResponse processResponse(HttpResponse response) throws IOException
