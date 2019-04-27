@@ -2,5 +2,6 @@
 image: kaiwinter/docker-java8-maven
 job1:
  script:
+ - "Xvfb :5 -screen 0 800x600x24 &"
+ - "export DISPLAY=:5"
  - "mvn install -B"
-
