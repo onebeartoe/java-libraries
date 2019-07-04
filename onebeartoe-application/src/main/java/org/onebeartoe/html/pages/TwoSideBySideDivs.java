@@ -35,6 +35,11 @@ public class TwoSideBySideDivs extends Div
         
         leftDiv.add(content);
     }
+    
+    public void setLeftStyle(String style)
+    {
+        leftDiv.setStyle(style);
+    }
 
     public void setRightContent(HtmlTag content)
     {
