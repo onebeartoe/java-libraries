@@ -21,18 +21,17 @@ public class TwoSideBySideDivs extends Div
         setClasses("sideBySide");
         
         leftDiv = new Div();
-        leftDiv.setClasses("sideBySideLeft" + " " + "blogEntryLeft");
+        leftDiv.setClasses("blogEntryLeft" + " " + "sideBySideLeft");
         
         rightDiv = new Div();
-        rightDiv.setClasses("sideBySideRight" + " " + "blogEntryRight");
+        rightDiv.setClasses("blogEntryRight" + " " + "sideBySideRight");
         
         add(leftDiv);
         add(rightDiv);
     } 
 
     public void setLeftContent(HtmlTag content)
-    {
-        
+    {        
         leftDiv.add(content);
     }
     
