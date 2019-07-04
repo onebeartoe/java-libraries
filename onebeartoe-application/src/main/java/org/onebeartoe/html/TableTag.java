@@ -4,7 +4,7 @@ package org.onebeartoe.html;
 /**
  * @author Roberto Marquez <https://www.youtube.com/user/onebeartoe>
  */
-public class TableTag implements HtmlTag
+public class TableTag extends HtmlTag
 {
     Object [][] cells;
     
@@ -18,7 +18,7 @@ public class TableTag implements HtmlTag
     }
     
     @Override
-    public String toHtml() 
+    public String toString() 
     {
         int rows = cells.length;
         int columns = cells[0].length;

@@ -5,7 +5,7 @@ package org.onebeartoe.html;
  * created 2007.10.23
  * @author rob
  */
-public class ImageTag 
+public class ImageTag extends HtmlTag
 {
 
 	// the model:
@@ -25,8 +25,8 @@ public class ImageTag
 		this.alt = alt;
 	}
 	
-        @Deprecated
-	public String toHtml()
+        
+	public String toString()
 	{
 		StringBuffer buf = new StringBuffer("<img src=\"");
 		buf.append(src);

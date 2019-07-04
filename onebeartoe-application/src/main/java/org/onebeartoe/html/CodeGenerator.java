@@ -29,7 +29,7 @@ public class CodeGenerator
     {
         AnchorTag tag = new AnchorTag(url, text);
 
-        return tag.toHtml();
+        return tag.toString();
     }    
     
     /**

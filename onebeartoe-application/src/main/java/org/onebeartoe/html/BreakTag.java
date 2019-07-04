@@ -1,18 +1,15 @@
-/*
- */
+
 package org.onebeartoe.html;
 
 /**
  *
  * @author Roberto Marquez
  */
-public class BreakTag implements HtmlTag
+public class BreakTag extends HtmlTag
 {
-    
     @Override
-    public String toHtml()
+    public String toString()
     {
         return "<br/>";
     }
-    
 }

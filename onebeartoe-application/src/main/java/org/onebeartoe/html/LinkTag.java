@@ -6,7 +6,7 @@ package org.onebeartoe.html;
  * @author Roberto Marquez
  * 
  */
-public abstract class LinkTag implements HtmlTag 
+public class LinkTag extends HtmlTag 
 {
 
 //       <link rel="stylesheet" type="text/css" href="http://www.onebeartoe.com/tours/web/css/layouts/toughest/style.css" />
@@ -27,7 +27,7 @@ public abstract class LinkTag implements HtmlTag
 	}
 	
         @Override
-	public String toHtml()
+	public String toString()
 	{
 		StringBuffer tag = new StringBuffer();
 
