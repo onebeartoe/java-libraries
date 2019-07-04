@@ -3,6 +3,7 @@ package org.onebeartoe.filesystem;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import org.testng.annotations.Test;
 
 /**
@@ -173,8 +174,11 @@ public class FileHelperSpecifcation
     @Test(groups = {"unit"})
     public void split() throws IOException
     {
-        File infile = new File("pom.xml");
-        implementation.split(infile, 20_000);
+        File infile = new File("src/test/resources/t5.gif");
+        File outfile = new File("target/t5.gif");
+        Files.copy(infile.toPath(), outfile.toPath() );
+        
+        implementation.split(outfile, 20_000);
     }
     
     @Test(groups = {"unit"})
