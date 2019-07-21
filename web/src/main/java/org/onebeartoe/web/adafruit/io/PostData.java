@@ -27,13 +27,28 @@ import org.apache.http.message.BasicNameValuePair;
  */
 public class PostData 
 {
-    public static void main(String [] args) throws UnsupportedEncodingException, IOException
+
+    /**
+     *
+     * @param args
+     */
+    public static void main(String [] args) throws IOException
+    {
+        PostData app = new PostData();
+        
+        app.post();
+    }
+    
+    public void post() throws IOException
     {
         String url = "https://io.adafruit.com/api/feeds/lizard-enclosure-top-temperature/data";
  
         HttpClient client = new DefaultHttpClient();
+        
         HttpPost post = new HttpPost(url);
 
+        
+        
         // set the Adafruit IO Key
         String aioKey = AioKeyLoader.load();
         post.setHeader("x-aio-key", aioKey);
@@ -69,6 +84,6 @@ public class PostData
             result.append("\n");
         }
 
-        System.out.println(result.toString());
+        System.out.println(result.toString());        
     }
 }
