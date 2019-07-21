@@ -16,6 +16,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 
 /**
@@ -43,12 +44,11 @@ public class PostData
     {
         String url = "https://io.adafruit.com/api/feeds/lizard-enclosure-top-temperature/data";
  
-        HttpClient client = new DefaultHttpClient();
+        HttpClient client = HttpClientBuilder.create()
+                                             .build();
         
         HttpPost post = new HttpPost(url);
 
-        
-        
         // set the Adafruit IO Key
         String aioKey = AioKeyLoader.load();
         post.setHeader("x-aio-key", aioKey);
