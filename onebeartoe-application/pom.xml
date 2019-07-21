@@ -23,7 +23,14 @@
             <artifactId>commons-cli</artifactId>
             <version>1.4</version>
         </dependency>
-        
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+            <scope>test</scope>
+        </dependency>
+                
         <dependency>
             <groupId>org.onebeartoe</groupId>
             <artifactId>onebeartoe-system</artifactId>  
@@ -36,6 +43,20 @@
             <version>6.14.3</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.11.3</version>
+        </dependency>
+
+<!--
+        <dependency>
+            <groupId>net.sf.jtidy</groupId>
+            <artifactId>jtidy</artifactId>
+            <version>r938</version>
+        </dependency>
+-->
     </dependencies>
   
     <build>

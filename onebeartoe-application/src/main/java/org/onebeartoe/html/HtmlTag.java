@@ -50,6 +50,4 @@ public class HtmlTag
     {
         this.style = style;
     }
-    
-    
 }
