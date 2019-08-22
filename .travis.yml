@@ -6,7 +6,7 @@ addons:
     organization: $SONAR_ORGNIZATION
     token: $SONAR_TOKEN
 jdk:
-  - oraclejdk8
+  - oraclejdk9
 script:
   - Xvfb :5 -screen 0 800x600x24 &
   - export DISPLAY=:5
