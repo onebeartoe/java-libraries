@@ -184,7 +184,7 @@ public class FileHelperSpecifcation
     @Test(groups = {"unit"})
     public void split_largerFile() throws IOException
     {
-        String largerFile = "../onebeartoe-application/src/main/resources/org/onebeartoe/ui/101px-Seven_segment_display-animated.gif";
+        String largerFile = "../application/src/main/resources/org/onebeartoe/ui/101px-Seven_segment_display-animated.gif";
         File infile = new File(largerFile);
         
         implementation.split(infile, 5);
