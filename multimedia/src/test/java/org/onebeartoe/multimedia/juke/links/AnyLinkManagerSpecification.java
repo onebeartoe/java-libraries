@@ -130,6 +130,7 @@ public class AnyLinkManagerSpecification
     @Test(groups = {"unit"})
     public void setRootUrl() throws Exception
     {
+        // remove any residual links
         implementation.clear();
         
         String host = "onebeartoe.org";
