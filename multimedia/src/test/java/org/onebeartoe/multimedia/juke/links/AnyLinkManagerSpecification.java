@@ -3,6 +3,10 @@ package org.onebeartoe.multimedia.juke.links;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
 import org.testng.annotations.Test;
 
 /**
@@ -34,36 +38,113 @@ public class AnyLinkManagerSpecification
     @Test(groups = {"unit"})
     public void add()
     {
-        implementation.add(null);
+        int currentCount = implementation.getLinkUnitNames().size();
+        
+        String name = "some-unit";
+        
+        LinkManager.LinkUnit unit = new LinkManager.LinkUnit();
+        
+        unit.name = name;
+        
+        implementation.add(unit);
+        
+        int actual = implementation.getLinkUnitNames().size();
+        
+        int expected = currentCount + 1;
+        
+        assertEquals(actual, expected);
     }
     
     @Test(groups = {"unit"})
     public void clear()
     {
+        String name = "some-unit";
+        
+        LinkManager.LinkUnit unit = new LinkManager.LinkUnit();
+        
+        unit.name = name;
+        
+        implementation.add(unit);
+
+        int currentSize = implementation.getLinkUnitNames().size();
+        
+        assertNotEquals(currentSize, 0);
+        
         implementation.clear();
+        
+        currentSize = implementation.getLinkUnitNames().size();
+        
+        assertEquals(currentSize, 0);
     }
     
     @Test(groups = {"unit"})
-    public void getLinsUnitFor()
+    public void getLinksUnitFor()
     {
-        implementation.getLinksUnitFor("unitName");
+        String name = "some-unit";
+        
+        LinkManager.LinkUnit unit = new LinkManager.LinkUnit();
+        
+        unit.name = name;
+        
+        implementation.add(unit);
+        
+        LinkManager.LinkUnit actualUnit = implementation.getLinksUnitFor(name);
+        
+        String expected = name;
+        
+        String actual = actualUnit.name;
+                
+        assertEquals(actual, expected);
     }
     
     @Test(groups = {"unit"})
     public void getLinkUnitNames()
     {
-        implementation.getLinkUnitNames();
+        List<String> linkUnitNames = implementation.getLinkUnitNames();
+        
+        assertNotNull(linkUnitNames);
     }
     
     @Test(groups = {"unit"})
     public void remove()
     {
-        implementation.remove(null);
+        String name = "some-unit";
+        
+        LinkManager.LinkUnit unit = new LinkManager.LinkUnit();
+        
+        unit.name = name;
+        
+        implementation.add(unit);
+        
+        int currentCount = implementation.getLinkUnitNames().size();
+        
+        implementation.remove(unit);
+        
+        int expected = currentCount - 1;
+        
+        int actual = implementation.getLinkUnitNames().size();
+        
+        assertEquals(actual, expected);
     }
     
     @Test(groups = {"unit"})
     public void setRootUrl() throws Exception
     {
-        implementation.setRootUrl("localhost", "fun");
+        implementation.clear();
+        
+        String host = "onebeartoe.org";
+        
+        // this path is to a text file and should have no links
+        String path = "/software/development/continuous/source/code/coverage/jacoco/sonar.properties";
+        
+        implementation.setRootUrl(host, path);
+        
+        List<String> names = implementation.getLinkUnitNames();
+        
+        int acutal = names.size();
+        
+        int expected = 0;
+        
+        assertEquals(acutal, expected);
     }
 }
