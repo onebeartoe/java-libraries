@@ -6,7 +6,7 @@ addons:
     organization: $SONAR_ORGNIZATION
     token: $SONAR_TOKEN
 jdk:
-  - oraclejdk9
+  - oraclejdk8
 script:
   - rm "${JAVA_HOME}/lib/security/cacerts"
   - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
