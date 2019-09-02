@@ -14,9 +14,9 @@
     <modules>
         <module>math</module>
         <module>network</module>
-        <module>onebeartoe-application</module>
+        <module>application</module>
         <module>onebeartoe-multimedia</module>
-        <module>onebeartoe-system</module>
+        <module>system</module>
         <module>science</module>
         <module>web</module>
     </modules>
