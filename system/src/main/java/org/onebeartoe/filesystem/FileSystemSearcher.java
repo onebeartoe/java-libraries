@@ -111,8 +111,11 @@ public class FileSystemSearcher
     public List<File> findTargetFiles()
     {
         List<File> targetFiles = new ArrayList<File>();
+        
         Vector<File> directories = new Vector<File>();
+        
         directories.add(dir);
+        
         while (!directories.isEmpty())
         {
             findTargetFilesOneLevel(directories, targetFiles);
@@ -124,7 +127,9 @@ public class FileSystemSearcher
     private void findTargetFilesOneLevel(Vector<File> directories, List<File> targetFiles)
     {
         File currentDir = directories.remove(0);
+        
         File[] dirContents = currentDir.listFiles();
+        
         if (dirContents != null)
         {
             for (File file : dirContents)
@@ -136,6 +141,7 @@ public class FileSystemSearcher
                 else
                 {
                     FileType type = determinFileType(file);
+                    
                     if (targets.contains(type))
                     {
                         targetFiles.add(file);
