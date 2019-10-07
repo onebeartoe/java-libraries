@@ -15,6 +15,24 @@ public class OperatingSystem
         return homeDirectory;
     }
     
+    public boolean seemsLikeMac()
+    {
+        boolean isMac = false;
+        
+        String os = System.getProperty("os.name").toLowerCase();
+        if( os.contains("mac") )
+        {
+            isMac = true;
+        }
+        
+        return isMac;
+    }
+    
+    public boolean seemsLikeLinux()
+    {
+        return !seemsLikeMac() && !seemsLikeMsWindows();
+    }
+    
     public boolean seemsLikeMsWindows()
     {
         boolean windows = false;
