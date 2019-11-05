@@ -1,6 +1,7 @@
-// move this to the .filesystem package
+
 package org.onebeartoe.system;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -9,6 +10,18 @@ import java.util.Date;
  */
 public class Filesystem 
 {
+    /**
+     * This utility method returns the present working directory.
+     * 
+     * @return present working directory
+     */
+    public static String pwd()
+    {
+        File pwd = new File(".");
+        
+        return pwd.getAbsolutePath();
+    }
+
     public static String systimeToFilename()
     {
         Date today;
