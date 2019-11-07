@@ -29,6 +29,7 @@ public class FileSelectionPanel extends JPanel implements ActionListener
 
     private FileType targetType;
 
+//TODO: make this configuratble for the HtmlUtility -> JspSeeder    
     private String selectDirectoryTitle = "What Dir?";    
 
     private JButton selectButton;
@@ -72,6 +73,7 @@ public class FileSelectionPanel extends JPanel implements ActionListener
     	fileSelectionMode = mode;
 	    	
         // set up GUI display componets
+//TODO: make this configuratble for the HtmlUtility -> JspSeeder
         JLabel sourceLabel = new JLabel("Enter the source directory here:");
         JPanel labelPanel = new JPanel();
         labelPanel.setLayout(new FlowLayout(FlowLayout.LEFT) );
