@@ -3,7 +3,9 @@ package org.onebeartoe.filesystem;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.CopyOption;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import org.testng.annotations.Test;
 
 /**
@@ -175,8 +177,8 @@ public class FileHelperSpecifcation
     public void split() throws IOException
     {
         File infile = new File("src/test/resources/t5.gif");
-        File outfile = new File("target/t5.gif");
-        Files.copy(infile.toPath(), outfile.toPath() );
+        File outfile = new File("target/t5.gif");        
+        Files.copy(infile.toPath(), outfile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         
         implementation.split(outfile, 20_000);
     }

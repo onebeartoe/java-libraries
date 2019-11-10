@@ -67,7 +67,8 @@ public class Compare extends SystemCommand
             String message = "The substring look up for the comparison percentage failed.  " +
                                 "Is the ImageMagic command available?";
             
-            message += "\n\n" + stderr;
+            message += "\n" + stderr;
+            
             logger.log(Level.SEVERE, message);
         }
         
@@ -75,7 +76,7 @@ public class Compare extends SystemCommand
         
         float f = Float.valueOf(s);
         
-        // move it to an integer representation of a percetage
+        // cast it to an integer representation of a percetage
         f = f * 100.0f;
         
         // check if the error percentage is below the threshold
@@ -89,13 +90,15 @@ public class Compare extends SystemCommand
             results.exitCode = (int) f;
             
             // the diff is not good
-            System.err.println();
-            System.err.println();
+            
             System.err.println("The comparison is not identical for:");
+            
             profile.commandAndArgs.forEach( c ->
             {
                 System.err.print(c + " ");   
             });
+            
+            System.err.println();
             System.err.println();
         }
         
