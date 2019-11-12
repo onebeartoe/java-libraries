@@ -34,7 +34,7 @@ public class SysoutLoggerFactory
     static class SysoutRecordFormatter extends SimpleFormatter 
     {
         @Override
-        public String format(final LogRecord r) 
+        public synchronized String format(final LogRecord r) 
         {
             StringBuilder sb = new StringBuilder();
 
