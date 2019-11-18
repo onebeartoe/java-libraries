@@ -9,6 +9,7 @@ import java.time.temporal.ChronoUnit;
  */
 public class DurationService
 {
+//TODO: add a prepend option to this and update 3D-modeling to use it    
     public String durationMessage(Instant start, Instant end)
     {
         ChronoUnit units = ChronoUnit.SECONDS;
