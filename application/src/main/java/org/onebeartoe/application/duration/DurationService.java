@@ -10,7 +10,7 @@ import java.time.temporal.ChronoUnit;
 public class DurationService
 {
     private String prependText;
-//TODO: add a prepend option to this and update 3D-modeling to use it    
+
     public String durationMessage(Instant start, Instant end)
     {
         ChronoUnit units = ChronoUnit.SECONDS;
@@ -22,7 +22,7 @@ public class DurationService
         
         String prepend = prependText == null ? "" : prependText;
         
-        String message = prepend + minutes + " minutes " + seconds + " seconds.";
+        String message = prepend + minutes + " minutes " + seconds + " seconds";
                 
         return message;
     }    

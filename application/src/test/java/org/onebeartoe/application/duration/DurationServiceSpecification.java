@@ -22,7 +22,7 @@ public class DurationServiceSpecification
         
         String acutal = implementation.durationMessage(start, end);
         
-        String expected = "1 minutes 0 seconds.";
+        String expected = "1 minutes 0 seconds";
         
         assertTrue( acutal.equals(expected) );
     }
@@ -39,7 +39,7 @@ public class DurationServiceSpecification
         
         String acutal = implementation.durationMessage(start, end);
         
-        String expected = "The test suite ran 0 minutes 10 seconds.";
+        String expected = "The test suite ran 0 minutes 10 seconds";
         
         assertEquals(acutal, expected);
     }
