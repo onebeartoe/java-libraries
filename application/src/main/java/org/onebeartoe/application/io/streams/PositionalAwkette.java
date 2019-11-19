@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -13,6 +14,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.onebeartoe.application.duration.DurationService;
+import org.onebeartoe.application.logging.SysoutLoggerFactory;
 
 /**
  * The application 
@@ -43,6 +45,8 @@ public class PositionalAwkette
     
     public static void main(String [] args) throws IOException
     {
+        Logger logger = SysoutLoggerFactory.getLogger( PositionalAwkette.class.getName() );
+        
         PositionalAwkette findette = new PositionalAwkette();
         Options options = findette.buildOptions();
         
@@ -58,9 +62,8 @@ public class PositionalAwkette
             Instant end = Instant.now();
         
             DurationService durationService = new DurationService();
-            String message = durationService.durationMessage(start, end);
-            System.out.println();
-            System.out.println(message);
+            String message = "Awkette ran for " + durationService.durationMessage(start, end) + "\n";
+            logger.info(message);
         }
         catch(ParseException uoe)
         {

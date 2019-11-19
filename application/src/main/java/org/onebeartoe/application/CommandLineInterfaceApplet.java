@@ -44,9 +44,8 @@ public class CommandLineInterfaceApplet
             Instant end = Instant.now();
         
             DurationService durationService = new DurationService();
-            String message = durationService.durationMessage(start, end);
-            System.out.println();
-            System.out.println(message);
+            String message = "The application ran for " + durationService.durationMessage(start, end) + "\n";
+            logger.info(message);
         }
         catch(ParseException uoe)
         {
