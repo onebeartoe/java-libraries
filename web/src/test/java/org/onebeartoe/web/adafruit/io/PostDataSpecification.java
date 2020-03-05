@@ -1,5 +1,4 @@
-/*
- */
+
 package org.onebeartoe.web.adafruit.io;
 
 import java.io.IOException;
