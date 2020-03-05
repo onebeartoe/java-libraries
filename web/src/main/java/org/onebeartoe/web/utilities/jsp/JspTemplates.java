@@ -6,6 +6,7 @@ import java.util.Date;
 import org.onebeartoe.io.TextFileReader;
 import org.onebeartoe.io.buffered.BufferedTextFileReader;
 
+//TODO: have this class cache the text content between reads
 public class JspTemplates
 {
     public String loadBottom() throws IOException
