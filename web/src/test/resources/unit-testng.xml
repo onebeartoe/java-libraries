@@ -4,14 +4,18 @@
 
 <suite name="java-libraries-web-test-suite" parallel="none">
     <test name="web-unit-tests">
+<!--
         <groups>
             <run>
                 <include name="unit" />
             </run>
         </groups>
-
+-->
         <packages>    
+
+            <package name="org.onebeartoe.web.adafruit.io"/>
             <package name="org.onebeartoe.web.utilities.jsp"/>
+   
         </packages>
     </test>    
 </suite>
