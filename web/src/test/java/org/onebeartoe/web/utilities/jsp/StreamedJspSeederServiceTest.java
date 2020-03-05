@@ -2,6 +2,9 @@
 package org.onebeartoe.web.utilities.jsp;
 
 import java.io.File;
+import org.onebeartoe.io.TextFileReader;
+import org.onebeartoe.io.buffered.BufferedTextFileReader;
+import static org.testng.AssertJUnit.assertTrue;
 import org.testng.annotations.Test;
 
 /**
@@ -10,13 +13,19 @@ import org.testng.annotations.Test;
  */
 public class StreamedJspSeederServiceTest 
 {
+    private final String urlPath = "imaging/gimp/cropping";
+    
     private final File outputDir = new File("target/test-data");
     
-    private StreamedJspSeederService seederService;
+    private final String jspPath = "WEB-INF/jsp/";
+    
+    private final File webinfDir = new File(outputDir, jspPath);
+    
+    private StreamedJspSeederService implementation;
     
     public StreamedJspSeederServiceTest()
     {
-        seederService = new StreamedJspSeederService();
+        implementation = new StreamedJspSeederService();
         
         System.out.println("out from streammed jsp seeder");
 
@@ -24,27 +33,36 @@ public class StreamedJspSeederServiceTest
         System.out.println("pwd: " + pwd.getAbsolutePath() );
     }
     
-    @Test(groups = {"unit"})
+    private void assertBottom()
+    {
+        String bottomPath = urlPath + "/bottom.jsp";
+        File bottom = new File(webinfDir, bottomPath);
+        System.out.println("expecting: " + bottom.getAbsolutePath() );
+        assert( bottom.exists() );
+        
+        String expectedPath = urlPath;
+
+        TextFileReader tfr = new BufferedTextFileReader();
+        String content = tfr.readText( bottom.getAbsolutePath() );
+
+        assertTrue( content.contains(expectedPath) );
+    }
+
+    @Test
+//    @Test(groups = {"unit"})
     public void seedIndex() throws Exception
     {
 // TODO: Make sure the files do not already exist.
         
-        String urlPath = "imaging/gimp/cropping";
-        
-        seederService.seedIndex(outputDir, urlPath);
+        implementation.seedIndex(outputDir, urlPath);
         
         String indexPath = urlPath + "/index.jsp";
         File index = new File(outputDir, indexPath);
         System.out.println("expecting: " + index.getAbsolutePath() );
         assert( index.exists() );
+
+        assertBottom();
         
-        File webinfDir = new File(outputDir, "WEB-INF/jsp/");
-        
-        String bottomPath = urlPath + "/bottom.jsp";
-        File bottom = new File(webinfDir, bottomPath);
-        System.out.println("expecting: " + bottom.getAbsolutePath() );
-        assert( bottom.exists() );
-                
         File webinfIndex = new File(webinfDir, indexPath);
         System.out.println("expecting: " + webinfIndex.getAbsolutePath() );
         assert( webinfIndex.exists() );
