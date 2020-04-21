@@ -65,7 +65,10 @@ public class CommandLineInterfaceApplet
         app.execute(args);
     }
 
-    protected RunProfile parseRunProfile(final String[] args, Options options) throws ParseException
+    protected 
+//                <T extends RunProfile> RunProfile 
+                RunProfile 
+                parseRunProfile(final String[] args, Options options) throws ParseException
     {
         if(args == null)
         {
