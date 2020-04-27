@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author Roberto Marquez
+ * This class services a default implementation.
  */
 public class AppletService 
 {
