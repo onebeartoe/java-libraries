@@ -6,11 +6,11 @@ package org.onebeartoe.system;
  */
 public class Sleeper 
 {
-    public static void sleepo(long duration)
+    public static void sleepo(long durationInMillis)
     {
         try 
         {
-            Thread.sleep(duration);
+            Thread.sleep(durationInMillis);
         } 
         catch (InterruptedException ex) 
         {
