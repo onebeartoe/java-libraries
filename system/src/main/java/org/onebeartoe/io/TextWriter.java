@@ -6,7 +6,15 @@ import java.io.IOException;
 
 public interface TextWriter 
 {
-	boolean writeText(File outfile, String text) throws IOException;
-	
-	boolean writeText(File outfile, String text, boolean append) throws IOException;
+    /**
+     * This method writes text to the specified File, overwriting any existing 
+     * content. 
+     * 
+     * @param outfile
+     * @param text
+     * @throws IOException 
+     */
+    void writeText(File outfile, String text) throws IOException;
+
+    void writeText(File outfile, String text, boolean append) throws IOException;
 }

@@ -16,37 +16,36 @@ public class TextFileWriter implements TextWriter
      * By default this method writes the test to the beginning of the file. Any
      * text already in the file is overwritten.
      */
-    public boolean writeText(File outfile, String text)
+    public void writeText(File outfile, String text) throws IOException
     {
-        return writeText(outfile, text, false);
+        writeText(outfile, text, false);
     }
 
     /**
-     * If the value of append is true the text will be add to the end of the
-     * file. if the value is false the text is add the begining of the file.
+     * This method writes text to a file.  If the value of append is true the 
+     * appended to the existing file otherwise the file is overwritten.
      */
-    public boolean writeText(File outfile, String text, boolean append)
+    public void writeText(File outfile, String text, boolean append) throws IOException
     {
-        boolean saved = true;
+//        boolean saved = true;
         try(FileWriter file = new FileWriter(outfile, append);
             PrintWriter index = new PrintWriter(file);)
         {
             
             index.print(text);
-            index.close();
         } 
-        catch(FileNotFoundException fnfe)
-        {
-            saved = false;
-            fnfe.printStackTrace();
-        }
-        catch (IOException ioe)
-        {
-            ioe.printStackTrace();
-            
-            saved = false;
-        }
+//        catch(FileNotFoundException fnfe)
+//        {
+//            saved = false;
+//            fnfe.printStackTrace();
+//        }
+//        catch (IOException ioe)
+//        {
+//            ioe.printStackTrace();
+//            
+//            saved = false;
+//        }
         
-        return saved;
+//        return saved;
     }
 }
