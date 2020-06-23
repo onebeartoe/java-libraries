@@ -3,6 +3,7 @@ package org.onebeartoe.system;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Deprecated
@@ -52,8 +53,14 @@ public class Commander
 
         System.out.println("executing: " + command);
 
-        ProcessBuilder builder = new ProcessBuilder(command, "push", "terue", "sss");
+        String[] split = command.split("\\\\s+");
+        List<String> commandAndArgs = Arrays.asList(split);
+        
+        ProcessBuilder builder = new ProcessBuilder(commandAndArgs);
+//        ProcessBuilder builder = new ProcessBuilder(command, "push", "terue", "sss");
+        
         Process jobProcess = builder.start();
+        
 //        Runtime runtime = Runtime.getRuntime();	
 //        Process jobProcess = runtime.exec(command);
                 
