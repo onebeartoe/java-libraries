@@ -53,8 +53,13 @@ public class Commander
 
         System.out.println("executing: " + command);
 
-        String[] split = command.split("\\\\s+");
+        String[] split = command.split("\\s+");
         List<String> commandAndArgs = Arrays.asList(split);
+        
+        System.out.println("commandAndArgs["
+                                + commandAndArgs.size()
+                                + "] = " 
+                                + commandAndArgs);
         
         ProcessBuilder builder = new ProcessBuilder(commandAndArgs);
 //        ProcessBuilder builder = new ProcessBuilder(command, "push", "terue", "sss");
