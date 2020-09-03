@@ -19,6 +19,7 @@
         <module>system</module>
         <module>science</module>
         <module>web</module>
+        <module>mobile</module>
     </modules>
 
     <properties>
