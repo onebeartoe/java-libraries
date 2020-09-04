@@ -4,7 +4,7 @@ package org.onebeartoe.mobile.android.permissions;
 import android.app.TabActivity;
 import android.content.pm.PackageManager;
 
-import androidx.core.app.ActivityCompat;
+//import androidx.core.app.ActivityCompat;
 
 /**
  * This class provides utility methods for permissions on the Android platform.
@@ -28,14 +28,17 @@ public class Permissions
      * 
      * @return true if any permissions are missing, false otherwise
      */
-    public static boolean areMissing(String [] requiredPermissions, TabActivity activity)
+    public static boolean areMissing(String [] requiredPermissions, TabActivity activity, String packageName)
     {
         boolean missing = false;
 
+        PackageManager pm = activity.getPackageManager();
+        
         for(String permission : requiredPermissions)
         {
-            int result = ActivityCompat.checkSelfPermission(activity, permission);
-            
+            int result = pm.checkPermission(permission, packageName);
+//            int result = ActivityCompat.checkSelfPermission(activity, permission);
+
             if(result != PackageManager.PERMISSION_GRANTED)
             {
                 missing = true;
