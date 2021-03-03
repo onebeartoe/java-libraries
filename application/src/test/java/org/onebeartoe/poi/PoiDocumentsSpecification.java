@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.onebeartoe.poi.PoiDocuments;
 import static org.testng.AssertJUnit.assertTrue;
 import org.testng.annotations.Test;
 
