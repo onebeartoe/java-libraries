@@ -25,6 +25,8 @@ public class PoiDocuments
         XWPFRun tmpRun = paragraph.createRun();
         tmpRun.setText(leftText);
         tmpRun.addTab();
+//tmpRun.setSmallCaps(true);
+
 // uncomment for 3 columns            
 //            tmpRun.setText("JAN2");
 //            tmpRun.addTab();

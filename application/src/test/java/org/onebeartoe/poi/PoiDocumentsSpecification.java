@@ -22,7 +22,7 @@ public class PoiDocumentsSpecification
     @Test
     public void edgeAlignedText() throws IOException
     {
-        File outFile = new File("target/aligned.docx");
+        File outFile = new File("target/poi/edge-aligned.docx");
         
         OutputStream outStream = new FileOutputStream(outFile);
 
