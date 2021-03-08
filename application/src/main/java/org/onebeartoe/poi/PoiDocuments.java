@@ -19,7 +19,6 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTabJc;
  */
 public class PoiDocuments 
 {
-    
     public void edgeAlignedText(XWPFParagraph paragraph, String leftText, String rightText)
     {
         XWPFRun tmpRun = paragraph.createRun();
@@ -36,6 +35,17 @@ public class PoiDocuments
 //            setTabStop(paragraph, STTabJc.Enum.forString("center"), pos1);
         BigInteger pos2 = BigInteger.valueOf(9000);
         setTabStop(paragraph, STTabJc.Enum.forString("right"), pos2);        
+    }
+
+    public void smallCapsCase(XWPFParagraph paragraph, String text, boolean bold)
+    {
+        XWPFRun run = paragraph.createRun();
+        
+        run.setSmallCaps(true);
+        
+        run.setBold(bold);
+        
+        run.setText(text);
     }
     
     public void writeDocument(OutputStream outStream, XWPFDocument document) 
