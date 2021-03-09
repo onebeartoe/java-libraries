@@ -91,7 +91,10 @@ public class PoiDocuments
         XWPFParagraph leftText = row1.getCell(0).addParagraph(); //setParagraph(leftText);
 //        row1.getCell(0).setParagraph(leftText);
 //        row1.getCell(0).setText("Table - Left TExt");
+        
         XWPFRun leftRun = leftText.createRun();
+        leftRun.setBold( leftTextProile.bold);
+        leftRun.setSmallCaps(leftTextProile.smallCaps);
         leftRun.setText(leftTextProile.text);
 
 
@@ -107,7 +110,9 @@ public class PoiDocuments
         XWPFParagraph rightText = row1.createCell().addParagraph();
 //        XWPFParagraph rightText = row1.addNewTableCell().addParagraph();
         XWPFRun rightRun = rightText.createRun();
-        rightRun.setText(rightTextProile.text);                
+        rightRun.setText(rightTextProile.text);          
+        rightRun.setBold( rightTextProile.bold);
+        rightRun.setSmallCaps(rightTextProile.smallCaps);
         rightText.setAlignment(ParagraphAlignment.RIGHT);
 
 
