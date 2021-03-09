@@ -7,14 +7,18 @@ public class Dates
     public static String shortFilesystemDate(Date date) 
     {
         StringBuffer buffer = new StringBuffer();
-        buffer.append(date.getYear());
+        int year = date.getYear() + 1900;
+        buffer.append(year);
         buffer.append("-");
 
         int month = date.getMonth() + 1;
         String monthStr;
-        if (month < 10) {
+        if (month < 10) 
+        {
             monthStr = "0" + month;
-        } else {
+        } 
+        else 
+        {
             monthStr = String.valueOf(month);
         }
         buffer.append(monthStr);
@@ -22,9 +26,12 @@ public class Dates
 
         int dateInt = date.getDate();
         String dateStr;
-        if (dateInt < 10) {
+        if (dateInt < 10) 
+        {
             dateStr = "0" + dateInt;
-        } else {
+        } 
+        else 
+        {
             dateStr = String.valueOf(dateInt);
         }
         buffer.append(dateStr);
