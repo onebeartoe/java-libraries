@@ -34,8 +34,6 @@ public class PoiDocuments
         XWPFParagraph p4 = document.createParagraph();
 
         XWPFRun r4 = p4.createRun();
-//r4.set
-//        r4.setText(" br ");
         
         r4.addBreak();
     }
@@ -84,25 +82,41 @@ public class PoiDocuments
         table.setBottomBorder(XWPFTable.XWPFBorderType.NONE, 0, 0, "");
         table.setTopBorder(XWPFTable.XWPFBorderType.NONE, 0, 0, "");
         
-        XWPFParagraph leftText = document.createParagraph();
+//        XWPFParagraph leftText = document.createParagraph();
+//        XWPFRun leftRun = leftText.createRun();
+//        leftRun.setText(leftTextProile.text);
+
+
+        
+        XWPFParagraph leftText = row1.getCell(0).addParagraph(); //setParagraph(leftText);
+//        row1.getCell(0).setParagraph(leftText);
+//        row1.getCell(0).setText("Table - Left TExt");
         XWPFRun leftRun = leftText.createRun();
         leftRun.setText(leftTextProile.text);
 
-        XWPFParagraph rightText = document.createParagraph();
-        XWPFRun rightRun = rightText.createRun();
-        rightRun.setText(rightTextProile.text);        
-        
-        row1.getCell(0).setParagraph(leftText);
-//        row1.getCell(0).setText("Table - Left TExt");
-        
+
+//        XWPFParagraph rightText = document.createParagraph();
+//        XWPFRun rightRun = rightText.createRun();
+//        rightRun.setText(rightTextProile.text);                
 //        XWPFDocument tableDoc = new XWPFDocument();
 //        XWPFParagraph rightTextPara = tableDoc.createParagraph();
 //        rightTextPara.setAlignment(ParagraphAlignment.RIGHT);
+
+
+
+        XWPFParagraph rightText = row1.createCell().addParagraph();
+//        XWPFParagraph rightText = row1.addNewTableCell().addParagraph();
+        XWPFRun rightRun = rightText.createRun();
+        rightRun.setText(rightTextProile.text);                
         rightText.setAlignment(ParagraphAlignment.RIGHT);
+
+
+
 //        XWPFRun rightTextRun = rightTextPara.createRun();
 //        rightTextRun.setText("Table - Right Text");
-        
-        row1.addNewTableCell().setParagraph(rightText);        
+
+//        XWPFParagraph rightText = row1.addNewTableCell().addParagraph();
+//        row1.addNewTableCell().setParagraph(rightText);
 //        row1.addNewTableCell().setParagraph(rightTextPara);        
     }
 
