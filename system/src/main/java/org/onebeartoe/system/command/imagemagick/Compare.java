@@ -64,8 +64,10 @@ public class Compare extends SystemCommand
         
         if(begin < 0 || end < 0)
         {
-            String message = "The substring look up for the comparison percentage failed.  " +
-                                "Is the ImageMagic command available?";
+            String message = "The substring look up for the comparison percentage failed.  " 
+                    +
+                            "  Exception:";
+//                                "Is the ImageMagic command available?";
             
             message += "\n" + stderr;
             
