@@ -7,13 +7,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import sun.audio.AudioStream;
+
+//TODO: reimplement these using something like
+//          javax.sound.sampled.Clip;
+//import sun.audio.AudioStream;
 
 public class SunAudioClipPlayer implements AudioPlayer 
 {
 
 	private AudioClip instanceClip;
-	AudioStream as;
+
+//TODO: reimplement these using something like
+//          javax.sound.sampled.Clip;        
+//	AudioStream as;
 	
 	public SunAudioClipPlayer(URL url)	
 	{
@@ -24,7 +30,10 @@ public class SunAudioClipPlayer implements AudioPlayer
 				 
 		try (InputStream in = url.openStream(); )
 		{
-			as = new AudioStream(in);
+//TODO: reimplement these using something like
+//          javax.sound.sampled.Clip;
+            int forcedError = 5 / 0;
+//			as = new AudioStream(in);
 		} 
 		catch (IOException e) 
 		{
@@ -48,8 +57,12 @@ public class SunAudioClipPlayer implements AudioPlayer
 	{		
 		System.out.println("method play(auiodstream) of " + getClass().getName() + " called.");
 
-		
-		sun.audio.AudioPlayer.player.start(as);
+//TODO: reimplement these using something like
+//          javax.sound.sampled.Clip;
+//		sun.audio.AudioPlayer.player.start(as);
+
+            
+            int forcedError = 5 / 0;
 	}
 
 	
