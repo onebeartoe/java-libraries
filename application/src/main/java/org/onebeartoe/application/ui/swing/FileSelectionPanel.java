@@ -47,18 +47,31 @@ public class FileSelectionPanel extends JPanel implements ActionListener
     ScrollableTextArea outputPanel;
 
     FileSelectionMethods fileSelectionMode;
+    
+    String sourceDirectoryLabel;
 
     JCheckBox recursiveCheckbox;
+    
+    final static String DEFAULT_SOURCE_DIRECTORY_LABEL = "Enter the source directory here:";
+
 
     public FileSelectionPanel(FileType type)
     {
         this(type, FileSelectionMethods.SINGLE_DIRECTORY, false);
     }
-
+    
+    
     public FileSelectionPanel(FileType type, FileSelectionMethods mode, boolean showRecursive) 
-    {
-        this(type, mode, showRecursive, null);
+    {        
+        this(type, mode, showRecursive, null, DEFAULT_SOURCE_DIRECTORY_LABEL);
     }
+    
+
+    public FileSelectionPanel(FileType type, FileSelectionMethods mode, boolean showRecursive, ActionListener listener)
+    {        
+        this(type, mode, showRecursive, listener, DEFAULT_SOURCE_DIRECTORY_LABEL);
+    }
+    
     
     /**
      * This GUI component shows the files that fit the targeted type. 
@@ -66,15 +79,19 @@ public class FileSelectionPanel extends JPanel implements ActionListener
      * an invalid file type is pased in then the target type will be all files.
      * @see onebeartoe.FileHelper 
      */
-    public FileSelectionPanel(FileType type, FileSelectionMethods mode, boolean showRecursive, ActionListener listener) 
+    public FileSelectionPanel(FileType type, FileSelectionMethods mode, boolean showRecursive, ActionListener listener,
+                                String sourceDirectoryLabel) 
     {
     	targetType = validateType(type);
     	
     	fileSelectionMode = mode;
+        
+        this.sourceDirectoryLabel = sourceDirectoryLabel;
 	    	
         // set up GUI display componets
+//RIGHT HERER BABY        
 //TODO: make this configuratble for the HtmlUtility -> JspSeeder
-        JLabel sourceLabel = new JLabel("Enter the source directory here:");
+        JLabel sourceLabel = new JLabel(sourceDirectoryLabel);
         JPanel labelPanel = new JPanel();
         labelPanel.setLayout(new FlowLayout(FlowLayout.LEFT) );
         labelPanel.add(sourceLabel);
@@ -224,5 +241,10 @@ public class FileSelectionPanel extends JPanel implements ActionListener
         
         String path = directory.getAbsolutePath();
         source.setText(path);
+    }
+
+    String getSourceDirectoryLabel() 
+    {
+        return sourceDirectoryLabel;
     }
 }
