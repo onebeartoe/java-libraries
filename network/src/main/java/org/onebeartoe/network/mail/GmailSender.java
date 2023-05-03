@@ -112,7 +112,8 @@ public class GmailSender implements JavaMailSender
                                         File attachment,
                                         boolean checkServerIdentity) throws AddressException, MessagingException
     {
-        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+//        new sun.security.ssl.
+  //      Security.addProvider(new sun// new com.sun.net.ssl.internal.ssl.Provider());
         
         Properties props = buildProperties(checkServerIdentity);
 
