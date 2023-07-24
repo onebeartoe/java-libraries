@@ -6,6 +6,10 @@ import android.content.pm.PackageManager;
 
 //import androidx.core.app.ActivityCompat;
 
+//TODO: checkout 
+//            https://robolectric.org/ 
+//      to automate unit testing
+
 /**
  * This class provides utility methods for permissions on the Android platform.
  */
